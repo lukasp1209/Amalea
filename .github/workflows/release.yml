@@ -1,0 +1,209 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: 'Version type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+      prerelease:
+        description: 'Create prerelease'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  # Version management
+  version:
+    name: Version Management
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      tag: ${{ steps.version.outputs.tag }}
+      changelog: ${{ steps.changelog.outputs.changelog }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get current version
+        id: current
+        run: |
+          # Extract current version from pyproject.toml or similar
+          echo "current_version=1.0.0" >> $GITHUB_OUTPUT
+
+      - name: Bump version
+        id: version
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          current="${{ steps.current.outputs.current_version }}"
+          type="${{ github.event.inputs.version_type }}"
+
+          # Simple version bumping logic
+          IFS='.' read -r major minor patch <<< "$current"
+
+          case $type in
+            major)
+              major=$((major + 1))
+              minor=0
+              patch=0
+              ;;
+            minor)
+              minor=$((minor + 1))
+              patch=0
+              ;;
+            patch)
+              patch=$((patch + 1))
+              ;;
+          esac
+
+          new_version="$major.$minor.$patch"
+          echo "version=$new_version" >> $GITHUB_OUTPUT
+          echo "tag=v$new_version" >> $GITHUB_OUTPUT
+
+      - name: Use tag version
+        id: tag_version
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+        run: |
+          tag="${GITHUB_REF#refs/tags/}"
+          version="${tag#v}"
+          echo "version=$version" >> $GITHUB_OUTPUT
+          echo "tag=$tag" >> $GITHUB_OUTPUT
+
+      - name: Generate changelog
+        id: changelog
+        run: |
+          # Generate changelog from git commits
+          changelog=$(git log --oneline --pretty=format:"* %s" $(git describe --tags --abbrev=0)..HEAD 2>/dev/null || git log --oneline --pretty=format:"* %s" -10)
+          echo "changelog<<EOF" >> $GITHUB_OUTPUT
+          echo "## What's Changed" >> $GITHUB_OUTPUT
+          echo "$changelog" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+  # Create release
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    needs: version
+    if: needs.version.outputs.tag
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update version in files
+        run: |
+          # Update version in relevant files
+          sed -i "s/version=.*/version='${{ needs.version.outputs.version }}'/g" mc_test_app/__init__.py || true
+          sed -i "s/__version__ = .*/__version__ = '${{ needs.version.outputs.version }}'/g" mc_test_app/__init__.py || true
+
+      - name: Create release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ needs.version.outputs.tag }}
+          release_name: Release ${{ needs.version.outputs.tag }}
+          body: ${{ needs.version.outputs.changelog }}
+          draft: false
+          prerelease: ${{ github.event.inputs.prerelease || false }}
+
+  # Publish to PyPI
+  publish:
+    name: Publish to PyPI
+    runs-on: ubuntu-latest
+    needs: [version, release]
+    if: needs.version.outputs.tag && !github.event.inputs.prerelease
+    environment: pypi
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install build tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install build twine
+
+      - name: Build package
+        run: python -m build
+
+      - name: Publish to PyPI
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+        run: |
+          twine upload dist/*
+
+  # Update documentation
+  docs:
+    name: Update Documentation
+    runs-on: ubuntu-latest
+    needs: version
+    if: needs.version.outputs.tag
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update version in README
+        run: |
+          sed -i "s/Version:.*/Version: ${{ needs.version.outputs.version }}/g" README.md
+          sed -i "s/version:.*/version: ${{ needs.version.outputs.version }}/g" README.md
+
+      - name: Update version in mc_test_app README
+        run: |
+          sed -i "s/Version:.*/Version: ${{ needs.version.outputs.version }}/g" mc_test_app/README.md
+
+      - name: Commit version updates
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: bump version to ${{ needs.version.outputs.version }}"
+          file_pattern: README.md mc_test_app/README.md mc_test_app/__init__.py
+
+  # Notify stakeholders
+  notify:
+    name: Notify Stakeholders
+    runs-on: ubuntu-latest
+    needs: [version, release]
+    if: needs.version.outputs.tag && always()
+    steps:
+      - name: Send notification
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const version = '${{ needs.version.outputs.version }}';
+            const tag = '${{ needs.version.outputs.tag }}';
+
+            // Create issue for release notes
+            const body = `## 🚀 Release ${tag} erfolgreich erstellt!
+
+            ### Checklist:
+            - [ ] Staging deployment testen
+            - [ ] Production deployment durchführen
+            - [ ] User feedback einholen
+            - [ ] Monitoring überwachen
+
+            ### Version: ${version}
+            ### Änderungen:
+            ${{ needs.version.outputs.changelog }}
+
+            ### Deployment:
+            - [Staging](https://staging.mc-test-app.com)
+            - [Production](https://mc-test-app.com)`;
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Release ${tag} - Deployment Checklist`,
+              body: body,
+              labels: ['release', 'deployment']
+            });

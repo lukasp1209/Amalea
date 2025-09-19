@@ -1,0 +1,278 @@
+name: Security
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    # Run security scans weekly
+    - cron: '0 3 * * 1'
+
+jobs:
+  # CodeQL Security Analysis
+  codeql:
+    name: CodeQL Analysis
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: python
+          config-file: ./.github/codeql-config.yml
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:python"
+
+  # Dependency vulnerability scanning
+  dependency-scan:
+    name: Dependency Vulnerability Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install safety
+        run: pip install safety
+
+      - name: Scan dependencies for vulnerabilities
+        run: |
+          safety check --file mc_test_app/requirements.txt --output json --save-json safety-report.json || true
+
+      - name: Upload safety report
+        uses: actions/upload-artifact@v4
+        with:
+          name: safety-report
+          path: safety-report.json
+
+      - name: Comment on PR if vulnerabilities found
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            if (fs.existsSync('safety-report.json')) {
+              const report = JSON.parse(fs.readFileSync('safety-report.json', 'utf8'));
+              if (report.issues && report.issues.length > 0) {
+                let comment = '## ⚠️ Security Vulnerabilities Found\n\n';
+                comment += '| Package | Vulnerability | Severity |\n';
+                comment += '|---------|---------------|----------|\n';
+
+                report.issues.slice(0, 10).forEach(issue => {
+                  comment += `| ${issue.package} | ${issue.vulnerability} | ${issue.severity} |\n`;
+                });
+
+                if (report.issues.length > 10) {
+                  comment += `\n*... and ${report.issues.length - 10} more issues*`;
+                }
+
+                github.rest.issues.createComment({
+                  issue_number: context.issue.number,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  body: comment
+                });
+              }
+            }
+
+  # Secret scanning
+  secret-scan:
+    name: Secret Scanning
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          history: false
+
+      - name: Scan for secrets
+        uses: gitleaks/gitleaks-action@v2
+        with:
+          config-path: .gitleaks.toml
+
+  # Container security scanning
+  container-scan:
+    name: Container Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -f Dockerfile.streamlit -t security-scan .
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'image'
+          scan-ref: 'security-scan'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Upload Trivy scan results
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+  # SAST (Static Application Security Testing)
+  sast:
+    name: SAST Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install bandit
+        run: pip install bandit
+
+      - name: Run Bandit security scan
+        run: |
+          bandit -r mc_test_app/ -f json -o bandit-report.json || true
+
+      - name: Upload Bandit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: bandit-report
+          path: bandit-report.json
+
+  # License compliance
+  license-check:
+    name: License Compliance
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check licenses
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          pip install pip-licenses
+          pip-licenses --format=json --output-file=licenses.json
+
+      - name: Check for problematic licenses
+        run: |
+          python -c "
+          import json
+          with open('licenses.json', 'r') as f:
+              licenses = json.load(f)
+
+          problematic = []
+          allowed_licenses = ['MIT', 'Apache 2.0', 'BSD', 'ISC', 'GPL-3.0', 'LGPL']
+
+          for pkg in licenses:
+              if pkg['License'] not in allowed_licenses:
+                  problematic.append(f\"{pkg['Name']}: {pkg['License']}\")
+
+          if problematic:
+              print('Problematic licenses found:')
+              for pkg in problematic:
+                  print(f'  - {pkg}')
+              exit(1)
+          else:
+              print('All licenses are compliant')
+          "
+
+      - name: Upload license report
+        uses: actions/upload-artifact@v4
+        with:
+          name: license-report
+          path: licenses.json
+
+  # Security audit summary
+  security-summary:
+    name: Security Audit Summary
+    runs-on: ubuntu-latest
+    needs: [codeql, dependency-scan, container-scan, sast, license-check]
+    if: always()
+    steps:
+      - name: Generate security summary
+        run: |
+          echo "## 🔒 Security Audit Summary" > security-summary.md
+          echo "" >> security-summary.md
+          echo "| Check | Status |" >> security-summary.md
+          echo "|-------|--------|" >> security-summary.md
+
+          # CodeQL
+          if [[ "${{ needs.codeql.result }}" == "success" ]]; then
+            echo "| CodeQL Analysis | ✅ Passed |" >> security-summary.md
+          else
+            echo "| CodeQL Analysis | ❌ Failed |" >> security-summary.md
+          fi
+
+          # Dependencies
+          if [[ "${{ needs.dependency-scan.result }}" == "success" ]]; then
+            echo "| Dependency Scan | ✅ Passed |" >> security-summary.md
+          else
+            echo "| Dependency Scan | ⚠️ Issues Found |" >> security-summary.md
+          fi
+
+          # Container
+          if [[ "${{ needs.container-scan.result }}" == "success" ]]; then
+            echo "| Container Scan | ✅ Passed |" >> security-summary.md
+          else
+            echo "| Container Scan | ❌ Failed |" >> security-summary.md
+          fi
+
+          # SAST
+          if [[ "${{ needs.sast.result }}" == "success" ]]; then
+            echo "| SAST Scan | ✅ Passed |" >> security-summary.md
+          else
+            echo "| SAST Scan | ⚠️ Issues Found |" >> security-summary.md
+          fi
+
+          # License
+          if [[ "${{ needs.license-check.result }}" == "success" ]]; then
+            echo "| License Check | ✅ Passed |" >> security-summary.md
+          else
+            echo "| License Check | ❌ Failed |" >> security-summary.md
+          fi
+
+          echo "" >> security-summary.md
+          echo "### 📊 Detailed Reports" >> security-summary.md
+          echo "- [CodeQL Results](https://github.com/${{ github.repository }}/security/code-scanning)" >> security-summary.md
+          echo "- [Dependency Scan](./dependency-scan)" >> security-summary.md
+          echo "- [Container Scan](./container-scan)" >> security-summary.md
+          echo "- [SAST Report](./sast)" >> security-summary.md
+          echo "- [License Report](./license-check)" >> security-summary.md
+
+      - name: Upload security summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-summary
+          path: security-summary.md
+
+      - name: Comment security summary on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const summary = fs.readFileSync('security-summary.md', 'utf8');
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: summary
+            });

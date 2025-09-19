@@ -1,0 +1,27 @@
+name: "CodeQL Configuration"
+
+disable-default-queries: false
+
+queries:
+  - uses: security-and-quality
+  - uses: security-experimental
+
+paths-ignore:
+  - "**/test/**"
+  - "**/tests/**"
+  - "**/__pycache__/**"
+  - "**/node_modules/**"
+  - "**/venv/**"
+  - "**/.venv/**"
+  - "**/mlruns/**"
+  - "**/BACKUP_Original_AMALEA_Notebooks/**"
+
+paths:
+  - "mc_test_app/"
+  - "01_Python_Grundlagen/"
+  - "02_Streamlit_und_Pandas/"
+  - "03_Machine_Learning/"
+  - "04_Advanced_Algorithms/"
+  - "05_Neural_Networks/"
+  - "06_Computer_Vision_NLP/"
+  - "07_Deployment_Portfolio/"
