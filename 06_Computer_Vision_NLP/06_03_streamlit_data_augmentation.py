@@ -381,7 +381,10 @@ with col2:
 
 # Interactive Tips
 if st.button("🎲 Zufällige Parameter generieren"):
-    st.experimental_rerun()
+    try:
+        st.rerun()
+    except Exception:
+        pass
 
 st.markdown("---")
 st.markdown("**🎓 IU Data Analytics & Big Data Course - Week 6.3: Data Augmentation**")
