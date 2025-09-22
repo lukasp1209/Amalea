@@ -4,6 +4,8 @@
 
 > 🚀 **Vollständig modernisiert**: 16 Core Notebooks + 8 Streamlit Apps + QUA³CK Framework + MLOps Integration
 
+👉 Technische Details (Docker, MLflow, Ports, Volumes, Deployment) jetzt ausgelagert: Siehe **`DEVELOPER_GUIDE.md`**.
+
 ---
 
 ## 📑 Inhaltsverzeichnis
@@ -121,6 +123,30 @@ docker compose up -d
 
 Hinweis: Der Slim-Streamlit-Service startet direkt die MC-Test-App
 (`mc_test_app/mc_test_app.py`).
+
+### 🧪 MC-Test App (Kurzüberblick)
+Die integrierte Multiple-Choice-App (`mc_test_app/`) bietet anonymes Quiz, Itemanalyse und Admin-Panel.
+
+| Bereich | Beschreibung |
+|---------|-------------|
+| Öffentlich (unangemeldet) | Top‑5 Leaderboard (live) |
+| Benutzer | Pseudonym-Login, zufällige Fragen, Erklärungen, Fortschritt |
+| Scoring-Modi | `Nur +Punkte` (falsch = 0) · `+/- Punkte` (falsch = -Gewichtung) |
+| Gewichtung | Jede Frage besitzt `gewichtung` (Standard 1; höhere = mehr Gewinn & Risiko) |
+| Negative Punkte | Erlaubt im +/- Modus (kein Floor) |
+| Motivation | Dynamische Feedback-Phrasen & Streak-Indikatoren |
+| Admin Tabs | Analyse · Highscore · Export · System · Glossar |
+| Reset | Globaler CSV-Reset (System-Tab) + Hinweisbanner |
+| Datenschutz | Hashing (SHA-256) + lokales CSV-Logging |
+
+Scoring-Details:
+- Positiv: Richtig => +Gewichtung, Falsch => 0
+- Negativ: Richtig => +Gewichtung, Falsch => -Gewichtung
+- Prozent = aktueller Score / Summe aller Gewichtungen
+
+Wechsel des Modus über Sidebar (Scoring-Modus). Falsche Antworten zeigen jetzt den tatsächlichen Abzugswert (nicht mehr pauschal -1).
+
+Mehr Details & Changelog: Siehe `mc_test_app/README.md`.
 
 Wechsle zu den Full-Services, wenn du TensorFlow, PyTorch, OpenCV oder
 große NLP-Modelle brauchst.
