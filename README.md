@@ -124,12 +124,37 @@ docker compose up -d
 Hinweis: Der Slim-Streamlit-Service startet direkt die MC-Test-App
 (`mc_test_app/mc_test_app.py`).
 
-### 🧪 MC-Test App (Kurzüberblick)
+große NLP-Modelle brauchst.
+
+### 🧪 MC-Test App (UI & Funktionsweise)
 Die integrierte Multiple-Choice-App (`mc_test_app/`) bietet anonymes Quiz, Itemanalyse und Admin-Panel.
+
+#### Startseiten-Logik & UI-Reihenfolge
+
+Die Startseite der App ist klar strukturiert (ab 2025-09-24):
+
+1. **Titelblock** (zentriert, mit Fragenset-Info)
+2. **Deutlicher Abstand** (36px)
+3. **Leaderboard (Top 5, öffentlich)** – nur wenn `show_top5_public` in der Config aktiviert ist
+4. **Fragenset-Auswahl** (Dropdown, persistiert in Session & Query-Param)
+5. **Scoring-Modus-Auswahl** (strict/relaxed)
+6. **Bar-Chart/Diagramm** (Punkteverteilung, falls aktiviert)
+7. **Login/Quiz-Start**
+
+Diese Reihenfolge ist cloud-kompatibel und funktioniert sowohl lokal als auch auf Streamlit Cloud. Der Titelblock steht garantiert immer ganz oben, gefolgt von Abstand und Leaderboard.
+
+#### Hinweise für Cloud-Betrieb
+
+- **Robuste Imports:** Die App funktioniert sowohl als Modul (Paket) als auch als Einzeldatei (`streamlit run mc_test_app/mc_test_app.py`).
+- **Session State:** Alle UI-Elemente und Fortschritte werden über `st.session_state` verwaltet und sind robust gegen Refreshes.
+- **Config:** Die Sichtbarkeit des Leaderboards wird über die globale Config (`mc_test_config.json`) gesteuert (`show_top5_public`).
+- **Dateipfade:** Alle Pfade sind relativ zum App-Verzeichnis und funktionieren auf Streamlit Cloud.
+
+#### Feature-Überblick
 
 | Bereich | Beschreibung |
 |---------|-------------|
-| Öffentlich (unangemeldet) | Top‑5 Leaderboard (live) |
+| Öffentlich (unangemeldet) | Top‑5 Leaderboard (live, filterbar) |
 | Benutzer | Pseudonym-Login, zufällige Fragen, Erklärungen, Fortschritt |
 | Scoring-Modi | `Nur +Punkte` (falsch = 0) · `+/- Punkte` (falsch = -Gewichtung) |
 | Gewichtung | Jede Frage besitzt `gewichtung` (Standard 1; höhere = mehr Gewinn & Risiko) |
@@ -144,12 +169,11 @@ Scoring-Details:
 - Negativ: Richtig => +Gewichtung, Falsch => -Gewichtung
 - Prozent = aktueller Score / Summe aller Gewichtungen
 
-Wechsel des Modus über Sidebar (Scoring-Modus). Falsche Antworten zeigen jetzt den tatsächlichen Abzugswert (nicht mehr pauschal -1).
+Wechsel des Modus über Sidebar (Scoring-Modus). Falsche Antworten zeigen den tatsächlichen Abzugswert (volle Gewichtung).
 
 Mehr Details & Changelog: Siehe `mc_test_app/README.md`.
 
-Wechsle zu den Full-Services, wenn du TensorFlow, PyTorch, OpenCV oder
-große NLP-Modelle brauchst.
+Wechsle zu den Full-Services, wenn du TensorFlow, PyTorch, OpenCV oder große NLP-Modelle brauchst.
 
 #### Streamlit Apps richtig starten (Docker)
 
