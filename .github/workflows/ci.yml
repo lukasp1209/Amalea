@@ -112,7 +112,7 @@ jobs:
       - name: Run tests with coverage
         if: matrix.coverage
         run: |
-          pytest mc_test_app/tests/ \
+          PYTHONPATH=. pytest mc_test_app/tests/ \
             --cov=mc_test_app \
             --cov-report=xml \
             --cov-report=html \
@@ -124,7 +124,7 @@ jobs:
       - name: Run tests (no coverage)
         if: ${{ !matrix.coverage }}
         run: |
-          pytest mc_test_app/tests/ \
+          PYTHONPATH=. pytest mc_test_app/tests/ \
             --html=test-report.html \
             --self-contained-html \
             -v
