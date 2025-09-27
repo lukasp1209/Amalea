@@ -121,60 +121,6 @@ docker compose up -d
 - Jupyter Slim: [http://localhost:8889](http://localhost:8889)
 - Streamlit Slim: [http://localhost:8502](http://localhost:8502)
 
-Hinweis: Der Slim-Streamlit-Service startet direkt die MC-Test-App
-(`mc_test_app/mc_test_app.py`).
-
-große NLP-Modelle brauchst.
-
-### 🧪 MC-Test App (UI & Funktionsweise)
-Die integrierte Multiple-Choice-App (`mc_test_app/`) bietet anonymes Quiz, Itemanalyse und Admin-Panel.
-
-#### Startseiten-Logik & UI-Reihenfolge
-
-Die Startseite der App ist klar strukturiert (ab 2025-09-24):
-
-1. **Titelblock** (zentriert, mit Fragenset-Info)
-2. **Deutlicher Abstand** (36px)
-3. **Leaderboard (Top 5, öffentlich)** – nur wenn `show_top5_public` in der Config aktiviert ist
-4. **Fragenset-Auswahl** (Dropdown, persistiert in Session & Query-Param)
-5. **Scoring-Modus-Auswahl** (strict/relaxed)
-6. **Bar-Chart/Diagramm** (Punkteverteilung, falls aktiviert)
-7. **Login/Quiz-Start**
-
-Diese Reihenfolge ist cloud-kompatibel und funktioniert sowohl lokal als auch auf Streamlit Cloud. Der Titelblock steht garantiert immer ganz oben, gefolgt von Abstand und Leaderboard.
-
-#### Hinweise für Cloud-Betrieb
-
-- **Robuste Imports:** Die App funktioniert sowohl als Modul (Paket) als auch als Einzeldatei (`streamlit run mc_test_app/mc_test_app.py`).
-- **Session State:** Alle UI-Elemente und Fortschritte werden über `st.session_state` verwaltet und sind robust gegen Refreshes.
-- **Config:** Die Sichtbarkeit des Leaderboards wird über die globale Config (`mc_test_config.json`) gesteuert (`show_top5_public`).
-- **Dateipfade:** Alle Pfade sind relativ zum App-Verzeichnis und funktionieren auf Streamlit Cloud.
-
-#### Feature-Überblick
-
-| Bereich | Beschreibung |
-|---------|-------------|
-| Öffentlich (unangemeldet) | Top‑5 Leaderboard (live, filterbar) |
-| Benutzer | Pseudonym-Login, zufällige Fragen, Erklärungen, Fortschritt |
-| Scoring-Modi | `Nur +Punkte` (falsch = 0) · `+/- Punkte` (falsch = -Gewichtung) |
-| Gewichtung | Jede Frage besitzt `gewichtung` (Standard 1; höhere = mehr Gewinn & Risiko) |
-| Negative Punkte | Erlaubt im +/- Modus (kein Floor) |
-| Motivation | Dynamische Feedback-Phrasen & Streak-Indikatoren |
-| Admin Tabs | Analyse · Highscore · Export · System · Glossar |
-| Reset | Globaler CSV-Reset (System-Tab) + Hinweisbanner |
-| Datenschutz | Hashing (SHA-256) + lokales CSV-Logging |
-
-Scoring-Details:
-- Positiv: Richtig => +Gewichtung, Falsch => 0
-- Negativ: Richtig => +Gewichtung, Falsch => -Gewichtung
-- Prozent = aktueller Score / Summe aller Gewichtungen
-
-Wechsel des Modus über Sidebar (Scoring-Modus). Falsche Antworten zeigen den tatsächlichen Abzugswert (volle Gewichtung).
-
-Mehr Details & Changelog: Siehe `mc_test_app/README.md`.
-
-Wechsle zu den Full-Services, wenn du TensorFlow, PyTorch, OpenCV oder große NLP-Modelle brauchst.
-
 #### Streamlit Apps richtig starten (Docker)
 
 Nutze für zusätzliche Apps die vorhandenen Streamlit-Container – nicht den
@@ -382,9 +328,7 @@ Zwei Profile für unterschiedliche Anforderungen. Nutze **Slim** für schnelle N
 | Image-Größe (relativ) | ★★★ | ★ | ★★ | ★ |
 | Heavy Libs (TF/Torch/OpenCV/Transformers) | ✔ | ✖ | ✔ | ✖ |
 | MLflow verfügbar | ✔ | ✔ (lib installiert) | ✔ (lib) | Optional (nicht zwingend) |
-| Typische Nutzung | DL, CV, NLP Experimente | Alltags-EDA, Lehre, schnelle Starts | Apps mit DL/CV/NLP | Schnelle UI-Prototypen / MC-Test |
 | Port | 8888 | 8889 | 8501 | 8502 |
-| Start-Command | start-notebook.sh | start-notebook.sh | streamlit run mc_test_app.py | streamlit run mc_test_app.py |
 | Refresh bei Codeänderung | Standard Jupyter | Standard Jupyter | Streamlit Hot Reload | Streamlit Hot Reload |
 
 Empfehlung Workflow:
@@ -471,8 +415,6 @@ Containern; keine Host-spezifischen Skripte.
 
 - Umgebungsvariablen
   - `.env` im Repo-Root wird automatisch von Compose geladen
-  - Beispiel: `MC_TEST_ADMIN_KEY=Admin` (Admin-Ansicht in der MC-Test-App)
-  - Vorlage: `.env.example` → kopiere zu `.env` und passe Werte an
 
 - macOS: Docker Desktop File Sharing
   - Öffne Docker Desktop → Settings → Resources → File Sharing
@@ -632,10 +574,6 @@ Alle Apps müssen **live deployed** und **öffentlich zugänglich** sein!
 
 ```text
 amalea/
-├── 📂 mc_test_app/                       # MC-Test App (ehemals in 01_Python_Grundlagen)
-│   ├── 🚀 mc_test_app.py
-│   ├── 📄 mc_test_answers.csv
-│   └── 📄 README.md
 ├── 📂 01_Python_Grundlagen/              # Python Basics & Übungen
 │   ├── 📓 00_Python_in_3_Stunden.ipynb
 │   ├── 📓 01_Docker_für_Data_Science.ipynb
@@ -685,7 +623,6 @@ amalea/
 ├── 📋 requirements.txt                   # Vollständige Abhängigkeiten
 ├── 📋 requirements.jupyter-slim.txt      # Slim Jupyter Dependencies
 ├── 📋 requirements.streamlit.txt         # Slim Streamlit Dependencies
-├── 🔑 .env.example                       # Beispiel-Env (MC_TEST_ADMIN_KEY)
 ├── 🧾 .dockerignore                      # Build-Kontext reduzieren
 ├── 🚫 .gitignore
 ├── ⚙️ .gitattributes

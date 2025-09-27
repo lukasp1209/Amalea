@@ -17,12 +17,7 @@ Konzentrierte technische Doku für Aufbau & Betrieb der Umgebung. Der Haupt-`REA
 | Ebene | Beschreibung |
 |-------|--------------|
 | Kurs Notebooks | Lern- & Demonstrationsinhalte (01_.. bis 07_..) |
-| Streamlit Apps | Interaktive UIs (Übungen, ML, CV, NLP, MC-Test) |
-| MC-Test App | Quiz- / Lernplattform mit Admin-Analyse |
-| MLflow | Experiment Tracking / Artefakte |
-| Docker Layer | Reproduzierbare Umgebung (Full vs Slim) |
-
-Module der MC-Test-App (Details in `mc_test_app/README.md`): `core.py`, `scoring.py`, `leaderboard.py`, `review.py`, `mc_test_app.py`.
+| Streamlit Apps | Interaktive UIs (Übungen, ML, CV, NLP) |
 
 ---
 ## Lokale Entwicklung (ohne Docker)
@@ -36,8 +31,6 @@ pip install -r requirements.txt
 jupyter lab
 # Start Beispiel-App
 streamlit run 02_Streamlit_und_Pandas/example_app.py
-# MC-Test-App
-streamlit run mc_test_app/mc_test_app.py
 ```
 
 Optionale Kernel-Registrierung:

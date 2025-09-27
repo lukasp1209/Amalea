@@ -39,8 +39,7 @@ services:
     environment:
       STREAMLIT_SERVER_PORT: "8501"
       STREAMLIT_SERVER_ADDRESS: "0.0.0.0"
-      MC_TEST_ADMIN_KEY: "${MC_TEST_ADMIN_KEY:-}"
-    command: streamlit run /app/mc_test_app/mc_test_app.py
+    command: streamlit run /app/02_Streamlit_und_Pandas/example_app.py
 
   # Streamlit Slim (schneller Start, kleineres Image)
   streamlit-slim:
@@ -54,8 +53,7 @@ services:
     environment:
       STREAMLIT_SERVER_PORT: "8501"
       STREAMLIT_SERVER_ADDRESS: "0.0.0.0"
-      MC_TEST_ADMIN_KEY: "${MC_TEST_ADMIN_KEY:-}"
-    command: streamlit run /app/mc_test_app/mc_test_app.py
+    command: streamlit run /app/02_Streamlit_und_Pandas/example_app.py
 
   # MLflow Tracking Server für Experiment Management
   mlflow:
