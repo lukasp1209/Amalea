@@ -204,3 +204,4 @@ docs/_build/
 # 
 # Dann in .gitattributes hinzufügen:
 # *.ipynb filter=nbstrip
+*.nbconvert.ipynb
