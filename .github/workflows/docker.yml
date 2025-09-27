@@ -6,14 +6,12 @@ on:
     paths:
       - 'Dockerfile*'
       - 'docker-compose.yml'
-      - 'mc_test_app/**'
       - 'requirements*.txt'
   pull_request:
     branches: [ main, develop ]
     paths:
       - 'Dockerfile*'
       - 'docker-compose.yml'
-      - 'mc_test_app/**'
       - 'requirements*.txt'
 
 env:

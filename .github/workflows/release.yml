@@ -101,8 +101,6 @@ jobs:
       - name: Update version in files
         run: |
           # Update version in relevant files
-          sed -i "s/version=.*/version='${{ needs.version.outputs.version }}'/g" mc_test_app/__init__.py || true
-          sed -i "s/__version__ = .*/__version__ = '${{ needs.version.outputs.version }}'/g" mc_test_app/__init__.py || true
 
       - name: Create release
         uses: actions/create-release@v1
@@ -159,15 +157,12 @@ jobs:
           sed -i "s/Version:.*/Version: ${{ needs.version.outputs.version }}/g" README.md
           sed -i "s/version:.*/version: ${{ needs.version.outputs.version }}/g" README.md
 
-      - name: Update version in mc_test_app README
         run: |
-          sed -i "s/Version:.*/Version: ${{ needs.version.outputs.version }}/g" mc_test_app/README.md
 
       - name: Commit version updates
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: bump version to ${{ needs.version.outputs.version }}"
-          file_pattern: README.md mc_test_app/README.md mc_test_app/__init__.py
 
   # Notify stakeholders
   notify:

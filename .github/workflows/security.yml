@@ -53,7 +53,6 @@ jobs:
 
       - name: Scan dependencies for vulnerabilities
         run: |
-          safety check --file mc_test_app/requirements.txt --output json --save-json safety-report.json || true
 
       - name: Upload safety report
         uses: actions/upload-artifact@v4
@@ -147,7 +146,6 @@ jobs:
 
       - name: Run Bandit security scan
         run: |
-          bandit -r mc_test_app/ -f json -o bandit-report.json || true
 
       - name: Upload Bandit report
         uses: actions/upload-artifact@v4
