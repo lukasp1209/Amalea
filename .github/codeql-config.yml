@@ -17,7 +17,6 @@ paths-ignore:
   - "**/BACKUP_Original_AMALEA_Notebooks/**"
 
 paths:
-  - "mc_test_app/"
   - "01_Python_Grundlagen/"
   - "02_Streamlit_und_Pandas/"
   - "03_Machine_Learning/"

@@ -143,12 +143,7 @@ docker compose up -d mlflow
 Tests ausführen:
 ```bash
 pip install -r requirements.txt
-PYTHONPATH=. pytest mc_test_app/tests -q
-```
-
-Einzelnen Test:
-```bash
-pytest mc_test_app/tests/test_core.py::test_append_row -q
+# Führe hier deine Tests aus
 ```
 
 Code-Blöcke / Lint (optional): markdownlint, ruff/flake8 integrierbar.
@@ -162,30 +157,12 @@ Code-Blöcke / Lint (optional): markdownlint, ruff/flake8 integrierbar.
 | Port belegt | Prozess blockiert | `lsof -i :8501` → Prozess killen |
 | MLflow leer | Falsche URI | `mlflow.get_tracking_uri()` prüfen |
 | Schreibfehler CSV | Lock Konflikt | Wiederholen; Lock-Datei löschen (letztes Mittel) |
-| Admin nicht sichtbar | User/Key mismatch | `.env` prüfen + App neu laden |
 
 Logs prüfen (alle Services):
 ```bash
 docker compose ps
 docker compose logs --tail=60 streamlit-dev
 ```
-
----
-## Release / Deployment (MC-Test)
-
-Subtree Push (nur App):
-```bash
-git subtree push --prefix mc_test_app github main
-```
-
-Streamlit Cloud: Neues Repo mit Inhalt aus `mc_test_app/` erstellen, dann Deploy.
-
----
-## Roadmap (Kurz)
-- Gamification Modularisierung (`gamification.py`)
-- Optional: Score Floor (min 0) konfigurieren
-- Frage-Metadaten: Tags, Schwierigkeitsgrad
-- API-Modus (REST oder Websocket) für externe Clients
 
 ---
 **Letzte Aktualisierung:** 2025-09-22
