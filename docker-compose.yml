@@ -63,7 +63,7 @@ services:
     volumes:
       - mlflow-data:/mlflow
     command: >
-      bash -c "pip install mlflow>=2.4.0 &&
+      bash -c "pip install mlflow>=3.7.0 &&
                mlflow server --host 0.0.0.0 --port 5000 --default-artifact-root /mlflow/artifacts --backend-store-uri sqlite:///mlflow/mlflow.db"
 
   # PostgreSQL für fortgeschrittene Datenbank-Übungen
