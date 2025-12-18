@@ -30,8 +30,19 @@ Nach dieser Woche kannst du:
 ## 🚀 So startest du
 
 ```bash
+# Umgebung aufsetzen
+pip install -r 04_Advanced_Algorithms/requirements.txt
+
+# Notebooks ausführen
+jupyter notebook 02_MLFlow_Big3_Tracking.ipynb
 jupyter notebook 03_Bäume_Nachbarn_und_Clustering.ipynb
 ```
+
+### 💡 Tipps für saubere Runs
+- **Seeds & Versionen:** Seeds sind in den Notebooks gesetzt, Versionen werden geloggt – behalte das für Repro im Blick.
+- **MLflow:** Default ist lokales Tracking (`file:./mlruns`). Falls der MLflow-Server läuft (`docker compose up -d mlflow`), setze `MLFLOW_TRACKING_URI=http://localhost:5001`.
+- **Kleine Grids:** Die Hyperparameter-Raster sind schlank gehalten, damit die Demos schnell durchlaufen.
+- **Apps/Deploy:** Nutze die Notebooks als Vorlage für Streamlit-Apps; Modelle mit Signaturen/Input-Beispielen loggen erleichtert späteres Serving.
 
 ---
 
