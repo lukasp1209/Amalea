@@ -1,13 +1,3 @@
-"""
-🧠 Neural Network Playground - AMALEA 2025
-Interactive Demo integrating all original AMALEA Neural Network concepts
-
-Integration der ursprünglichen AMALEA-Notebooks:
-- "Jetzt geht's in die Tiefe" → Neural Network Grundlagen
-- "Wir trainieren nur bergab" → Backpropagation & Optimierung
-- "Regression II" → Neural Networks für Regression
-- "Classification Softmax" → Neural Networks für Klassifikation
-"""
 
 import streamlit as st
 import numpy as np
@@ -15,11 +5,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.express as px
 import plotly.graph_objects as go
-from sklearn.datasets import make_regression, make_classification, load_iris, make_circles
+from sklearn.datasets import make_regression, make_classification, load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPRegressor, MLPClassifier
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import accuracy_score, mean_squared_error, confusion_matrix, classification_report
+from sklearn.metrics import accuracy_score, mean_squared_error, confusion_matrix
 import seaborn as sns
 
 # 🎯 Streamlit App Configuration
@@ -39,7 +29,7 @@ st.sidebar.title("🎛️ Navigation")
 app_mode = st.sidebar.selectbox(
     "Wähle einen Bereich:",
     ["🧠 Einfachstes Neuron", "📈 Aktivierungsfunktionen", "🎯 Regression Demo", 
-     "🏷️ Klassifikation Demo", "🍦 Softmax Explorer", "🎮 Interaktiver Playground"]
+     "🏷️ Klassifikation Demo", "🎮 Interaktiver Playground"]
 )
 
 # ============================================================================
@@ -59,10 +49,7 @@ if app_mode == "🧠 Einfachstes Neuron":
         b = st.slider("Bias (b)", -5.0, 5.0, 1.0, 0.1)
         
         # Formel anzeigen
-        st.latex(f"f(x) = w \\cdot x + b = {w} \\cdot x + {b}")
-        
-        # AMALEA Original Info
-        st.info("💡 **AMALEA-Original**: Mit w=-1, b=1 ergibt f(5) = -4")
+        st.latex(f"f(x) = w \cdot x + b = {w} \cdot x + {b}")
         
     with col2:
         st.subheader("📊 Neuron-Verhalten")
@@ -84,6 +71,9 @@ if app_mode == "🧠 Einfachstes Neuron":
     test_input = st.number_input("Teste Input-Wert:", value=5.0)
     result = w * test_input + b
     st.success(f"f({test_input}) = {w} × {test_input} + {b} = **{result:.2f}**")
+    
+    # AMALEA-Originale
+    st.info("💡 **AMALEA-Original**: Mit w=-1, b=1 ergibt f(5) = -4")
 
 # ============================================================================
 # 📈 BEREICH 2: Aktivierungsfunktionen (AMALEA Deep Learning Grundlagen)
@@ -121,8 +111,6 @@ elif app_mode == "📈 Aktivierungsfunktionen":
         
         if show_leaky:
             alpha = st.slider("Leaky ReLU α", 0.01, 0.3, 0.01, 0.01)
-        else:
-            alpha = 0.01
     
     with col2:
         st.subheader("📊 Aktivierungsfunktionen")
@@ -184,6 +172,7 @@ elif app_mode == "🎯 Regression Demo":
     st.header("🎯 Neural Network Regression")
     st.markdown("**Aus dem ursprünglichen AMALEA-Kurs: 'Regression II - Künstliche Gehirne'**")
     
+    # Daten generieren
     col1, col2 = st.columns([1, 2])
     
     with col1:
@@ -302,6 +291,7 @@ elif app_mode == "🏷️ Klassifikation Demo":
             target_names = [f"Klasse {i}" for i in range(n_classes)]
             
         else:  # Kreise
+            from sklearn.datasets import make_circles
             n_samples = st.slider("Anzahl Samples", 100, 1000, 300)
             noise = st.slider("Noise", 0.0, 0.3, 0.1)
             X_viz, y = make_circles(n_samples=n_samples, noise=noise, random_state=42)
@@ -394,118 +384,7 @@ elif app_mode == "🏷️ Klassifikation Demo":
             st.plotly_chart(fig_cm, use_container_width=True)
 
 # ============================================================================
-# 🍦 BEREICH 5: Softmax Explorer
-# ============================================================================
-
-elif app_mode == "🍦 Softmax Explorer":
-    st.header("🍦 Softmax Explorer")
-    st.markdown("**Verstehe 'Softmax-Eis für einen one-hot day' interaktiv**")
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.subheader("🎛️ Logits eingeben")
-        
-        # Anzahl Klassen
-        n_classes = st.slider("Anzahl Klassen", 2, 5, 3)
-        
-        # Logits eingeben
-        logits = []
-        for i in range(n_classes):
-            logit = st.slider(f"Logit Klasse {i}", -5.0, 5.0, 0.0, 0.1, key=f"logit_{i}")
-            logits.append(logit)
-        
-        # Temperature für Softmax
-        temperature = st.slider("Temperature", 0.1, 5.0, 1.0, 0.1)
-        
-        # Softmax berechnen
-        logits_array = np.array(logits) / temperature
-        exp_logits = np.exp(logits_array - np.max(logits_array))  # Numerische Stabilität
-        softmax_probs = exp_logits / np.sum(exp_logits)
-        
-        # Predicted Class
-        predicted_class = np.argmax(softmax_probs)
-        confidence = softmax_probs[predicted_class]
-        
-        st.subheader("📊 Ergebnisse")
-        st.write(f"**Vorhergesagte Klasse:** {predicted_class}")
-        st.write(f"**Konfidenz:** {confidence:.1%}")
-        st.write(f"**Summe:** {np.sum(softmax_probs):.6f}")
-    
-    with col2:
-        st.subheader("📈 Softmax Visualisierung")
-        
-        # Bar Chart
-        class_names = [f"Klasse {i}" for i in range(n_classes)]
-        
-        fig = go.Figure(data=[
-            go.Bar(
-                x=class_names,
-                y=softmax_probs,
-                text=[f"{p:.3f}" for p in softmax_probs],
-                textposition='auto',
-            )
-        ])
-        
-        fig.update_layout(
-            title="Softmax Wahrscheinlichkeiten",
-            yaxis_title="Wahrscheinlichkeit",
-            height=400
-        )
-        
-        st.plotly_chart(fig, use_container_width=True)
-        
-        # Temperature Effect Demo
-        st.subheader("🌡️ Temperature Effekt")
-        
-        temperatures = [0.5, 1.0, 2.0, 5.0]
-        temp_probs = []
-        
-        for temp in temperatures:
-            scaled_logits = np.array(logits) / temp
-            exp_scaled = np.exp(scaled_logits - np.max(scaled_logits))
-            temp_prob = exp_scaled / np.sum(exp_scaled)
-            temp_probs.append(temp_prob)
-        
-        # Heatmap für Temperature Effekt
-        temp_df = pd.DataFrame(temp_probs, 
-                              columns=class_names,
-                              index=[f"T={t}" for t in temperatures])
-        
-        fig_heatmap = px.imshow(temp_df, 
-                               text_auto='.3f',
-                               aspect="auto",
-                               title="Temperature Effekt auf Softmax")
-        st.plotly_chart(fig_heatmap, use_container_width=True)
-    
-    # One-Hot Encoding Demo
-    st.subheader("🔥 One-Hot Encoding")
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.write("**Ground Truth (One-Hot):**")
-        true_class = st.selectbox("Wahre Klasse", range(n_classes))
-        one_hot = np.zeros(n_classes)
-        one_hot[true_class] = 1
-        st.write(one_hot)
-    
-    with col2:
-        st.write("**Cross-Entropy Loss:**")
-        # Clip für numerische Stabilität
-        clipped_probs = np.clip(softmax_probs, 1e-15, 1 - 1e-15)
-        cross_entropy = -np.sum(one_hot * np.log(clipped_probs))
-        st.write(f"{cross_entropy:.4f}")
-        
-        if cross_entropy < 0.1:
-            st.success("Excellent prediction! 🎯")
-        elif cross_entropy < 1.0:
-            st.info("Good prediction 👍")
-        else:
-            st.warning("Poor prediction 😞")
-
-# ============================================================================
-# 🎮 BEREICH 6: Interaktiver Playground
+# 🎮 BEREICH 5: Interaktiver Playground
 # ============================================================================
 
 else:  # Interaktiver Playground
@@ -642,23 +521,3 @@ else:  # Interaktiver Playground
 st.markdown("---")
 st.markdown("**🎓 AMALEA 2025 - Neural Networks modernisiert mit Streamlit**")
 st.markdown("Alle ursprünglichen AMALEA-Konzepte interaktiv erlebbar!")
-
-# Zusätzliche Info in Sidebar
-st.sidebar.markdown("---")
-st.sidebar.subheader("📚 AMALEA Integration")
-st.sidebar.markdown("""
-**Ursprüngliche Notebooks:**
-- 🧠 "Jetzt geht's in die Tiefe"
-- 🏔️ "Wir trainieren nur bergab"  
-- 📊 "Regression II"
-- 🍦 "Classification Softmax"
-
-**Modernisierte Features:**
-- ✅ Interaktive Parameter
-- ✅ Live-Visualisierung
-- ✅ Streamlit-Integration
-- ✅ Beginner-freundlich
-""")
-
-st.sidebar.markdown("---")
-st.sidebar.info("💡 **Tipp**: Experimentiere mit verschiedenen Parametern!")

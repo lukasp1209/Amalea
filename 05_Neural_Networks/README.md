@@ -27,24 +27,16 @@ Woche_4_Deep_Learning/
 
 ## 🚀 Getting Started
 
-### 1. Jupyter Notebook
-
 ```bash
-# Ins Verzeichnis wechseln
-cd "Woche_4_Deep_Learning"
+# Umgebung vorbereiten
+pip install -r 05_Neural_Networks/requirements.txt
 
-# Jupyter starten
+# Notebook ausführen
 jupyter notebook 04_Neural_Networks_in_Streamlit.ipynb
-```
 
-### 2. Streamlit App
-
-```bash
-# Streamlit App starten
+# Streamlit-App (optional)
 streamlit run neural_network_playground.py
-
-# App öffnet sich automatisch im Browser
-# URL: http://localhost:8501
+# Standard: http://localhost:8501
 ```
 
 ## 🧠 Lernziele
@@ -73,16 +65,9 @@ Die Streamlit-App bietet 6 interaktive Bereiche:
 
 ## 🛠️ Technische Anforderungen
 
-```python
-# Alle benötigten Pakete (bereits in requirements-2025.txt)
-streamlit>=1.28.0
-numpy>=1.24.0
-pandas>=2.0.0
-matplotlib>=3.7.0
-plotly>=5.15.0
-scikit-learn>=1.3.0
-seaborn>=0.12.0
-```
+- Installiere die Pakete über `pip install -r 05_Neural_Networks/requirements.txt` (oder die Repo-`requirements.txt`, falls du den vollen Stack brauchst).
+- TensorFlow ist schwergewichtig; auf schwächerer Hardware ggf. CPU-Only oder Slim-Umgebung nutzen.
+- Seeds und Versionen werden im Notebook geloggt (Reproduzierbarkeit).
 
 ## 📝 Übungen & Projekte
 
@@ -165,6 +150,14 @@ Bei Fragen oder Problemen:
 2. 🎮 Teste verschiedene Parameter in der Streamlit-App
 3. 💬 Nutze die Diskussionsforen des Kurses
 4. 🔍 Google ist dein Freund für spezifische Errors
+
+---
+
+### 💡 Praktische Tipps
+- Epochen sind im Notebook reduziert, damit Demos schnell laufen; für bessere Performance Epochen schrittweise erhöhen.
+- Bei Streamlit-Apps: Modelle mit `model.save(...)` speichern und im App-Code laden, um Bootzeiten kurz zu halten.
+- Ports belegt? `streamlit run neural_network_playground.py --server.port 8502` nutzen.
+- Für reproduzierbare Runs: Seeds setzen (numpy, tensorflow) und Versionen im Notebook mitloggen (bereits vorbereitet).
 
 ---
 
