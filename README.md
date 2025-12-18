@@ -1,54 +1,79 @@
 # 🎓 AMALEA 2025 - Data Analytics & Big Data
 
-**Modernisierter Kurs für IU Studierende - 5. Semester**
+**Der modernisierte Data-Science-Kurs für Entwickler & Analysten**
 
-> 🚀 **Vollständig modernisiert**: 16 Core Notebooks + 8 Streamlit Apps + QUA³CK Framework + MLOps Integration
-
-👉 Technische Details zur Entwicklungsumgebung (Docker, MLflow, Ports, Volumes) sind im **`DEVELOPER_GUIDE.md`** zu finden.
-
----
-
-## 🎯 Was ist AMALEA?
-
-**AMALEA** steht für **"Angewandte Machine Learning Algorithmen"** und ist ein praxisorientierter Kurs, der drei Kernbereiche kombiniert:
-* **📚 Theoretische Fundamente**: Strukturiert durch das QUA³CK Prozessmodell.
-* **🛠️ Praktische Umsetzung**: Hands-on-Coding mit modernen Tools wie Pandas, Scikit-learn und TensorFlow.
-* **☁️ Interaktive Anwendungen**: Entwicklung und Deployment von produktionsreifen Streamlit-Apps.
-
-### 🔄 Das QUA³CK Prozessmodell
-Alle Projekte folgen dem systematischen **QUA³CK Framework**, einem Prozessmodell für Data-Science-Projekte:
-- **Q**uestion: Problemdefinition
-- **U**nderstand: Datenexploration und -analyse
-- **A**cquire & Clean: Datenaufbereitung und -verarbeitung
-- **A**nalyze: Modellentwicklung und -evaluierung
-- **A**pp: Interaktive Streamlit-Anwendung
-- **C**onclusion & **K**ommunikation: Dokumentation und Präsentation
+> 🚀 **Dein Ziel:**
+>
+> Von Python-Basics zu **Production-Grade ML-Systemen**.
+> In 7 Wochen baust du ein Portfolio aus **8 interaktiven Apps**, trainierst neuronale Netze und deployest alles in die Cloud.
+>
+> **Kein "Spaghetti-Code" in Notebooks, sondern sauberes Software-Engineering für Daten.**
 
 ---
 
-## 🚀 Quick Start
+## 💡 Der Tech-Stack (Industrie-Standard)
 
-Die empfohlene Methode zur Nutzung dieses Repositorys ist Docker.
+Wir nutzen Tools, die du auch im Job finden wirst:
 
-### Mit Docker starten
-1.  **Repository klonen:**
-    ```bash
-    git clone <repo-url>
-    cd amalea
-    ```
-2.  **Entwicklungsumgebung starten:**
-    ```bash
-    docker-compose up
-    ```
-3.  **Services nutzen:**
-    *   **JupyterLab**: [http://localhost:8888](http://localhost:8888) (für die Bearbeitung der Notebooks)
-    *   **Streamlit**: [http://localhost:8501](http://localhost:8501) (zeigt die `example_app.py`)
-    *   **MLflow**: [http://localhost:5001](http://localhost:5001) (zum Tracken von ML-Experimenten)
+| Kategorie | Tools | Warum? |
+|---|---|---|
+| **Core** | 🐍 Python 3.11+, Pandas, NumPy | Der Gold-Standard für Data Science. |
+| **ML & AI** | 🤖 Scikit-Learn, TensorFlow, Hugging Face | Von klassischem ML bis zu modernen Transformern. |
+| **App** | 🎈 Streamlit | Der schnellste Weg von Daten zur Web-App. |
+| **Ops** | 🐳 Docker, MLflow | Reproduzierbare Umgebungen & Experiment-Tracking. |
+| **Process** | 🦆 QUA³CK | Ein Framework, das Chaos in Struktur verwandelt. |
 
-### Leichtgewichtige Umgebung (Slim Images)
-Für schnellere Ladezeiten ohne Deep-Learning-Bibliotheken (TensorFlow, PyTorch) können die "Slim"-Services verwendet werden:
+---
+
+## 🗺️ Deine Roadmap (7 Wochen)
+
+Der Kurs ist modular aufgebaut. Jede Woche liefert ein fertiges Projekt für dein Portfolio.
+
+### Phase 1: Foundations & Engineering
+*   **📂 Woche 01: Python & QUA³CK**
+    *   *Focus:* Clean Code, Docker-Setup, Projekt-Strukturierung.
+*   **📂 Woche 02: Data Apps**
+    *   *Focus:* Interaktive Dashboards mit Streamlit & Pandas.
+
+### Phase 2: Machine Learning Core
+*   **📂 Woche 03: ML Engineering**
+    *   *Focus:* Scikit-Learn Pipelines, Klassifikation & Regression.
+*   **📂 Woche 04: Advanced Algorithms**
+    *   *Focus:* Ensemble Methods, Unsupervised Learning, MLOps.
+
+### Phase 3: Deep Learning & AI
+*   **📂 Woche 05: Neural Networks**
+    *   *Focus:* TensorFlow/Keras, Deep Learning Grundlagen.
+*   **📂 Woche 06: Computer Vision & NLP**
+    *   *Focus:* CNNs, Transformer, Hugging Face.
+
+### Phase 4: Production
+*   **📂 Woche 07: Deployment**
+    *   *Focus:* Cloud-Deployment, Model Serving, Finales Portfolio.
+
+---
+
+## 🛠️ Quick Start (Docker)
+
+Die einfachste Art zu starten. Wir bieten zwei Varianten an:
+
+### Option A: Full Experience (Empfohlen) 🐳
+Enthält alles (inkl. TensorFlow, MLflow).
+
 ```bash
-# Nur die schlanken Services für Jupyter und Streamlit starten
+# 1. Starten
+docker-compose up --build
+
+# 2. Services öffnen
+# Jupyter Lab: http://localhost:8888
+# Streamlit App: http://localhost:8501
+# MLflow UI:     http://localhost:5001
+```
+
+### Option B: Slim & Fast 🚀
+Ohne schwere Deep-Learning-Bibliotheken. Schneller Download.
+
+```bash
 docker compose up -d jupyter-lab-slim streamlit-slim
 ```
 - **Jupyter Slim**: [http://localhost:8889](http://localhost:8889)

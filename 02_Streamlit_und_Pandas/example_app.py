@@ -40,31 +40,34 @@ st.markdown(
 # --- Kursstruktur ---
 st.header("📁 Neue Kursstruktur")
 
+# Caching: Daten werden nur einmal geladen, nicht bei jedem Rerun
+@st.cache_data
+def load_structure_data() -> pd.DataFrame:
+    structure_data: Dict[str, List[str]] = {
+        "Woche": ["01", "02", "03", "04", "05", "06", "07"],
+        "Ordner": [
+            "01_Python_Grundlagen",
+            "02_Streamlit_und_Pandas",
+            "03_Machine_Learning",
+            "04_Advanced_Algorithms",
+            "05_Neural_Networks",
+            "06_Computer_Vision_NLP",
+            "07_Deployment_Portfolio"
+        ],
+        "Thema": [
+            "Python Basics + Docker",
+            "Web-Apps + Datenanalyse",
+            "ML Fundamentals",
+            "Trees, KNN, Clustering",
+            "Deep Learning",
+            "CNNs + NLP",
+            "Cloud Deployment"
+        ],
+        "Status": ["✅", "✅", "✅", "✅", "✅", "✅", "✅"]
+    }
+    return pd.DataFrame(structure_data)
 
-structure_data = {
-    "Woche": ["01", "02", "03", "04", "05", "06", "07"],
-    "Ordner": [
-        "01_Python_Grundlagen",
-        "02_Streamlit_und_Pandas",
-        "03_Machine_Learning",
-        "04_Advanced_Algorithms",
-        "05_Neural_Networks",
-        "06_Computer_Vision_NLP",
-        "07_Deployment_Portfolio"
-    ],
-    "Thema": [
-        "Python Basics + Docker",
-        "Web-Apps + Datenanalyse",
-        "ML Fundamentals",
-        "Trees, KNN, Clustering",
-        "Deep Learning",
-        "CNNs + NLP",
-        "Cloud Deployment"
-    ],
-    "Status": ["✅", "✅", "✅", "✅", "✅", "✅", "✅"]
-}
-
-df_structure = pd.DataFrame(structure_data)
+df_structure = load_structure_data()
 st.dataframe(df_structure, use_container_width=True)
 
 
