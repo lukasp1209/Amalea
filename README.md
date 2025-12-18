@@ -1,5 +1,13 @@
 # 🎓 AMALEA 2025 - Data Analytics & Big Data
 
+<div align="center">
+  <img src="./kurs-logo.png" alt="AMALEA 2025 Logo" width="400">
+  <br><br>
+  <img src="https://img.shields.io/badge/Python-3.11%2B-blue?logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/Streamlit-App-FF4B4B?logo=streamlit&logoColor=white" alt="Streamlit">
+  <img src="https://img.shields.io/badge/Docker-Enabled-2496ED?logo=docker&logoColor=white" alt="Docker">
+</div>
+
 **Der modernisierte Data-Science-Kurs für Entwickler & Analysten**
 
 > 🚀 **Dein Ziel:**
@@ -11,7 +19,18 @@
 
 ---
 
-## 💡 Der Tech-Stack (Industrie-Standard)
+## 📋 Inhaltsverzeichnis
+
+- [Der Tech-Stack](#-der-tech-stack-industrie-standard)
+- [Deine Roadmap](#-deine-roadmap-7-wochen)
+- [Quick Start](#-quick-start-docker)
+- [Repository-Struktur](#-repository-struktur)
+- [Kursinhalte & Portfolio](#-kursinhalte--portfolio-projekte)
+- [Support](#-support)
+
+---
+
+##  Der Tech-Stack (Industrie-Standard)
 
 Wir nutzen Tools, die du auch im Job finden wirst:
 
@@ -54,6 +73,10 @@ Der Kurs ist modular aufgebaut. Jede Woche liefert ein fertiges Projekt für dei
 ---
 
 ## 🛠️ Quick Start (Docker)
+
+### Voraussetzungen
+*   [Docker Desktop](https://www.docker.com/products/docker-desktop) installiert und laufend.
+*   [Git](https://git-scm.com/) installiert.
 
 Die einfachste Art zu starten. Wir bieten zwei Varianten an:
 
@@ -140,15 +163,6 @@ Der Kurs ist in 7 Wochen gegliedert. **Stand Februar 2025**: Die Wochen **01–0
 **In Vorbereitung (W04–W07):** Weitere ML-, CV- und Deployment-Apps folgen, sobald die entsprechenden Wochen migriert sind.
 
 ---
-
-## 🛠️ Technischer Stack
-
-- **Sprache**: Python 3.11+
-- **Data Science**: Pandas, NumPy, Scikit-learn
-- **Deep Learning**: TensorFlow/Keras, Hugging Face
-- **Web-Apps**: Streamlit
-- **Entwicklungsumgebung**: Docker
-- **MLOps**: MLflow
 
 ---
 
