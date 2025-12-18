@@ -103,53 +103,43 @@ Nach **Woche 6** beherrschen Sie:
 ## 🚀 AMALEA Schnellstart
 
 ```bash
-# Portfolio Environment Setup
-conda activate amalea-env
-pip install -r ../requirements.txt
+# Umgebung
+pip install -r ../requirements.txt  # oder gezielt: pip install -r requirements.streamlit.txt
 
-# Computer Vision & NLP Ordner
+# Ordner
 cd 06_Computer_Vision_NLP
 
-# 🎮 Streamlit Portfolio Apps starten:
+# Streamlit Apps (Auswahl)
 streamlit run 06_01_streamlit_cnn_filter.py          # CNN Filter Demo
 streamlit run 06_02_streamlit_cv_apps.py             # CV Applications Suite  
 streamlit run 06_03_streamlit_data_augmentation.py   # Augmentation Explorer
 streamlit run 06_04_streamlit_transfer_learning.py   # Transfer Learning Hub
 
-# 📚 QUA³CK Jupyter Notebooks:
+# Notebooks
 jupyter notebook 06_01_CNN_Grundlagen.ipynb
 jupyter notebook 06_02_Computer_Vision_Anwendungen.ipynb
 jupyter notebook 06_03_Data_Augmentation.ipynb
 jupyter notebook 06_04_Transfer_Learning.ipynb
 
-# 🔬 MLFlow Experiment Tracking
+# MLflow (optional)
 mlflow ui --port 5000  # http://localhost:5000
 ```
 
-## 📁 AMALEA Struktur (2025)
+## 📁 AMALEA Struktur (Stand)
 
 ```
 06_Computer_Vision_NLP/
-├── 📚 notebooks/
-│   ├── 06_01_CNN_Grundlagen.ipynb              # QUA³CK-strukturiert
-│   ├── 06_02_Computer_Vision_Anwendungen.ipynb # OpenCV Mastery
-│   ├── 06_03_Data_Augmentation.ipynb           # Advanced Augmentation
-│   └── 06_04_Transfer_Learning.ipynb           # Hugging Face Integration
-├── 🚀 apps/
-│   ├── 06_01_streamlit_cnn_filter.py          # CNN Portfolio App
-│   ├── 06_02_streamlit_cv_apps.py             # CV Suite App
-│   ├── 06_03_streamlit_data_augmentation.py   # Augmentation App
-│   └── 06_04_streamlit_transfer_learning.py   # Transfer Learning App
-├── 📊 data/
-│   ├── cifar10/          # CIFAR-10 Dataset Cache
-│   ├── custom_images/    # Portfolio Image Collection
-│   └── pretrained/       # Pre-trained Model Cache
-├── 🖼️ images/           # Visualisierungen und Results
-├── 🛠️ utils/
-│   ├── cv_utils.py       # Computer Vision Hilfsfunktionen
-│   ├── augmentation.py   # Custom Augmentation Functions
-│   └── model_utils.py    # Model Loading & Saving Utils
-└── 📋 README.md          # This file
+├── 06_01_CNN_Grundlagen.ipynb
+├── 06_02_Computer_Vision_Anwendungen.ipynb
+├── 06_03_Data_Augmentation.ipynb
+├── 06_04_Transfer_Learning.ipynb
+├── 06_01_streamlit_cnn_filter.py
+├── 06_02_streamlit_cv_apps.py
+├── 06_03_streamlit_data_augmentation.py
+├── 06_04_streamlit_transfer_learning.py
+├── utils.py
+├── data/ (Datasets/NPY)
+└── images/ (Visualisierungen)
 ```
 
 ## � AMALEA Portfolio Integration

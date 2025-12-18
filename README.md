@@ -128,7 +128,7 @@ amalea/
 
 ## 📚 Kursinhalte & Portfolio-Projekte
 
-Der Kurs ist in 7 Wochen gegliedert. **Stand Februar 2025**: Die Wochen **01–03** sind vollständig überarbeitet (6 Kern-Notebooks + 6 Streamlit-Apps); die Inhalte zu Woche 04–07 werden aktuell migriert.
+Der Kurs ist in 7 Wochen gegliedert. **Stand 18.12.2025**: Die Wochen **01–03** sind vollständig überarbeitet (6 Kern-Notebooks + 6 Streamlit-Apps); die Inhalte zu Woche 04–07 werden aktuell migriert (Week 04–06 Notebooks/Apps in Arbeit, teilweise lauffähig).
 
 | Woche | Thema |
 |-------|-------|
