@@ -44,7 +44,7 @@ docker-compose up --build
 
 ```bash
 # 1. Dependencies installieren
-pip install -r requirements.txt
+pip install -r 02_Streamlit_und_Pandas/requirements.txt
 
 # 2. App starten
 streamlit run example_app.py

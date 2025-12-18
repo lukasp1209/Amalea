@@ -63,7 +63,7 @@ Um die `.ipynb` Dateien interaktiv zu lernen:
 
 ```bash
 # 1. Abhängigkeiten installieren
-pip install -r requirements.txt
+pip install -r 01_Python_Grundlagen/requirements.txt
 
 # 2. Jupyter Lab starten
 jupyter lab

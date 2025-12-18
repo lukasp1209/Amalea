@@ -44,3 +44,15 @@ docker-compose up --build
 
 # App öffnen: http://localhost:8501
 ```
+
+### Option B: Lokal 💻
+
+```bash
+# 1. Dependencies installieren (Woche 3)
+pip install -r 03_Machine_Learning/requirements.txt
+
+# 2. App starten
+streamlit run 03_Machine_Learning/iris_ml_app.py
+# oder
+streamlit run 03_Machine_Learning/housing_regression_app.py
+```
