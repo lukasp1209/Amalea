@@ -18,6 +18,7 @@ Starte im Terminal:
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+from typing import List, Dict, Any
 
 
 # --- App-Konfiguration ---
