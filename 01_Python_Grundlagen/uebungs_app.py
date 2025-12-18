@@ -1,62 +1,99 @@
+"""
+Advanced Analytics Dashboard
+---------------------------
+Eine professionelle Streamlit-App zur Datenanalyse.
+Starten mit: streamlit run uebungs_app.py
+"""
 
 import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-# App-Titel
-st.title("📊 Meine Data Analytics & Big Data App")
-st.write("Von: [Dein Name hier]")
+# 1. Konfiguration & State Management
+st.set_page_config(page_title="Pro Data App", layout="wide")
 
-# Beispieldaten erstellen
-daten = {
-    'Produkt': ['Laptop', 'Handy', 'Tablet', 'Kopfhörer', 'Maus'],
-    'Preis': [800, 600, 400, 100, 25],
-    'Kategorie': ['Computer', 'Telefon', 'Computer', 'Audio', 'Computer'],
-    'Bewertung': [4.5, 4.2, 4.0, 4.8, 3.9]
-}
+if 'warenkorb' not in st.session_state:
+    st.session_state.warenkorb = []
 
-df = pd.DataFrame(daten)
+# 2. Daten laden (Cached & Typed)
+@st.cache_data
+def lade_daten() -> pd.DataFrame:
+    data = {
+        'Produkt': ['Laptop X1', 'Phone 15', 'Tablet Pro', 'Headset QC', 'Maus MX', 'Monitor 4K'],
+        'Kategorie': ['Electronics', 'Electronics', 'Electronics', 'Audio', 'Peripherals', 'Peripherals'],
+        'Preis': [1200, 999, 850, 299, 99, 450],
+        'Lagerbestand': [5, 12, 8, 25, 50, 10],
+        'Bewertung': [4.8, 4.5, 4.3, 4.7, 4.6, 4.4]
+    }
+    return pd.DataFrame(data)
 
-# Sidebar für Filter
-st.sidebar.header("🔍 Filter")
-kategorie_filter = st.sidebar.selectbox(
-    "Kategorie wählen:",
-    ["Alle"] + list(df['Kategorie'].unique())
+df = lade_daten()
+
+# 3. Sidebar: Advanced Filters
+st.sidebar.header("🔍 Filter & Einstellungen")
+kategorien = st.sidebar.multiselect(
+    "Kategorien filtern:", 
+    options=df['Kategorie'].unique(),
+    default=df['Kategorie'].unique()
 )
 
-# Daten filtern
-if kategorie_filter != "Alle":
-    gefilterte_daten = df[df['Kategorie'] == kategorie_filter]
-else:
-    gefilterte_daten = df
+preis_range = st.sidebar.slider(
+    "Preisrahmen (€):", 
+    min_value=int(df['Preis'].min()), 
+    max_value=int(df['Preis'].max()),
+    value=(0, 2000)
+)
 
-# Hauptbereich
-st.subheader("🛍️ Produktdaten")
-st.dataframe(gefilterte_daten)
+# Filter-Logik (Vektorisierung)
+maske = (df['Kategorie'].isin(kategorien)) & (df['Preis'].between(preis_range[0], preis_range[1]))
+df_filtered = df[maske]
 
-# Visualisierungen
-col1, col2 = st.columns(2)
+# 4. Haupt-Layout mit Tabs
+st.title("🚀 Advanced Analytics Dashboard")
+tab1, tab2, tab3 = st.tabs(["📊 Dashboard", "📋 Rohdaten", "🛒 Warenkorb"])
 
-with col1:
-    fig1 = px.bar(gefilterte_daten, x='Produkt', y='Preis', 
-                  title="Preise nach Produkt")
-    st.plotly_chart(fig1, use_container_width=True)
+with tab1:
+    # KPI Row
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("Produkte", len(df_filtered))
+    col2.metric("Ø Preis", f"{df_filtered['Preis'].mean():.2f} €")
+    col3.metric("Gesamtwert (Lager)", f"{(df_filtered['Preis'] * df_filtered['Lagerbestand']).sum():,.0f} €")
+    
+    # Bestes Produkt (Pandas Magic)
+    best_product = df_filtered.loc[df_filtered['Bewertung'].idxmax()]
+    col4.metric("Top Produkt", best_product['Produkt'], f"{best_product['Bewertung']} ⭐")
 
-with col2:
-    fig2 = px.scatter(gefilterte_daten, x='Preis', y='Bewertung',
-                     color='Kategorie', title="Preis vs. Bewertung")
-    st.plotly_chart(fig2, use_container_width=True)
+    # Charts
+    c1, c2 = st.columns(2)
+    with c1:
+        fig_bar = px.bar(df_filtered, x='Produkt', y='Lagerbestand', color='Kategorie', title="Lagerbestand")
+        st.plotly_chart(fig_bar, use_container_width=True)
+    with c2:
+        fig_scat = px.scatter(df_filtered, x='Preis', y='Bewertung', size='Lagerbestand', hover_name='Produkt', title="Preis-Leistungs-Matrix")
+        st.plotly_chart(fig_scat, use_container_width=True)
 
-# Statistiken
-st.subheader("📈 Zusammenfassung")
-col1, col2, col3 = st.columns(3)
+with tab2:
+    st.dataframe(df_filtered, use_container_width=True)
+    
+    # Interaktion: Produkt zum Warenkorb hinzufügen
+    produkt_wahl = st.selectbox("Produkt zum Merken wählen:", df_filtered['Produkt'])
+    if st.button("In den Warenkorb legen"):
+        if produkt_wahl not in st.session_state.warenkorb:
+            st.session_state.warenkorb.append(produkt_wahl)
+            st.success(f"{produkt_wahl} hinzugefügt!")
+        else:
+            st.warning("Schon drin!")
 
-with col1:
-    st.metric("Anzahl Produkte", len(gefilterte_daten))
-with col2:
-    st.metric("Durchschnittspreis", f"{gefilterte_daten['Preis'].mean():.0f}€")
-with col3:
-    st.metric("Beste Bewertung", f"{gefilterte_daten['Bewertung'].max()}")
+with tab3:
+    st.subheader("Deine Merkliste (Session State Demo)")
+    if st.session_state.warenkorb:
+        st.write(st.session_state.warenkorb)
+        if st.button("Warenkorb leeren"):
+            st.session_state.warenkorb = []
+            st.rerun()
+    else:
+        st.info("Der Warenkorb ist leer.")
 
-# TODO: Erweitere die App nach deinen Ideen!
-st.info("💡 Ideen zum Erweitern: Mehr Filter, andere Diagramme, Daten-Upload...")
+# Debugging Info für Entwickler
+with st.expander("🤓 Developer Info (State)"):
+    st.write(st.session_state)

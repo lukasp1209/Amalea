@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  # Unsere Streamlit App
+  streamlit-app:
+    build: .                    # Baue aus lokalem Dockerfile
+    restart: unless-stopped     # Automatischer Neustart bei Absturz
+    ports:
+      - "8501:8501"            # Port-Weiterleitung
+    volumes:
+      - ./data:/app/data       # Datenordner verbinden
+    
+  # Jupyter für Entwicklung
+  jupyter:
+    image: jupyter/datascience-notebook
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebooks:/home/jovyan/work
+    environment:
+      - JUPYTER_TOKEN=mein-geheimes-token
