@@ -105,7 +105,7 @@ amalea/
 
 ## 📚 Kursinhalte & Portfolio-Projekte
 
-Der Kurs ist in 7 Wochen gegliedert und umfasst **16 Notebooks** und **8 Streamlit-Apps**, die als Portfolio-Projekte dienen.
+Der Kurs ist in 7 Wochen gegliedert. **Stand Februar 2025**: Die Wochen **01–03** sind vollständig überarbeitet (6 Kern-Notebooks + 6 Streamlit-Apps); die Inhalte zu Woche 04–07 werden aktuell migriert.
 
 | Woche | Thema |
 |-------|-------|
@@ -117,12 +117,27 @@ Der Kurs ist in 7 Wochen gegliedert und umfasst **16 Notebooks** und **8 Streaml
 | **06** | Computer Vision & NLP |
 | **07** | Deployment & Portfolio |
 
+### Aktueller Stand im Repo (Ordner 01–03)
+
+| Woche | Kern-Notebooks | Apps / Skripte | Status |
+|-------|----------------|----------------|--------|
+| 01 | `00_Python_in_3_Stunden.ipynb`, `01_Docker_für_Data_Science.ipynb`, `02_Glossar_Alle_Begriffe_erklärt.ipynb`, `03_QUA3CK_Prozessmodell.ipynb` | `01_Python_Grundlagen/uebungs_app.py`, `01_Python_Grundlagen/meine_erste_app.py`, `01_Python_Grundlagen/streamlit_komponenten.py` | ✅ Fertig |
+| 02 | `02_Streamlit_und_Pandas/01_Erste_Streamlit_App_fixed.ipynb` | `02_Streamlit_und_Pandas/example_app.py`, `02_Streamlit_und_Pandas/hello_streamlit.py`, `02_Streamlit_und_Pandas/streamlit_komponenten.py` | ✅ Fertig |
+| 03 | `03_Machine_Learning/02_ML_in_Streamlit_fixed.ipynb` | `03_Machine_Learning/iris_ml_app.py`, `03_Machine_Learning/housing_regression_app.py` | ✅ Fertig |
+
+> ℹ️ Für Woche 04–07 existieren bereits Platzhalter-Ordner. Inhalte werden sukzessive veröffentlicht und hier ergänzt.
+
 ### Portfolio-Apps (Beispiele)
-1.  **Streamlit Pandas Demo** (`02_Streamlit_und_Pandas/example_app.py`)
-2.  **Neural Network Playground** (`05_Neural_Networks/neural_network_playground.py`)
-3.  **CNN Filter Explorer** (`06_Computer_Vision_NLP/06_01_streamlit_cnn_filter.py`)
-4.  **Computer Vision Apps** (`06_Computer_Vision_NLP/06_02_streamlit_cv_apps.py`)
-5.  ... und 4 weitere Apps in den Wochen 6 und 7.
+
+**Bereits lauffähig (W01–W03):**
+1.  **Python Fundamentals Dashboard** (`01_Python_Grundlagen/uebungs_app.py`)
+2.  **Streamlit Starter** (`01_Python_Grundlagen/meine_erste_app.py`)
+3.  **Streamlit Pandas Demo** (`02_Streamlit_und_Pandas/example_app.py`)
+4.  **Hello Streamlit Widgets** (`02_Streamlit_und_Pandas/hello_streamlit.py`)
+5.  **Iris ML Playground** (`03_Machine_Learning/iris_ml_app.py`)
+6.  **Housing Regression Explorer** (`03_Machine_Learning/housing_regression_app.py`)
+
+**In Vorbereitung (W04–W07):** Weitere ML-, CV- und Deployment-Apps folgen, sobald die entsprechenden Wochen migriert sind.
 
 ---
 
