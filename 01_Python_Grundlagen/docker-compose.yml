@@ -1,21 +1,20 @@
 version: '3.8'
 
 services:
-  # Unsere Streamlit App
-  streamlit-app:
-    build: .                    # Baue aus lokalem Dockerfile
-    restart: unless-stopped     # Automatischer Neustart bei Absturz
+  # Unsere Data Science App
+  app:
+    build: .
+    container_name: data-science-pro
+    restart: unless-stopped  # Auto-Restart bei Crash
     ports:
-      - "8501:8501"            # Port-Weiterleitung
+      - "8501:8501"
     volumes:
-      - ./data:/app/data       # Datenordner verbinden
-    
-  # Jupyter für Entwicklung
-  jupyter:
-    image: jupyter/datascience-notebook
-    ports:
-      - "8888:8888"
-    volumes:
-      - ./notebooks:/home/jovyan/work
+      - .:/app              # Hot-Reloading für Entwicklung
     environment:
-      - JUPYTER_TOKEN=mein-geheimes-token
+      - ENV=development
+    # Ressourcen-Limits (Cgroups in Action)
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G

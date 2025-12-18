@@ -1,48 +1,84 @@
+# 🐍 Woche 1: Python & Data Science Fundamentals
 
-
-# 🐍 01 Python Grundlagen
-
-> 🚀 **Motivation:**
+> 🚀 **Dein Ziel:**
 >
-> Starte jetzt deine Data-Science-Reise! In nur einer Woche legst du das Fundament für alle weiteren Data-Science- und KI-Projekte – ganz ohne Vorwissen, aber mit viel Praxis, Spaß und Portfolio-Power.
+> Vom "Skript-Bastler" zum **Data Science Engineer**.
+> In dieser Woche legst du das Fundament für professionelle Daten-Projekte: Reproduzierbar, strukturiert und bereit für die Cloud.
 
-> 💡 **Warum lohnt sich das?**
-> - Python ist das Schweizer Taschenmesser der Datenanalyse und der Schlüssel zu modernen KI-Anwendungen.
-> - Nach dieser Woche kannst du eigene Analysen, Apps und ML-Projekte starten – und hast direkt Material für dein Portfolio!
+## 💡 Warum dieser Tech-Stack?
 
+Wir setzen auf den **Industrie-Standard**:
+1.  **Python & Pandas:** Das "Excel auf Steroiden" für Datenanalyse.
+2.  **Streamlit:** Der schnellste Weg von Daten zur Web-App (ohne HTML/CSS!).
+3.  **Docker:** Damit deine App überall läuft (nie wieder "It works on my machine").
+4.  **QUA³CK:** Ein Prozessmodell, das Chaos in Struktur verwandelt.
 
+---
 
-## 📚 Inhalt
+## 🗺️ Deine Roadmap
 
-- `00_Python_in_3_Stunden.ipynb` – Python Crashkurs für Anfänger
-- `01_Docker_für_Data_Science.ipynb` – Entwicklungsumgebung-Setup
-- `02_Glossar_Alle_Begriffe_erklärt.ipynb` – Nachschlagewerk für alle Begriffe (Tipp: Immer offen lassen!)
-- `03_QUA3CK_Prozessmodell.ipynb` – Strukturierter ML-Entwicklungsprozess
-- `uebungs_app.py` – Interaktive Streamlit-App zum Üben und Ausprobieren (Start: `streamlit run uebungs_app.py`)
+Arbeite die Inhalte in dieser Reihenfolge durch:
 
+### 1️⃣ Die Basics (Theorie & Praxis)
+- **`00_Python_in_3_Stunden.ipynb`**
+  - *Lernziel:* Python-Syntax auffrischen und Daten mit Pandas bändigen.
+  - *Highlight:* Visualisierung mit Plotly vs. Matplotlib.
 
-## 🎯 Lernziele
+### 2️⃣ Die Infrastruktur (DevOps)
+- **`01_Docker_für_Data_Science.ipynb`**
+  - *Lernziel:* Verstehen, wie man Data-Science-Umgebungen containerisiert.
+  - *Output:* Ein `Dockerfile` und `docker-compose.yml` für dieses Projekt.
 
-Nach dieser Woche kannst du:
-- ✅ Python-Grundlagen (Variablen, Listen, Funktionen)
-- ✅ Jupyter Notebooks effektiv nutzen
-- ✅ Docker für reproduzierbare Umgebungen
-- ✅ QUA³CK Framework für ML-Projekte anwenden
-- ✅ Alle Data Science Begriffe verstehen
+### 3️⃣ Die Methodik (Process)
+- **`03_QUA3CK_Prozessmodell.ipynb`**
+  - *Lernziel:* ML-Projekte professionell planen (Question -> Understand -> ...).
+  - *Highlight:* Integration von MLFlow und Experiment-Tracking.
 
-> 📚 **Glossar-Tipp:** Nutze das Glossar als ständigen Begleiter – so findest du schnell jede Erklärung, egal ob im Unterricht, bei Übungen oder im Projekt! Fehlt ein Begriff? Sag Bescheid – das Glossar wächst mit deinen Fragen.
+### 4️⃣ Das Produkt (Deployment)
+- **`uebungs_app.py`**
+  - *Was:* Deine erste Streamlit-App (Dashboard).
+  - *Aufgabe:* Starte sie und passe sie an!
 
-## 🚀 So startest du
+> 📚 **Cheat-Sheet:** Nutze `02_Glossar_Alle_Begriffe_erklärt.ipynb` als dein ständiges Nachschlagewerk für Fachbegriffe.
+
+---
+
+## 🛠️ Setup & Start
+
+Du hast zwei Möglichkeiten, mit diesem Repo zu arbeiten:
+
+### Option A: Die App starten (via Docker) 🐳
+Perfekt, um das Endergebnis zu sehen und die Umgebung zu testen.
 
 ```bash
-# Docker-Umgebung starten (empfohlen)
-docker-compose up
+# 1. Container bauen und starten
+docker-compose up --build
 
-# Oder lokal mit Jupyter (falls installiert)
-jupyter notebook
+# 2. App im Browser öffnen
+# http://localhost:8501
+```
+
+### Option B: Notebooks bearbeiten (Lokal) 💻
+Um die `.ipynb` Dateien interaktiv zu lernen:
+
+```bash
+# 1. Abhängigkeiten installieren
+pip install -r requirements.txt
+
+# 2. Jupyter Lab starten
+jupyter lab
 ```
 
 ---
 
-**Viel Erfolg und Spaß beim Lernen!**<br>
-Bei Fragen: Erst ins Glossar schauen, dann fragen. 😉
+## ⚠️ Wichtige Hinweise
+
+1.  **Streamlit vs. Notebooks:**
+    Streamlit-Code (`st.write`, etc.) funktioniert **nicht** in Jupyter Notebooks. Schreibe ihn immer in `.py` Dateien (wie `uebungs_app.py`) und führe sie via Terminal aus.
+
+2.  **Docker Troubleshooting:**
+    Falls Ports belegt sind, stoppe andere Container mit `docker stop $(docker ps -q)`.
+
+---
+
+**Viel Erfolg!** 🚀
