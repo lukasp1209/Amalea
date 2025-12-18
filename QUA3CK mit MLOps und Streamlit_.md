@@ -84,6 +84,30 @@ Dieses Handout führt Sie durch die Modernisierung des QUA³CK-Prozessmodells mi
 
 **Für AMALEA-Studierende** dient dieses Handout als theoretisches Fundament für alle **24 Portfolio-Komponenten** (16 Notebooks + 8 Streamlit Apps). Die hier vorgestellten Konzepte werden in den praktischen Notebooks der Wochen 1, 4 und 7 direkt umgesetzt und bereiten optimal auf die **Fallstudien** vor.
 
+## 🚀 Schnelleinstieg (Praxis-Setup)
+
+```bash
+# 1) Umgebung
+python -m venv .venv && source .venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+
+# 2) MLflow Server (optional, sonst lokales file:./mlruns)
+docker compose up -d mlflow   # UI: http://localhost:5001
+export MLFLOW_TRACKING_URI=http://localhost:5001
+
+# 3) Beispiel-Notebook ausführen
+jupyter notebook 04_Advanced_Algorithms/02_MLFlow_Big3_Tracking.ipynb
+
+# 4) Beispiel-Streamlit-App starten
+streamlit run 03_Machine_Learning/iris_ml_app.py
+```
+
+**Hinweise:**  
+- Ohne laufenden MLflow-Server wird automatisch auf `file:./mlruns` geloggt.  
+- MLflow-Version im Kurs: 3.x (kompatibel mit den Notebooks).  
+- Für reproduzierbare Runs: Seeds im Notebook aktiv lassen; Versionen werden geloggt.
+
 ## Teil 1: Das Fundamentale QUA³CK-Prozessmodell
 
 > 🎥 **AMALEA Video-Integration**: Die folgenden Konzepte werden durch **originale AMALEA-Videos** aus 2021 vertieft  

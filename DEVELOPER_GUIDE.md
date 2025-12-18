@@ -117,16 +117,19 @@ Tracking URIs:
 |---------|-----|
 | Host | http://localhost:5001 |
 | Container | http://mlflow:5000 |
+| Fallback ohne Server | file:./mlruns |
 
 Minimal:
 ```python
 import mlflow
-mlflow.set_tracking_uri("http://localhost:5001")
+mlflow.set_tracking_uri("http://localhost:5001")  # oder fallback: file:./mlruns
 mlflow.set_experiment("demo")
 with mlflow.start_run():
     mlflow.log_param("model","rf")
     mlflow.log_metric("accuracy",0.91)
 ```
+
+> Hinweis: Wenn kein Server läuft, setze `MLFLOW_TRACKING_URI=file:./mlruns` oder im Code `mlflow.set_tracking_uri("file:./mlruns")`.
 
 Artefakte: Volume `mlflow-data` → Ordner `/mlflow/artifacts`.
 
