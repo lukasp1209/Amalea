@@ -8,6 +8,13 @@
 - **02_NLP_und_Text_Generation.ipynb** – Kurze CPU-Demo: einfache Sentiment-Heuristik + Stub-Text-Gen (kein großes Modell).
 - **03_QUA3CK_MLOps_Integration.ipynb** – QUA³CK-Mini-Flow, Health/Predict-Check gegen das Backend.
 
+### Geführter Ablauf
+1) Backend starten (Demo oder Live) oder im Dashboard Demo-Modus lassen.
+2) 01_Notebook: Mini-Train + Export (Artefakt anlegbar für Serving).
+3) 02_Notebook: Sentiment/Gen-Stubs verstehen (schnell, CPU).
+4) 03_Notebook: Health/Predict gegen API prüfen (oder Hinweis lesen, wenn API aus ist).
+5) Dashboards öffnen: erst Demo, dann Live mit `API_URL` setzen. Optional per `docker compose up --build` alles gemeinsam starten.
+
 ## 🚀 Streamlit Apps (Status)
 
 - **04_streamlit_mlops_dashboard.py** – Dashboard für Iris-Predict-API (`/health`, `/predict`). Demo-Modus integriert (simulierte Metriken), Live-Modus erwartet API.

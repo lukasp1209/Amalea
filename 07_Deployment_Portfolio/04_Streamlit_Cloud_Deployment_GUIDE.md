@@ -1,6 +1,6 @@
-# 🚀 Deployment auf Streamlit Cloud: Eine Schritt-für-Schritt-Anleitung
+# 🚀 Deployment auf Streamlit Cloud (MLOps/NLP Dashboards)
 
-Dieses Dokument erklärt, wie du eine Streamlit-Anwendung aus diesem Kurs auf der Streamlit Cloud veröffentlichst.
+Dieses Dokument erklärt, wie du die Dashboards aus `07_Deployment_Portfolio` auf Streamlit Cloud veröffentlichst – inklusive Hinweis, wie du mit Demo-Modus oder externem API-Endpoint arbeitest.
 
 ---
 
@@ -14,47 +14,39 @@ Stelle sicher, dass du Folgendes hast:
 
 ---
 
-## ⚙️ Schritt 2: Die `requirements.txt`-Datei
+## ⚙️ Schritt 2: Dependencies (`requirements.cloud.txt`)
 
-Diese Datei ist entscheidend. Sie sagt Streamlit Cloud, welche Pakete es installieren muss. Für die meisten Apps hier genügt eine einfache Datei, da viele Pakete vorinstalliert sind.
-
-**Beispielinhalt für `requirements.cloud.txt`:**
-```
-streamlit>=1.32
-pandas>=2.2
-numpy
-plotly
-scikit-learn
-```
-
-> **Wichtig**: Wenn deine App spezielle Bibliotheken wie `tensorflow` oder `transformers` benötigt, musst du diese hier explizit aufführen.
+Nutze die vorhandene `requirements.cloud.txt` im Ordner `07_Deployment_Portfolio`. Sie enthält Streamlit, sklearn und FastAPI/uvicorn (für lokale Tests). Auf Streamlit Cloud wird nur die App selbst ausgeführt; das Backend musst du extern bereitstellen oder den Demo-Modus nutzen.
 
 ---
 
-## 🚀 Schritt 3: Der Deployment-Prozess
+## 🚀 Schritt 3: Der Deployment-Prozess (Dashboard-only)
 
 1.  **Anmelden**: Gehe zu [share.streamlit.io](https://share.streamlit.io/) und melde dich mit deinem GitHub-Konto an.
 2.  **Neue App**: Klicke in deinem Workspace auf den Button **"New app"**.
-3.  **Repository verbinden**: Wähle dein GitHub-Repository, den Branch (z.B. `main`) und den genauen Pfad zu deiner App-Datei (z.B. `07_Deployment_Portfolio/04_streamlit_mlops_dashboard.py`).
+3.  **Repository verbinden**: Wähle dein GitHub-Repository, den Branch (z.B. `main`) und den genauen Pfad zu deiner App-Datei (z.B. `07_Deployment_Portfolio/04_streamlit_mlops_dashboard.py` oder `07_Deployment_Portfolio/05_streamlit_nlp_dashboard.py`).
 4.  **Deploy**: Klicke auf **"Deploy!"**. Deine App wird nach wenigen Minuten online sein. 🎉
 
 ---
 
-## 🔑 Schritt 4: Secrets Management
+## 🔑 Schritt 4: API-URL & Secrets
 
-Gib niemals API-Schlüssel oder Passwörter direkt in deinen Code. Nutze stattdessen das Secrets Management von Streamlit Cloud.
+- Dashboards unterstützen Demo-Mode (ohne Backend). Für Live-Mode brauchst du eine öffentlich erreichbare API (z.B. dein FastAPI-Backend auf Render/Fly/Heroku/Azure). Setze `API_URL` unter **Settings → Secrets**:
 
--   Gehe in den App-Einstellungen zu **Settings -> Secrets**.
--   Füge deine Geheimnisse dort ein.
--   Greife im Code sicher darauf zu mit `st.secrets["DEIN_GEHEIMNIS"]`.
+```
+API_URL="https://dein-backend.example.com"
+```
+
+- Keine API-Keys nötig im Demo-Modus. Falls dein Backend Auth benötigt, lege Schlüssel ebenso in `Secrets` ab und lies sie in der App.
 
 ---
 
 ## 🔧 Schritt 5: Troubleshooting
 
--   **`ModuleNotFoundError`**: Ein Paket fehlt in der `requirements.txt`.
--   **App startet nicht**: Überprüfe die Logs in der Streamlit Cloud auf Fehlermeldungen.
--   **`Slug size too large`**: Dein Repository ist zu groß. Lagere große Datendateien aus (z.B. mit Git LFS).
+- **Backend nicht erreichbar**: Schalte auf Demo-Modus oder setze `API_URL` korrekt auf dein gehostetes FastAPI.
+- **`ModuleNotFoundError`**: Abhängigkeit in `requirements.cloud.txt` ergänzen.
+- **Langsame Builds/Slug zu groß**: Halte das Repo schlank (keine großen Daten). Wir haben `data/` und `images/` bereits entfernt.
+- **Timeouts**: In Streamlit Cloud sind Requests limitiert; halte API-Calls kurz oder nutze Demo-Modus.
 
 ---
 
