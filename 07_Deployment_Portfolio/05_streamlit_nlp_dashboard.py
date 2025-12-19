@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 import requests
 from datetime import datetime
 from typing import Any, Dict
@@ -34,7 +35,8 @@ def safe_post(url: str, payload: Dict[str, Any]):
 # Sidebar
 st.sidebar.header("⚙️ Konfiguration")
 demo_mode = st.sidebar.toggle("Demo-Modus (ohne API)", value=True)
-api_url = st.sidebar.text_input("NLP API URL", "http://localhost:8000")
+default_api = os.getenv("API_URL", "http://localhost:8000")
+api_url = st.sidebar.text_input("NLP API URL", default_api)
 
 # Main Content
 tab1, tab2, tab3 = st.tabs(["✍️ Text Generation", "😊 Sentiment", "❓ Q&A"])

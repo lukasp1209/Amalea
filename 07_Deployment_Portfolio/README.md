@@ -4,9 +4,9 @@
 
 ## 📚 Notebooks (Status)
 
-- **01_MLOps_und_Deployment.ipynb** – Rohfassung, noch nicht ausgeführt. Enthält Pipeline-/Deployment-Skizzen, muss auf aktuelle Tooling-Versionen geprüft werden.
-- **02_NLP_und_Text_Generation.ipynb** – Rohfassung, unexecuted. Enthält Text-Generation/Sentiment/Q&A-Abschnitte, benötigt Runtime-Validierung und ggf. kleinere CPU-Demos.
-- **03_QUA3CK_MLOps_Integration.ipynb** – Rohfassung, unexecuted. Bezieht sich auf QUA³CK + MLOps; modernisieren und kürzen empfohlen.
+- **01_MLOps_und_Deployment.ipynb** – Kurze CPU-Demo: Iris-LogReg + Export (`artifacts/iris_lr.pkl`), Hinweis auf Serving via FastAPI.
+- **02_NLP_und_Text_Generation.ipynb** – Kurze CPU-Demo: einfache Sentiment-Heuristik + Stub-Text-Gen (kein großes Modell).
+- **03_QUA3CK_MLOps_Integration.ipynb** – QUA³CK-Mini-Flow, Health/Predict-Check gegen das Backend.
 
 ## 🚀 Streamlit Apps (Status)
 
@@ -34,6 +34,16 @@ cd 07_Deployment_Portfolio
 pip install -r requirements.cloud.txt
 uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
 ```
+
+Start (Docker Compose, API + beide Dashboards):
+```bash
+cd 07_Deployment_Portfolio
+docker compose up --build
+```
+URLs:
+- API: http://localhost:8000
+- MLOps Dashboard: http://localhost:8505
+- NLP Dashboard: http://localhost:8506
 
 ## 📱 Streamlit Apps (Starten)
 
@@ -67,10 +77,6 @@ Hinweise:
 - **Multi-task NLP** - Sentiment, Q&A, Summarization
 
 ## 🗺️ Nächste Schritte (Empfohlen)
-- Notebooks neu und kurz (CPU): Seeds, kleine Datasets, klare "So nutzt du…"-Abschnitte.
-- Backend: optional Dockerfile/Compose ergänzen; einfache Tests für Endpunkte.
-- MLOps/NLP Dashboards: ggf. echte Monitoring-Metriken anbinden, Prompt-Limits und Safety-Hinweise weiter ausbauen.
-
-## 📁 Assets
-- `data/` enthält Beispieltexte (Grimms/Simpsons) und einen Stromverbrauch-Datensatz (CSV); derzeit nicht in den Apps verdrahtet.
-- `images/` für Abbildungen in Anleitungen.
+- Backend: einfache Tests für Endpunkte ergänzen; optional kleinere Modelle anstelle der Stubs.
+- MLOps/NLP Dashboards: echte Monitoring-Metriken anbinden, Prompt-Limits/Safety weiter ausbauen.
+- Falls nötig: eigene Assets hinzufügen; ungenutzte Beispiel-Daten/Images wurden entfernt.

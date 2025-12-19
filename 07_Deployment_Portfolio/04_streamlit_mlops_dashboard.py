@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
+import os
 import requests
 from datetime import datetime
 from typing import Any, Dict
@@ -19,7 +20,8 @@ st.markdown("**Real-time Monitoring für Iris Classification API** — wähle De
 # Sidebar für Konfiguration
 st.sidebar.header("⚙️ Konfiguration")
 demo_mode = st.sidebar.toggle("Demo-Modus (ohne API)", value=True)
-api_url = st.sidebar.text_input("API URL", "http://localhost:8000")
+default_api = os.getenv("API_URL", "http://localhost:8000")
+api_url = st.sidebar.text_input("API URL", default_api)
 refresh_interval = st.sidebar.slider("Refresh Interval (s)", 5, 60, 10)
 
 if st.sidebar.button("🔄 Refresh"):

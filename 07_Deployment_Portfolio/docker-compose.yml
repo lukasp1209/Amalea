@@ -1,0 +1,42 @@
+version: "3.9"
+services:
+  api:
+    build: ./backend
+    container_name: amalea-api
+    ports:
+      - "8000:8000"
+    environment:
+      - UVICORN_WORKERS=1
+    restart: unless-stopped
+
+  mlops-dashboard:
+    image: python:3.11-slim
+    container_name: amalea-mlops-dashboard
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: ["bash", "-c", "pip install --no-cache-dir -r requirements.cloud.txt && streamlit run 04_streamlit_mlops_dashboard.py --server.port=8505 --server.address=0.0.0.0"]
+    ports:
+      - "8505:8505"
+    environment:
+      - STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+      - API_URL=http://api:8000
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  nlp-dashboard:
+    image: python:3.11-slim
+    container_name: amalea-nlp-dashboard
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: ["bash", "-c", "pip install --no-cache-dir -r requirements.cloud.txt && streamlit run 05_streamlit_nlp_dashboard.py --server.port=8506 --server.address=0.0.0.0"]
+    ports:
+      - "8506:8506"
+    environment:
+      - STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+      - API_URL=http://api:8000
+    depends_on:
+      - api
+    restart: unless-stopped
