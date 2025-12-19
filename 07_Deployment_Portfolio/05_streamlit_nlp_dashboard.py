@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
-import json
 from datetime import datetime
+from typing import Any, Dict
 
 st.set_page_config(
     page_title="Modern NLP Dashboard",
@@ -12,8 +12,28 @@ st.set_page_config(
 st.title("🤖 Modern NLP Dashboard")
 st.markdown("**Transformer-basierte NLP Services**")
 
+
+def mock_generate(prompt: str, max_length: int) -> Dict[str, Any]:
+    return {
+        "generated_texts": [(prompt + " ... (demo completion)")[:max_length]]
+    }
+
+
+def mock_sentiment(text: str) -> Dict[str, Any]:
+    label = "POSITIVE" if "good" in text.lower() else "NEUTRAL"
+    return {"sentiment": {"label": label, "confidence": 0.8}}
+
+
+def mock_qa(context: str, question: str) -> Dict[str, Any]:
+    return {"answer": {"answer": context.split(" ")[0] if context else "N/A", "confidence": 0.3}}
+
+
+def safe_post(url: str, payload: Dict[str, Any]):
+    return requests.post(url, json=payload, timeout=15)
+
 # Sidebar
 st.sidebar.header("⚙️ Konfiguration")
+demo_mode = st.sidebar.toggle("Demo-Modus (ohne API)", value=True)
 api_url = st.sidebar.text_input("NLP API URL", "http://localhost:8000")
 
 # Main Content
@@ -31,27 +51,33 @@ with tab1:
         max_length = st.slider("Max Length", 50, 200, 100)
         temperature = st.slider("Temperature", 0.1, 1.0, 0.7)
         
+    st.caption("Begrenzt auf 400 Zeichen; Demo-Modus liefert Stub-Text.")
     if st.button("🚀 Generate Text", type="primary"):
         with st.spinner("Generiere Text..."):
             try:
-                response = requests.post(
-                    f"{api_url}/generate",
-                    json={
-                        "prompt": prompt,
-                        "max_length": max_length,
-                        "temperature": temperature
-                    }
-                )
-                
-                if response.status_code == 200:
-                    result = response.json()
+                if demo_mode:
+                    result = mock_generate(prompt, max_length)
+                else:
+                    response = safe_post(
+                        f"{api_url}/generate",
+                        {
+                            "prompt": prompt,
+                            "max_length": max_length,
+                            "temperature": temperature,
+                        },
+                    )
+                    if response.status_code != 200:
+                        st.error(f"API Fehler: {response.status_code}")
+                        result = None
+                    else:
+                        result = response.json()
+
+                if result:
                     st.success("Text erfolgreich generiert!")
                     st.write("**Generated Text:**")
                     st.write(result["generated_texts"][0])
-                else:
-                    st.error(f"API Fehler: {response.status_code}")
             except Exception as e:
-                st.error(f"Verbindungsfehler: {str(e)}")
+                st.error(f"Verbindungsfehler: {e}")
 
 with tab2:
     st.header("😊 Sentiment Analysis")
@@ -62,29 +88,30 @@ with tab2:
         if text_input:
             with st.spinner("Analysiere Sentiment..."):
                 try:
-                    response = requests.post(
-                        f"{api_url}/sentiment",
-                        json={"text": text_input}
-                    )
-                    
-                    if response.status_code == 200:
-                        result = response.json()
+                    if demo_mode:
+                        result = mock_sentiment(text_input)
+                    else:
+                        response = safe_post(
+                            f"{api_url}/sentiment",
+                            {"text": text_input},
+                        )
+                        if response.status_code != 200:
+                            st.error(f"API Fehler: {response.status_code}")
+                            result = None
+                        else:
+                            result = response.json()
+
+                    if result:
                         sentiment = result["sentiment"]
-                        
                         col1, col2 = st.columns(2)
                         with col1:
                             st.metric("Sentiment", sentiment["label"])
                         with col2:
                             st.metric("Confidence", f"{sentiment['confidence']:.2%}")
-                            
-                        # Emoji basierend auf Sentiment
                         emoji = "😊" if sentiment["label"] == "POSITIVE" else "😔"
                         st.write(f"## {emoji} {sentiment['label']}")
-                        
-                    else:
-                        st.error(f"API Fehler: {response.status_code}")
                 except Exception as e:
-                    st.error(f"Verbindungsfehler: {str(e)}")
+                    st.error(f"Verbindungsfehler: {e}")
         else:
             st.warning("Bitte Text eingeben")
 
@@ -94,30 +121,33 @@ with tab3:
     context = st.text_area("Kontext:", height=150)
     question = st.text_input("Frage:")
     
+    st.caption("Demo-Modus liefert einfache Heuristik; Kontext max. 2000 Zeichen.")
     if st.button("💡 Answer Question", type="primary"):
         if context and question:
             with st.spinner("Beantworte Frage..."):
                 try:
-                    response = requests.post(
-                        f"{api_url}/qa",
-                        json={
-                            "context": context,
-                            "question": question
-                        }
-                    )
-                    
-                    if response.status_code == 200:
-                        result = response.json()
+                    if demo_mode:
+                        result = mock_qa(context, question)
+                    else:
+                        response = safe_post(
+                            f"{api_url}/qa",
+                            {
+                                "context": context,
+                                "question": question,
+                            },
+                        )
+                        if response.status_code != 200:
+                            st.error(f"API Fehler: {response.status_code}")
+                            result = None
+                        else:
+                            result = response.json()
+                    if result:
                         answer = result["answer"]
-                        
                         st.success("Antwort gefunden!")
                         st.write(f"**Antwort:** {answer['answer']}")
                         st.write(f"**Confidence:** {answer['confidence']:.2%}")
-                        
-                    else:
-                        st.error(f"API Fehler: {response.status_code}")
                 except Exception as e:
-                    st.error(f"Verbindungsfehler: {str(e)}")
+                    st.error(f"Verbindungsfehler: {e}")
         else:
             st.warning("Bitte Kontext und Frage eingeben")
 

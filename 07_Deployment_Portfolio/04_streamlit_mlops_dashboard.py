@@ -4,9 +4,8 @@ import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 import requests
-import json
 from datetime import datetime
-import time
+from typing import Any, Dict
 
 st.set_page_config(
     page_title="MLOps Monitoring Dashboard",
@@ -15,35 +14,68 @@ st.set_page_config(
 )
 
 st.title("🚀 MLOps Monitoring Dashboard")
-st.markdown("**Real-time Monitoring für Iris Classification API**")
+st.markdown("**Real-time Monitoring für Iris Classification API** — wähle Demo oder Live-API.")
 
 # Sidebar für Konfiguration
 st.sidebar.header("⚙️ Konfiguration")
+demo_mode = st.sidebar.toggle("Demo-Modus (ohne API)", value=True)
 api_url = st.sidebar.text_input("API URL", "http://localhost:8000")
 refresh_interval = st.sidebar.slider("Refresh Interval (s)", 5, 60, 10)
 
-# Auto-refresh
 if st.sidebar.button("🔄 Refresh"):
     st.rerun()
 
 # API Health Check
-try:
-    health_response = requests.get(f"{api_url}/health", timeout=5)
-    if health_response.status_code == 200:
-        health_data = health_response.json()
-        st.success(f"✅ API Status: {health_data['status']}")
-        
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            st.metric("Model Version", health_data.get('model_version', 'N/A'))
-        with col2:
-            st.metric("Model Loaded", "✅" if health_data.get('model_loaded') else "❌")
-        with col3:
-            st.metric("Target Classes", len(health_data.get('target_classes', [])))
-    else:
-        st.error(f"❌ API nicht erreichbar (Status: {health_response.status_code})")
-except Exception as e:
-    st.error(f"❌ Verbindung zur API fehlgeschlagen: {str(e)}")
+def mock_health() -> Dict[str, Any]:
+    return {
+        "status": "ok (demo)",
+        "model_version": "0.1.0-demo",
+        "model_loaded": True,
+        "target_classes": ["setosa", "versicolor", "virginica"],
+        "timestamp": datetime.utcnow().isoformat() + "Z",
+    }
+
+
+def mock_predict(payload: Dict[str, float]) -> Dict[str, Any]:
+    conf = 0.9
+    return {
+        "prediction_label": "setosa",
+        "confidence": conf,
+        "timestamp": datetime.utcnow().isoformat() + "Z",
+    }
+
+
+def safe_get(url: str):
+    return requests.get(url, timeout=5)
+
+
+def safe_post(url: str, json_payload: Dict[str, Any]):
+    return requests.post(url, json=json_payload, timeout=10)
+
+
+health_data = None
+if demo_mode:
+    health_data = mock_health()
+    st.info("Demo-Modus aktiv: simulierte API-Daten.")
+else:
+    try:
+        resp = safe_get(f"{api_url}/health")
+        if resp.status_code == 200:
+            health_data = resp.json()
+            st.success(f"✅ API Status: {health_data.get('status','ok')}")
+        else:
+            st.error(f"❌ API nicht erreichbar (Status: {resp.status_code})")
+    except Exception as e:
+        st.error(f"❌ Verbindung zur API fehlgeschlagen: {e}")
+
+if health_data:
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric("Model Version", health_data.get('model_version', 'N/A'))
+    with col2:
+        st.metric("Model Loaded", "✅" if health_data.get('model_loaded') else "❌")
+    with col3:
+        st.metric("Target Classes", len(health_data.get('target_classes', [])))
 
 st.divider()
 
@@ -60,30 +92,28 @@ with col1:
     petal_width = st.slider("Petal Width", 0.1, 2.5, 0.2, 0.1)
     
     if st.button("🔮 Predict", type="primary"):
+        prediction_data = {
+            "sepal_length": sepal_length,
+            "sepal_width": sepal_width,
+            "petal_length": petal_length,
+            "petal_width": petal_width
+        }
         try:
-            prediction_data = {
-                "sepal_length": sepal_length,
-                "sepal_width": sepal_width,
-                "petal_length": petal_length,
-                "petal_width": petal_width
-            }
-            
-            response = requests.post(
-                f"{api_url}/predict",
-                json=prediction_data,
-                timeout=10
-            )
-            
-            if response.status_code == 200:
-                result = response.json()
+            if demo_mode:
+                result = mock_predict(prediction_data)
+            else:
+                response = safe_post(f"{api_url}/predict", prediction_data)
+                if response.status_code != 200:
+                    st.error(f"Prediction fehlgeschlagen: {response.text}")
+                    result = None
+                else:
+                    result = response.json()
+            if result:
                 st.success(f"Prediction: **{result['prediction_label']}**")
                 st.info(f"Confidence: {result['confidence']:.4f}")
                 st.caption(f"Timestamp: {result['timestamp']}")
-            else:
-                st.error(f"Prediction fehlgeschlagen: {response.text}")
-                
         except Exception as e:
-            st.error(f"Fehler bei Prediction: {str(e)}")
+            st.error(f"Fehler bei Prediction: {e}")
 
 with col2:
     st.subheader("Iris Species")
@@ -102,10 +132,10 @@ with col2:
 
 st.divider()
 
-# Performance Metriken (Simulation)
+# Performance Metriken
 st.header("📈 Performance Metriken")
 
-# Simulierte Daten für Demo
+# Simulierte Daten (demo) oder Platzhalter bei Live
 np.random.seed(42)
 dates = pd.date_range(start='2024-01-01', periods=30, freq='D')
 predictions_per_day = np.random.poisson(100, 30)

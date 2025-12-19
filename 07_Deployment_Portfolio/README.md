@@ -1,33 +1,58 @@
 # 🚀 07 Deployment & Portfolio
 
-**MLOps, Modern NLP und Production-Ready Deployment**
+**MLOps, Modern NLP und Production-Ready Deployment (Stand: Work-in-Progress)**
 
-## 📚 Notebooks
+## 📚 Notebooks (Status)
 
-1. **01_MLOps_und_Deployment.ipynb** - MLOps Pipeline, Docker, API Deployment
-2. **02_NLP_und_Text_Generation.ipynb** - Modern NLP mit Transformers
-3. **03_QUA3CK_MLOps_Integration.ipynb** - QUA³CK Framework mit MLOps
+- **01_MLOps_und_Deployment.ipynb** – Rohfassung, noch nicht ausgeführt. Enthält Pipeline-/Deployment-Skizzen, muss auf aktuelle Tooling-Versionen geprüft werden.
+- **02_NLP_und_Text_Generation.ipynb** – Rohfassung, unexecuted. Enthält Text-Generation/Sentiment/Q&A-Abschnitte, benötigt Runtime-Validierung und ggf. kleinere CPU-Demos.
+- **03_QUA3CK_MLOps_Integration.ipynb** – Rohfassung, unexecuted. Bezieht sich auf QUA³CK + MLOps; modernisieren und kürzen empfohlen.
 
-## 🚀 Streamlit Apps
+## 🚀 Streamlit Apps (Status)
 
-4. **04_streamlit_mlops_dashboard.py** - Interactive MLOps Dashboard
-5. **05_streamlit_nlp_dashboard.py** - NLP Analytics Dashboard
+- **04_streamlit_mlops_dashboard.py** – Dashboard für Iris-Predict-API (`/health`, `/predict`). Demo-Modus integriert (simulierte Metriken), Live-Modus erwartet API.
+- **05_streamlit_nlp_dashboard.py** – UI für Text-Gen/Sentiment/Q&A (`/generate`, `/sentiment`, `/qa`). Demo-Modus integriert, Live-Modus erwartet NLP-API.
 
-## 🎯 Lernziele
+## 🎯 Lernziele (Zielbild)
 
-- 🔄 **MLOps Pipeline**: Model Training bis Production Deployment
-- 🐳 **Containerization**: Docker für reproduzierbare ML-Services
-- 🌐 **API Development**: FastAPI für ML Model Serving
-- 📊 **Model Monitoring**: Performance Tracking in Production
-- 🤖 **Modern NLP**: Transformer-basierte Text Processing
-- 🚀 **Production Deployment**: Skalierbare ML-Anwendungen
+- 🔄 **MLOps Pipeline**: Model Training bis Production Deployment (noch zu verifizieren)
+- 🐳 **Containerization**: Docker für reproduzierbare ML-Services (siehe Ergänzungen unten)
+- 🌐 **API Development**: FastAPI für ML Model Serving (API wird aktuell vorausgesetzt, nicht bereitgestellt)
+- 📊 **Model Monitoring**: Performance Tracking in Production (Dashboard nutzt simulierte Daten)
+- 🤖 **Modern NLP**: Transformer-basierte Text Processing (Backend-Service nötig)
+- 🚀 **Production Deployment**: Skalierbare ML-Anwendungen (Deployment-Schritte noch zu ergänzen/kürzen)
 
-## 📱 Streamlit Apps
+## 📡 Backend (neu, leichtgewichtig)
 
-- **07_01_streamlit_mlops_dashboard.py** - MLOps Monitoring Dashboard
-- **07_02_streamlit_nlp_dashboard.py** - Interactive NLP Service Interface
+- **FastAPI-Demo-API** unter `backend/main.py`
+	- Endpunkte: `/health`, `/predict` (Iris), `/sentiment`, `/qa`, `/generate`
+	- Läuft vollständig CPU-basiert, keine großen Modelle.
 
-## �️ Technologie-Stack
+Start (lokal):
+```bash
+cd 07_Deployment_Portfolio
+pip install -r requirements.cloud.txt
+uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+## 📱 Streamlit Apps (Starten)
+
+```bash
+cd 07_Deployment_Portfolio
+pip install -r requirements.cloud.txt
+
+# MLOps Dashboard (Demo- oder Live-Modus wählbar)
+streamlit run 04_streamlit_mlops_dashboard.py --server.port 8505
+
+# NLP Dashboard (Demo- oder Live-Modus wählbar)
+streamlit run 05_streamlit_nlp_dashboard.py --server.port 8506
+```
+
+Hinweise:
+- Demo-Modus funktioniert ohne Backend; Live-Modus erwartet API auf `http://localhost:8000` (anpassbar in der Sidebar).
+- Ports nach Bedarf anpassen.
+
+## 🛠️ Technologie-Stack (geplant/teilweise vorhanden)
 
 ### MLOps & Deployment
 - **MLflow** - Experiment Tracking & Model Registry
@@ -41,24 +66,11 @@
 - **Text Generation** - GPT-style Language Models
 - **Multi-task NLP** - Sentiment, Q&A, Summarization
 
-## 🏆 Portfolio-Highlights
+## 🗺️ Nächste Schritte (Empfohlen)
+- Notebooks neu und kurz (CPU): Seeds, kleine Datasets, klare "So nutzt du…"-Abschnitte.
+- Backend: optional Dockerfile/Compose ergänzen; einfache Tests für Endpunkte.
+- MLOps/NLP Dashboards: ggf. echte Monitoring-Metriken anbinden, Prompt-Limits und Safety-Hinweise weiter ausbauen.
 
-### 🔧 MLOps Pipeline
-- Model Training mit Validation
-- REST API für Model Serving
-- Docker Container Setup
-- Performance Monitoring Dashboard
-
-### 🤖 NLP Service
-- Transformer-basierte Text Generation
-- Multi-task NLP API (Sentiment, Q&A)
-- Interactive Web Interface
-- Production-ready Architecture
-
-## 📁 Generierte Artefakte
-
-- **ML Models** - Trainierte und validierte Modelle
-- **Docker Images** - Containerisierte Services
-- **API Documentation** - OpenAPI/Swagger Specs
-- **Monitoring Dashboards** - Real-time Performance Tracking
-- **NLP Services** - Multi-task Text Processing APIs
+## 📁 Assets
+- `data/` enthält Beispieltexte (Grimms/Simpsons) und einen Stromverbrauch-Datensatz (CSV); derzeit nicht in den Apps verdrahtet.
+- `images/` für Abbildungen in Anleitungen.
