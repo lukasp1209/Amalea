@@ -22,11 +22,15 @@ USER jovyan
 RUN conda update -n base -c defaults conda && \
     pip install --upgrade pip setuptools wheel
 
-# Installiere alle Python-Pakete für den Kurs
-COPY requirements.txt /tmp/requirements.txt
+# Installiere Python-Pakete (wählbar über Build-Arg)
+ARG REQS_FILE=requirements.txt
+ARG EXTRA_REQS_FILE=
+COPY ${REQS_FILE} /tmp/requirements.txt
+COPY ${EXTRA_REQS_FILE:-requirements.txt} /tmp/extra-requirements.txt
 # Pre-install build-time dependencies to avoid setuptools/backports issues
 RUN pip install --no-cache-dir --upgrade setuptools wheel backports.tarfile && \
-    pip install --no-cache-dir -r /tmp/requirements.txt
+    pip install --no-cache-dir -r /tmp/requirements.txt && \
+    if [ -n "$EXTRA_REQS_FILE" ]; then pip install --no-cache-dir -r /tmp/extra-requirements.txt; fi
 
 # Jupyter Erweiterungen installieren
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager && \

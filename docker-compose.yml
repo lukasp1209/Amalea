@@ -4,6 +4,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.jupyter
+      args:
+        REQS_FILE: requirements-week06.txt    # DL/CV/NLP
+        EXTRA_REQS_FILE: requirements-week07.txt  # Deployment stack
     ports:
       - "8888:8888"
     volumes:
@@ -32,6 +35,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.streamlit
+      args:
+        REQS_FILE: requirements-week07.txt    # Backend + dashboards deps
     ports:
       - "8501:8501"
     volumes:

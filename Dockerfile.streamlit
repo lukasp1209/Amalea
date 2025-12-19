@@ -13,9 +13,14 @@ RUN apt-get update && apt-get install -y \
 # Arbeitsverzeichnis erstellen
 WORKDIR /app
 
-# Python-Pakete installieren
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Python-Pakete installieren (wählbar über Build-Arg)
+ARG REQS_FILE=requirements.txt
+ARG EXTRA_REQS_FILE=
+COPY ${REQS_FILE} /tmp/requirements.txt
+COPY ${EXTRA_REQS_FILE:-requirements.txt} /tmp/extra-requirements.txt
+RUN pip install --no-cache-dir --upgrade pip setuptools wheel \
+    && pip install --no-cache-dir -r /tmp/requirements.txt \
+    && if [ -n "$EXTRA_REQS_FILE" ]; then pip install --no-cache-dir -r /tmp/extra-requirements.txt; fi
 
 # Streamlit-Konfiguration
 RUN mkdir -p ~/.streamlit && \
