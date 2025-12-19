@@ -43,7 +43,7 @@ jupyter notebook 06_05_neu_Image_Sampler.ipynb
 - ORB wird als lizenzfreundliche Feature-Alternative genutzt; SIFT kann ergänzt werden, falls verfügbar.
 
 ## Assets
-- Legacy-Notebooks, Streamlit-Skripte und Altdaten wurden entfernt.
+- Fokus ausschließlich auf den fünf neuen "neu"-Notebooks in diesem Ordner.
 - Der Ordner `images/` bleibt für Demos erhalten (wird im Image Sampler genutzt); fehlt er, fällt das Notebook automatisch auf synthetische Beispiele zurück.
 - Der Ordner `data/dataset` wird aktuell nicht verwendet und kann bei Bedarf gelöscht oder archiviert werden.
 
