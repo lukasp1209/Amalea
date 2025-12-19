@@ -22,6 +22,15 @@ Aktualisierte, schlanke Notebooks für schnelle CPU-Runs und klare Lernpfade. Vi
 - **Standard**: Voreinstellungen im Notebook nutzen.
 - **Vertiefung**: mehr Epochen/Samples, zusätzliche Visuals (ggf. GPU verwenden).
 
+## Geführter Ablauf (Quick Guide)
+1) **06_01_neu_CNN_Basics**: Mini-CNN laufen lassen, Feature-Maps ansehen, Overfitting spüren.
+2) **06_02_neu_OpenCV_Edge_Features**: Kanten/Keypoints durchspielen; Dtype/Resize-Hinweise beachten.
+3) **06_03_neu_Data_Augmentation_Practice**: Baseline vs. Aug vergleichen; `keep`/Epochen wie im Table justieren; Albumentations optional.
+4) **06_04_neu_Transfer_Learning_Lite**: Head trainieren, optional leicht fine-tunen, dann exportieren (`.keras`).
+5) **06_05_neu_Image_Sampler**: Eigene oder Demo-Bilder schnell prüfen (Edges/Contours/ORB/Aug-Previews).
+
+Tipps: CPU knapp? `keep` und Epochen senken; GPU vorhanden? Epochen hoch, ggf. Fine-Tuning aktivieren. Notebooks sind so strukturiert, dass du pro Abschnitt klar erkennst, was du lernst und welche Schalter du drehen kannst.
+
 ## Schnellstart
 ```bash
 # Umgebung
