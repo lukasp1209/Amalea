@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import datetime, timezone
+from functools import lru_cache
 from typing import List
 
 import numpy as np
@@ -12,6 +13,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
+from transformers import pipeline
 
 
 @dataclass
@@ -96,39 +98,33 @@ class GenerateResponse(BaseModel):
     model_info: str
 
 
-def simple_sentiment(text: str) -> SentimentResponse:
-    lowered = text.lower()
-    positive = sum(lowered.count(tok) for tok in ["good", "great", "love", "happy", "excellent", "nice"])
-    negative = sum(lowered.count(tok) for tok in ["bad", "hate", "sad", "angry", "terrible", "poor"])
-    score = positive - negative
-    if score > 0:
-        label, confidence = "POSITIVE", min(0.5 + 0.1 * score, 0.99)
-    elif score < 0:
-        label, confidence = "NEGATIVE", min(0.5 + 0.1 * abs(score), 0.99)
-    else:
-        label, confidence = "NEUTRAL", 0.55
-    return SentimentResponse(label=label, confidence=confidence)
+SENTIMENT_MODEL_ID = "distilbert-base-uncased-finetuned-sst-2-english"
+QA_MODEL_ID = "distilbert-base-cased-distilled-squad"
+GEN_MODEL_ID = "sshleifer/tiny-gpt2"
 
 
-def simple_qa(context: str, question: str) -> QAResponse:
-    sentences = [s.strip() for s in context.replace("\n", " ").split(".") if s.strip()]
-    answer = sentences[0] if sentences else "No answer found."
-    return QAResponse(answer=answer, confidence=0.35)
+@lru_cache(maxsize=1)
+def get_sentiment_pipeline():
+    return pipeline("sentiment-analysis", model=SENTIMENT_MODEL_ID)
 
 
-def simple_generate(prompt: str, max_length: int, temperature: float) -> GenerateResponse:
-    # Deterministic stub for demo purposes
-    continuation = " ..." + " generated text"[: max_length // 4]
-    text = (prompt + continuation)[: max_length]
-    return GenerateResponse(
-        generated_texts=[text],
-        model_info=f"stub-generator (temp={temperature})",
-    )
+@lru_cache(maxsize=1)
+def get_qa_pipeline():
+    return pipeline("question-answering", model=QA_MODEL_ID)
+
+
+@lru_cache(maxsize=1)
+def get_generate_pipeline():
+    # Tiny GPT-2 keeps CPU footprint small
+    return pipeline("text-generation", model=GEN_MODEL_ID)
 
 
 app = FastAPI(title="AMALEA Demo API", version="0.1.0")
 iris_service = IrisService.create()
-NLP_STUB_NOTE = "Sentiment/QA/Generate sind keyword-basierte Stubs (Demo)"
+# Preload NLP models to avoid cold-start penalties on first request
+sentiment_pipe = get_sentiment_pipeline()
+qa_pipe = get_qa_pipeline()
+generate_pipe = get_generate_pipeline()
 
 
 @app.get("/health")
@@ -139,8 +135,11 @@ def health():
         "model_loaded": True,
         "target_classes": iris_service.target_names,
         "timestamp": datetime.now(timezone.utc).isoformat(),
-        "nlp_endpoints_stub": True,
-        "stub_note": NLP_STUB_NOTE,
+        "nlp_models": {
+            "sentiment": SENTIMENT_MODEL_ID,
+            "qa": QA_MODEL_ID,
+            "generate": GEN_MODEL_ID,
+        },
     }
 
 
@@ -153,17 +152,34 @@ def predict(req: PredictRequest):
 
 @app.post("/sentiment", response_model=SentimentResponse)
 def sentiment(req: SentimentRequest):
-    return simple_sentiment(req.text)
+    result = sentiment_pipe(req.text, truncation=True)[0]
+    label = result["label"]
+    # HF pipelines sometimes use LABEL_0/1; map to POSITIVE/NEGATIVE if needed
+    if label == "LABEL_1":
+        label = "POSITIVE"
+    elif label == "LABEL_0":
+        label = "NEGATIVE"
+    return SentimentResponse(label=label, confidence=float(result["score"]))
 
 
 @app.post("/qa", response_model=QAResponse)
 def qa(req: QARequest):
-    return simple_qa(req.context, req.question)
+    result = qa_pipe(question=req.question, context=req.context)
+    return QAResponse(answer=result.get("answer", ""), confidence=float(result.get("score", 0.0)))
 
 
 @app.post("/generate", response_model=GenerateResponse)
 def generate(req: GenerateRequest):
-    return simple_generate(req.prompt, req.max_length, req.temperature)
+    outputs = generate_pipe(
+        req.prompt,
+        max_new_tokens=req.max_length,
+        do_sample=True,
+        temperature=req.temperature,
+        num_return_sequences=1,
+        return_full_text=True,
+    )
+    texts = [out["generated_text"] for out in outputs]
+    return GenerateResponse(generated_texts=texts, model_info=GEN_MODEL_ID)
 
 
 @app.get("/")
@@ -171,6 +187,9 @@ def root():
     return {
         "message": "AMALEA demo API running",
         "endpoints": ["/health", "/predict", "/sentiment", "/qa", "/generate"],
-        "nlp_endpoints_stub": True,
-        "stub_note": NLP_STUB_NOTE,
+        "nlp_models": {
+            "sentiment": SENTIMENT_MODEL_ID,
+            "qa": QA_MODEL_ID,
+            "generate": GEN_MODEL_ID,
+        },
     }

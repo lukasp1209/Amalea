@@ -23,7 +23,7 @@ Ein zentrales Merkmal des Kurses ist die Betonung auf echte, industrierelevante 
 
 Nach erfolgreichem Abschluss des Kurses verfügen die Studierenden über ein umfassendes Skillset, das sie unmittelbar in der Berufspraxis einsetzen können. Sie beherrschen Python für Data Science auf professionellem Niveau und können selbstständig Machine Learning-Pipelines von der Datenaufbereitung bis zum Deployment entwickeln. Besonders wertvoll ist ihre Fähigkeit, interaktive Web-Anwendungen mit Streamlit zu erstellen, die komplexe Datenanalysen für Nicht-Techniker zugänglich machen.
 
-Die Teilnehmer lernen moderne Deep Learning-Frameworks wie TensorFlow und Keras kennen und können Neural Networks für Computer Vision und Natural Language Processing implementieren. Durch die intensive Arbeit mit aktuellen Bibliotheken wie Hugging Face Transformers sind sie mit den neuesten Entwicklungen im Bereich der künstlichen Intelligenz vertraut. Gleichzeitig erwerben sie praktische MLOps-Kompetenzen, die für die Skalierung von Machine Learning-Lösungen in Produktionsumgebungen essentiell sind. Im Deployment-Modul (W07) arbeiten sie mit einer FastAPI-Demo; die NLP-Endpunkte (Sentiment/QA/Generate) sind bewusst als keyword-basierte Stubs ausgelegt, um den Fokus auf API-Design, Monitoring und Deployment zu legen.
+Die Teilnehmer lernen moderne Deep Learning-Frameworks wie TensorFlow und Keras kennen und können Neural Networks für Computer Vision und Natural Language Processing implementieren. Durch die intensive Arbeit mit aktuellen Bibliotheken wie Hugging Face Transformers sind sie mit den neuesten Entwicklungen im Bereich der künstlichen Intelligenz vertraut. Gleichzeitig erwerben sie praktische MLOps-Kompetenzen, die für die Skalierung von Machine Learning-Lösungen in Produktionsumgebungen essentiell sind. Im Deployment-Modul (W07) arbeiten sie mit einer FastAPI-Demo; die NLP-Endpunkte (Sentiment/QA/Generate) nutzen leichte Hugging Face Pipelines (DistilBERT/Tiny-GPT-2), sodass API-Design, Monitoring und Deployment realistisch erprobt werden können.
 
 ### Kursstruktur und Inhalte
 
@@ -33,7 +33,7 @@ Die zweite Woche konzentriert sich auf die Entwicklung interaktiver Web-Anwendun
 
 Das absolute Highlight des Kurses ist die vierte Woche mit dem "Big 3" Notebook, das eine umfassende praktische Einführung in die drei wichtigsten Machine Learning-Algorithmen bietet: Decision Trees, K-Nearest Neighbors und K-Means Clustering. Dieses Modul verbindet theoretisches Verständnis mit intensiver praktischer Anwendung und bereitet optimal auf komplexere Algorithmen vor.
 
-Die fünfte Woche taucht tief in Neural Networks und Deep Learning ein, während die sechste Woche Computer Vision und Natural Language Processing mit vier spezialisierten Notebooks (Runner: `run_cv_notebooks.sh`, Executed-Notebooks inklusive) und vier begleitenden Streamlit-Anwendungen/Dashboards behandelt. Die finale siebte Woche konzentriert sich auf Deployment, MLOps und Portfolio-Entwicklung mit FastAPI-Demo (NLP-Endpunkte als keyword-basierte Stubs für Sentiment/QA/Generate), zwei produktionsreifen Streamlit-Dashboards und drei kompakten Notebooks; die Studierenden üben API-Handling, Monitoring und Deployment.
+Die fünfte Woche taucht tief in Neural Networks und Deep Learning ein, während die sechste Woche Computer Vision und Natural Language Processing mit vier spezialisierten Notebooks (Runner: `run_cv_notebooks.sh`, Executed-Notebooks inklusive) und vier begleitenden Streamlit-Anwendungen/Dashboards behandelt. Die finale siebte Woche konzentriert sich auf Deployment, MLOps und Portfolio-Entwicklung mit FastAPI-Demo (NLP-Endpunkte via leichte HF-Pipelines für Sentiment/QA/Generate), zwei produktionsreifen Streamlit-Dashboards und drei kompakten Notebooks; die Studierenden üben API-Handling, Monitoring und Deployment.
 
 ### Aktuelle Kursstruktur im Detail (2025)
 
@@ -47,7 +47,7 @@ Der vollständig modernisierte Kurs umfasst **24 Portfolio-Komponenten**:
 | **04** | Advanced Algorithms | 2 | 0 | Ensembles & Unsupervised, MLflow/DVC Intro |
 | **05** | Neural Networks | 1 | 1 | Keras Basics & Transfer Learning Lite |
 | **06** | Computer Vision & NLP | 4 | 4 | CV/NLP Fundamentals + Augmentation/Transfer |
-| **07** | Deployment & Portfolio | 3 | 2 | FastAPI + Monitoring Dashboards (NLP-Stubs) |
+| **07** | Deployment & Portfolio | 3 | 2 | FastAPI + Monitoring Dashboards (HF-Pipelines) |
 
 **Gesamt: 16 Core Notebooks + 8 Streamlit Apps = 24 Portfolio-Komponenten**
 
@@ -76,7 +76,7 @@ Für das Experiment Tracking und MLOps kommt MLflow zum Einsatz, während Git un
 - **W04 (Advanced/MLops):** Ensembles (RandomForest/GradientBoosting-Patterns), Clustering (K-Means), Anomalie-Detektion; MLflow/DVC-Einstieg.
 - **W05 (Deep Learning):** Keras-Sequential/Functional API, Dense-Netze für Tabulardaten, leichtgewichtige Transfer-Learning-Setups.
 - **W06 (CV/NLP):** CNN-Grundlagen, Edge/Feature-Extraction mit OpenCV, Data Augmentation, Transfer Learning Lite; Transformers-Demo für Text (CPU-freundlich).
-- **W07 (Deployment):** FastAPI-Demo mit Sklearn-Iris-Modell; NLP-Endpunkte als keyword-basierte Stubs (Sentiment/QA/Generate) für API/Monitoring/Deployment-Übungen; zwei Streamlit-Dashboards für Monitoring & NLP.
+- **W07 (Deployment):** FastAPI-Demo mit Sklearn-Iris-Modell; NLP-Endpunkte mit leichten HF-Pipelines (Sentiment/QA/Generate) für API/Monitoring/Deployment-Übungen; zwei Streamlit-Dashboards für Monitoring & NLP.
 
 ### Studienleistung
 
