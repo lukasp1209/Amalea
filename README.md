@@ -202,7 +202,7 @@ Der Kurs ist in 7 Wochen gegliedert; alle Inhalte sind production-ready mit Exec
 | 04 | `04_Advanced_Algorithms/01_Ensembles.ipynb`, `04_Advanced_Algorithms/02_Unsupervised.ipynb` | `04_Advanced_Algorithms/streamlit_komponenten.py` | ✅ Fertig |
 | 05 | `05_Neural_Networks/01_Intro_to_DL.ipynb`, `05_Neural_Networks/02_Keras_Transfer.ipynb` | `05_Neural_Networks/streamlit_komponenten.py` | ✅ Fertig |
 | 06 | `06_01_neu_CNN_Basics`, `06_02_neu_OpenCV_Edge_Features`, `06_03_neu_Data_Augmentation_Practice`, `06_04_neu_Transfer_Learning_Lite`, `06_05_neu_Image_Sampler` | Runner: `run_cv_notebooks.sh` erzeugt Executed-Notebooks in `06_Computer_Vision_NLP/executed` | ✅ Fertig |
-| 07 | `07_Deployment_Portfolio/01_MLOps_und_Deployment.ipynb`, `02_NLP_und_Text_Generation.ipynb`, `03_QUA3CK_MLOps_Integration.ipynb` (ausgeführt unter `executed/`) | FastAPI-Demo-API (`backend/main.py`), Streamlit-Dashboards (`04_streamlit_mlops_dashboard.py`, `05_streamlit_nlp_dashboard.py`), Compose-Stack (`docker-compose.yml`) | ✅ Fertig |
+| 07 | `07_Deployment_Portfolio/01_MLOps_und_Deployment.ipynb`, `02_NLP_und_Text_Generation.ipynb`, `03_QUA3CK_MLOps_Integration.ipynb` (ausgeführt unter `executed/`) | FastAPI-Demo-API (`backend/main.py`, NLP-Endpunkte sind keyword-basierte Stubs für Sentiment/QA/Generate), Streamlit-Dashboards (`04_streamlit_mlops_dashboard.py`, `05_streamlit_nlp_dashboard.py`), Compose-Stack (`docker-compose.yml`) | ✅ Fertig |
 
 > ℹ️ CV/NLP (W06) und Deployment (W07) laufen CPU-freundlich; GPU beschleunigt Trainingszellen in W06 optional.
 

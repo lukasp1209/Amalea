@@ -128,6 +128,7 @@ def simple_generate(prompt: str, max_length: int, temperature: float) -> Generat
 
 app = FastAPI(title="AMALEA Demo API", version="0.1.0")
 iris_service = IrisService.create()
+NLP_STUB_NOTE = "Sentiment/QA/Generate sind keyword-basierte Stubs (Demo)"
 
 
 @app.get("/health")
@@ -137,7 +138,9 @@ def health():
         "model_version": iris_service.version,
         "model_loaded": True,
         "target_classes": iris_service.target_names,
-           "timestamp": datetime.now(timezone.utc).isoformat(),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "nlp_endpoints_stub": True,
+        "stub_note": NLP_STUB_NOTE,
     }
 
 
@@ -165,4 +168,9 @@ def generate(req: GenerateRequest):
 
 @app.get("/")
 def root():
-    return {"message": "AMALEA demo API running", "endpoints": ["/health", "/predict", "/sentiment", "/qa", "/generate"]}
+    return {
+        "message": "AMALEA demo API running",
+        "endpoints": ["/health", "/predict", "/sentiment", "/qa", "/generate"],
+        "nlp_endpoints_stub": True,
+        "stub_note": NLP_STUB_NOTE,
+    }
