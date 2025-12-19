@@ -46,15 +46,22 @@ def normalize_answer(payload: Dict[str, Any]) -> Dict[str, Any]:
         return {"answer": payload["answer"], "confidence": payload["confidence"]}
     raise ValueError("Unexpected QA payload shape")
 
-
-def safe_post(url: str, payload: Dict[str, Any]):
-    return requests.post(url, json=payload, timeout=15)
-
 # Sidebar
 st.sidebar.header("⚙️ Konfiguration")
 demo_mode = st.sidebar.toggle("Demo-Modus (ohne API)", value=True)
 default_api = os.getenv("API_URL", "http://localhost:8000")
 api_url = st.sidebar.text_input("NLP API URL", default_api)
+
+REQUEST_TIMEOUT = 10
+
+
+def fetch_json(url: str, payload: Dict[str, Any]):
+    try:
+        resp = requests.post(url, json=payload, timeout=REQUEST_TIMEOUT)
+        resp.raise_for_status()
+        return resp.json(), None
+    except Exception as exc:
+        return None, str(exc)
 
 # Main Content
 tab1, tab2, tab3 = st.tabs(["✍️ Text Generation", "😊 Sentiment", "❓ Q&A"])
@@ -78,7 +85,7 @@ with tab1:
                 if demo_mode:
                     result = mock_generate(prompt, max_length)
                 else:
-                    response = safe_post(
+                    result, err = fetch_json(
                         f"{api_url}/generate",
                         {
                             "prompt": prompt,
@@ -86,11 +93,9 @@ with tab1:
                             "temperature": temperature,
                         },
                     )
-                    if response.status_code != 200:
-                        st.error(f"API Fehler: {response.status_code}")
+                    if err:
+                        st.error(f"API Fehler: {err}")
                         result = None
-                    else:
-                        result = response.json()
 
                 if result:
                     st.success("Text erfolgreich generiert!")
@@ -111,15 +116,13 @@ with tab2:
                     if demo_mode:
                         result = mock_sentiment(text_input)
                     else:
-                        response = safe_post(
+                        result, err = fetch_json(
                             f"{api_url}/sentiment",
                             {"text": text_input},
                         )
-                        if response.status_code != 200:
-                            st.error(f"API Fehler: {response.status_code}")
+                        if err:
+                            st.error(f"API Fehler: {err}")
                             result = None
-                        else:
-                            result = response.json()
 
                     if result:
                         sentiment = normalize_sentiment(result)
@@ -149,18 +152,16 @@ with tab3:
                     if demo_mode:
                         result = mock_qa(context, question)
                     else:
-                        response = safe_post(
+                        result, err = fetch_json(
                             f"{api_url}/qa",
                             {
                                 "context": context,
                                 "question": question,
                             },
                         )
-                        if response.status_code != 200:
-                            st.error(f"API Fehler: {response.status_code}")
+                        if err:
+                            st.error(f"API Fehler: {err}")
                             result = None
-                        else:
-                            result = response.json()
                     if result:
                         answer = normalize_answer(result)
                         st.success("Antwort gefunden!")

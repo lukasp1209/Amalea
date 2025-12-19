@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
-import plotly.graph_objects as go
 import os
 import requests
 from datetime import datetime
@@ -26,6 +25,21 @@ api_url = st.sidebar.text_input("API URL", default_api)
 if st.sidebar.button("🔄 Refresh"):
     st.rerun()
 
+REQUEST_TIMEOUT = 8
+
+
+def fetch_json(method: str, url: str, payload: Dict[str, Any] | None = None):
+    try:
+        if method == "get":
+            resp = requests.get(url, timeout=REQUEST_TIMEOUT)
+        else:
+            resp = requests.post(url, json=payload, timeout=REQUEST_TIMEOUT)
+        resp.raise_for_status()
+        return resp.json(), None
+    except Exception as exc:
+        return None, str(exc)
+
+
 # API Health Check
 def mock_health() -> Dict[str, Any]:
     return {
@@ -45,29 +59,16 @@ def mock_predict(payload: Dict[str, float]) -> Dict[str, Any]:
         "timestamp": datetime.utcnow().isoformat() + "Z",
     }
 
-
-def safe_get(url: str):
-    return requests.get(url, timeout=5)
-
-
-def safe_post(url: str, json_payload: Dict[str, Any]):
-    return requests.post(url, json=json_payload, timeout=10)
-
-
 health_data = None
 if demo_mode:
     health_data = mock_health()
     st.info("Demo-Modus aktiv: simulierte API-Daten.")
 else:
-    try:
-        resp = safe_get(f"{api_url}/health")
-        if resp.status_code == 200:
-            health_data = resp.json()
-            st.success(f"✅ API Status: {health_data.get('status','ok')}")
-        else:
-            st.error(f"❌ API nicht erreichbar (Status: {resp.status_code})")
-    except Exception as e:
-        st.error(f"❌ Verbindung zur API fehlgeschlagen: {e}")
+    health_data, err = fetch_json("get", f"{api_url}/health")
+    if health_data:
+        st.success(f"✅ API Status: {health_data.get('status','ok')}")
+    else:
+        st.error(f"❌ API nicht erreichbar: {err}")
 
 if health_data:
     col1, col2, col3 = st.columns(3)
@@ -103,12 +104,10 @@ with col1:
             if demo_mode:
                 result = mock_predict(prediction_data)
             else:
-                response = safe_post(f"{api_url}/predict", prediction_data)
-                if response.status_code != 200:
-                    st.error(f"Prediction fehlgeschlagen: {response.text}")
+                result, err = fetch_json("post", f"{api_url}/predict", prediction_data)
+                if err:
+                    st.error(f"Prediction fehlgeschlagen: {err}")
                     result = None
-                else:
-                    result = response.json()
             if result:
                 st.success(f"Prediction: **{result['prediction_label']}**")
                 st.info(f"Confidence: {result['confidence']:.4f}")

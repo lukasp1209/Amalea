@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import datetime
-from typing import List, Optional
+from typing import List
 
 import numpy as np
 from fastapi import FastAPI
@@ -39,10 +39,13 @@ class IrisService:
         arr = np.array(features, dtype=float).reshape(1, -1)
         probs = self.pipeline.predict_proba(arr)[0]
         idx = int(np.argmax(probs))
+        # Use timezone-aware UTC datetime
+        from datetime import timezone
+        now_utc = datetime.now(timezone.utc)
         return {
             "prediction_label": self.target_names[idx],
             "confidence": float(probs[idx]),
-            "timestamp": datetime.utcnow().isoformat() + "Z",
+            "timestamp": now_utc.isoformat(),
             "target_classes": self.target_names,
             "model_version": self.version,
         }

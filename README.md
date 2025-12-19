@@ -104,6 +104,16 @@ docker compose up -d jupyter-lab-slim streamlit-slim
 
 ---
 
+## ▶️ Run Cheatsheet (lokal)
+
+- **W07 Backend**: `cd 07_Deployment_Portfolio && export PYTHONPATH=$(pwd) && uvicorn backend.main:app --host 127.0.0.1 --port 8000`
+- **W07 Dashboards lokal**: `API_URL=http://127.0.0.1:8000 streamlit run 04_streamlit_mlops_dashboard.py --server.port 8505` und `...05_streamlit_nlp_dashboard.py --server.port 8506`
+- **Compose (API + beide Dashboards)**: `cd 07_Deployment_Portfolio && docker compose up --build`
+- **Streamlit Cloud**: `requirements.cloud.txt` nutzen, `API_URL` als Secret setzen (Demo-Modus ohne Backend möglich).
+- **Pinned Stack (07)**: `make install` nutzt `requirements-07.lock.txt` als Constraints für reproduzierbare Versionsstände (FastAPI/Streamlit/Sklearn).
+
+---
+
 ## 📁 Repository-Struktur
 
 Das Repository ist nach den Kurswochen gegliedert:
