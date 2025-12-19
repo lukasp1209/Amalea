@@ -1,4 +1,4 @@
-# Prüfungsleistung: Referat (Kurs)
+# Prüfungsleistung: Referat
 
 **Ziel:**
 - **Kurz:** Jede Person wählt ein Thema aus dem Ordner `Referate/`, bereitet ein kompaktes Fachreferat vor und reicht ein 4‑seitiges Handout ein.
@@ -32,12 +32,8 @@ Committe/Push deine finalen Dateien in dieses Repo unter dem genannten Pfad bis 
 - Code: kurz und reproduzierbar; wenn Abhängigkeiten nötig sind, ergänzt `requirements.txt` im Ordner `code/`.
 
 **Ordnerstruktur (erwartet):**
-- `slides/` — Präsentationsdateien (`slides.pdf`, `slides.pptx`).
-- `notes/` — `handout.pdf`, optional `talk_notes.md`.
-- `code/` — `demo.ipynb` oder `demo.py`, ggf. `requirements.txt`.
-- `assets/` — Bilder, Plots, ergänzende Dateien.
 
-**Themenliste (Empfohlenes kompaktes Set):**
+**Themenliste:**
 1. Lineare Regression & MSE
 2. Logistische Regression (Sigmoid + Cross‑Entropy)
 3. Softmax + Cross‑Entropy (Multiklassen)
@@ -47,11 +43,26 @@ Committe/Push deine finalen Dateien in dieses Repo unter dem genannten Pfad bis 
 7. Scaled Dot‑Product Attention (Transformer‑Kern)
 8. Bias–Variance Decomposition
 
-**Hinweis zu bereits existierenden Ordnern:**
-- Es gibt aktuell mehrere bereits angelegte Ordner. Falls du ein Thema nutzt, benenne deinen Ordner bitte `Referate/<Dein_Thema>` oder erstelle einen neuen Ordner mit diesem Namen. Auf Wunsch fasse ich Ordner zusammen oder erstelle Starter‑Templates.
+**Hinweise pro Thema (was thematisch ins Referat muss):**
+
+- **Lineare Regression & MSE:** Herleitung des Modells und der MSE, analytische Lösung vs. numerische Optimierung, Kurven/Plots (Fit + Residuen), ein kurzes Datenset‑Demo und ein kleines Code‑Beispiel zum Fitten.
+
+- **Logistische Regression (Sigmoid + Cross‑Entropy):** Sigmoid‑Funktion und Likelihood‑Argumentation, Ableitung der Cross‑Entropy, Entscheidungsgrenzen visualisieren, Binary‑Demo mit Confusion‑Matrix und kurzer Trainings‑Code.
+
+- **Softmax + Cross‑Entropy (Multiklassen):** Softmax‑Formel und numerische Stabilität (log‑sum‑exp), Multiklassen‑Loss, kleine Multiclass‑Demo (Accuracy) und Beispielcode für Forward/Loss.
+
+- **Regularisierung (L1 vs L2):** Regularisierungsziel formulieren, geometrische Intuition (Sparsity vs Shrinkage), Vergleichseffekt auf Koeffizienten, kurzer CV‑Test zur Wahl von Lambda und Demo‑Plots.
+
+- **Optimierung: Gradient Descent, Momentum, Adam:** Update‑Regeln zeigen, Lernraten‑Effekte, Konvergenzkurven, Vergleichsplots verschiedener Optimierer, kleines Experiment zur Wahl des Lernrates.
+
+- **CNN Basics (Convolution Shapes + Pooling):** Faltungsoperation erklären, Ausgabedimensionen (Kernel/Stride/Padding) herleiten, receptive field kurz erklären, Beispiel‑Layer durchrechnen und ein Visual‑Demo (z. B. Feature‑Maps).
+
+- **Scaled Dot‑Product Attention:** Q/K/V‑Notation und Formel (inkl. Skalierung), Intuition für Attention‑Scores, Visualisierung von Attention‑Gewichten, kurzes Mini‑Beispiel (Transformer‑Block‑Sketch).
+
+- **Bias–Variance Decomposition:** Zerlegung des Erwartungsfehlers erklären, illustrative Plots (Bias vs Variance), Beispiele durch Variation der Modellkomplexität und kurz Maßnahmen zur Reduktion (Regularisierung, Ensemble).
 
 **Abgabe & Support:**
 - Abgabe erfolgt per Commit/Pull in dieses Repository unter `Referate/<Dein_Thema>/` bis zum auf der Kursplattform genannten Datum.
-- Fragen oder Probleme: erstellt ein Issue im Kurs‑Repo oder kontaktiert die Lehrperson/TA über die Kursplattform.
+- Fragen oder Probleme: erstellt ein Issue im Kurs‑Repo.
 
 Viel Erfolg — denk an klare Visualisierungen und ein kompaktes, aussagekräftiges Handout!
