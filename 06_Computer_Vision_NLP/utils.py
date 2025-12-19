@@ -5,15 +5,18 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import numpy as np
 
-import keras
-from keras import backend as K
+from tensorflow import keras
+from tensorflow.keras import backend as K
 
-from keras.layers import UpSampling2D
-from keras.layers import Conv2DTranspose
-from keras.layers import Input, BatchNormalization
-from keras.models import Model
+from tensorflow.keras.layers import UpSampling2D
+from tensorflow.keras.layers import Conv2DTranspose
+from tensorflow.keras.layers import Input, BatchNormalization
+from tensorflow.keras.models import Model
 
-rgb_array = np.load("data/dataset/rgb_array.npy")
+try:
+    rgb_array = np.load("data/dataset/rgb_array.npy")
+except (FileNotFoundError, OSError):
+    rgb_array = None
 
 
 class LossGraph(keras.callbacks.Callback):
@@ -36,8 +39,8 @@ class LossGraph(keras.callbacks.Callback):
         self.epoch_count += 1
         self.train_loss.append(logs.get("loss"))
         self.val_loss.append(logs.get("val_loss"))
-        self.train_acc.append(logs.get("acc"))
-        self.val_acc.append(logs.get("val_acc"))
+        self.train_acc.append(logs.get("accuracy"))
+        self.val_acc.append(logs.get("val_accuracy"))
 
     def on_train_end(self, logs={}):
 
@@ -173,6 +176,9 @@ def get_prediction(predicted_bitmap, classes_list):
                 )
                 rgb_value = classes_list[class_index]
 
+                if rgb_value is None:
+                    continue
+                    
                 image[row, column, 0] = int(float(rgb_value[0]))
                 image[row, column, 1] = int(float(rgb_value[1]))
                 image[row, column, 2] = int(float(rgb_value[2]))
@@ -322,6 +328,9 @@ def ae_predict(
             prediction = np.squeeze(prediction, axis=0)
 
         elif class_or_regr == 1:
+            global rgb_array
+            if rgb_array is None:
+                rgb_array = np.load("data/dataset/rgb_array.npy")
             prediction = get_prediction(prediction, rgb_array)
 
         plt.subplots(figsize=(15, 15))
