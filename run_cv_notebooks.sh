@@ -14,11 +14,12 @@ fi
 
 mkdir -p "$OUTPUT_DIR"
 
+# Run only the new CV notebooks ("neu" in filename).
 NOTEBOOKS=(
-  "06_01_CNN_Grundlagen.ipynb"
-  "06_02_Computer_Vision_Anwendungen.ipynb"
-  "06_03_Data_Augmentation.ipynb"
-  "06_04_Transfer_Learning.ipynb"
+  "06_01_neu_CNN_Basics.ipynb"
+  "06_02_neu_OpenCV_Edge_Features.ipynb"
+  "06_03_neu_Data_Augmentation_Practice.ipynb"
+  "06_04_neu_Transfer_Learning_Lite.ipynb"
   "06_05_neu_Image_Sampler.ipynb"
 )
 
