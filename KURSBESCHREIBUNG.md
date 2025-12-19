@@ -11,7 +11,7 @@
 
 ### Überblick
 
-AMALEA 2025 ist ein vollständig modernisierter, praxisorientierter Kurs für Data Analytics & Big Data, der speziell für Informatik-Studierende der IU im 5. Semester konzipiert wurde. Der Kurs baut auf dem bewährten **"Angewandte Machine Learning Algorithmen"** Programm des KI-Campus auf und erweitert es um moderne Deployment-Strategien, interaktive Web-Anwendungen und industrierelevante MLOps-Kompetenzen. Der Kurs kombiniert theoretische Grundlagen mit intensiver praktischer Anwendung und bereitet Studierende auf die Anforderungen der modernen Datenwissenschaft vor. Durch die Entwicklung von 16 interaktiven Jupyter Notebooks und 8 produktionsreifen Streamlit-Anwendungen erwerben die Teilnehmer nicht nur technische Kompetenzen, sondern erstellen gleichzeitig ein beeindruckendes Portfolio für ihre berufliche Laufbahn.
+AMALEA 2025 ist ein vollständig modernisierter, praxisorientierter Kurs für Data Analytics & Big Data, der speziell für Informatik-Studierende der IU im 5. Semester konzipiert wurde. Der Kurs baut auf dem bewährten **"Angewandte Machine Learning Algorithmen"** Programm des KI-Campus auf und erweitert es um moderne Deployment-Strategien, interaktive Web-Anwendungen und industrierelevante MLOps-Kompetenzen. Der Kurs kombiniert theoretische Grundlagen mit intensiver praktischer Anwendung und bereitet Studierende auf die Anforderungen der modernen Datenwissenschaft vor. Durch die Entwicklung von 16 interaktiven Jupyter Notebooks und 8 produktionsreifen Streamlit-Anwendungen (alle Wochen 01–07 production-ready; W06/W07 CPU-freundlich) erwerben die Teilnehmer nicht nur technische Kompetenzen, sondern erstellen gleichzeitig ein beeindruckendes Portfolio für ihre berufliche Laufbahn.
 
 ### Pädagogisches Konzept
 
@@ -23,7 +23,7 @@ Ein zentrales Merkmal des Kurses ist die Betonung auf echte, industrierelevante 
 
 Nach erfolgreichem Abschluss des Kurses verfügen die Studierenden über ein umfassendes Skillset, das sie unmittelbar in der Berufspraxis einsetzen können. Sie beherrschen Python für Data Science auf professionellem Niveau und können selbstständig Machine Learning-Pipelines von der Datenaufbereitung bis zum Deployment entwickeln. Besonders wertvoll ist ihre Fähigkeit, interaktive Web-Anwendungen mit Streamlit zu erstellen, die komplexe Datenanalysen für Nicht-Techniker zugänglich machen.
 
-Die Teilnehmer lernen moderne Deep Learning-Frameworks wie TensorFlow und Keras kennen und können Neural Networks für Computer Vision und Natural Language Processing implementieren. Durch die intensive Arbeit mit aktuellen Bibliotheken wie Hugging Face Transformers sind sie mit den neuesten Entwicklungen im Bereich der künstlichen Intelligenz vertraut. Gleichzeitig erwerben sie praktische MLOps-Kompetenzen, die für die Skalierung von Machine Learning-Lösungen in Produktionsumgebungen essentiell sind.
+Die Teilnehmer lernen moderne Deep Learning-Frameworks wie TensorFlow und Keras kennen und können Neural Networks für Computer Vision und Natural Language Processing implementieren. Durch die intensive Arbeit mit aktuellen Bibliotheken wie Hugging Face Transformers sind sie mit den neuesten Entwicklungen im Bereich der künstlichen Intelligenz vertraut. Gleichzeitig erwerben sie praktische MLOps-Kompetenzen, die für die Skalierung von Machine Learning-Lösungen in Produktionsumgebungen essentiell sind. Im Deployment-Modul (W07) arbeiten sie mit einer FastAPI-Demo; die NLP-Endpunkte (Sentiment/QA/Generate) sind bewusst als keyword-basierte Stubs ausgelegt, um den Fokus auf API-Design, Monitoring und Deployment zu legen.
 
 ### Kursstruktur und Inhalte
 
@@ -33,21 +33,21 @@ Die zweite Woche konzentriert sich auf die Entwicklung interaktiver Web-Anwendun
 
 Das absolute Highlight des Kurses ist die vierte Woche mit dem "Big 3" Notebook, das eine umfassende praktische Einführung in die drei wichtigsten Machine Learning-Algorithmen bietet: Decision Trees, K-Nearest Neighbors und K-Means Clustering. Dieses Modul verbindet theoretisches Verständnis mit intensiver praktischer Anwendung und bereitet optimal auf komplexere Algorithmen vor.
 
-Die fünfte Woche taucht tief in Neural Networks und Deep Learning ein, während die sechste Woche Computer Vision und Natural Language Processing mit vier spezialisierten Notebooks und vier begleitenden Streamlit-Anwendungen behandelt. Die finale siebte Woche konzentriert sich auf Deployment, MLOps und Portfolio-Entwicklung mit fünf fortgeschrittenen Notebooks und zwei produktionsreifen MLOps-Anwendungen, wobei die Studierenden lernen, ihre Projekte professionell zu präsentieren und zu skalieren.
+Die fünfte Woche taucht tief in Neural Networks und Deep Learning ein, während die sechste Woche Computer Vision und Natural Language Processing mit vier spezialisierten Notebooks (Runner: `run_cv_notebooks.sh`, Executed-Notebooks inklusive) und vier begleitenden Streamlit-Anwendungen/Dashboards behandelt. Die finale siebte Woche konzentriert sich auf Deployment, MLOps und Portfolio-Entwicklung mit FastAPI-Demo (NLP-Endpunkte als keyword-basierte Stubs für Sentiment/QA/Generate), zwei produktionsreifen Streamlit-Dashboards und drei kompakten Notebooks; die Studierenden üben API-Handling, Monitoring und Deployment.
 
 ### Aktuelle Kursstruktur im Detail (2025)
 
-Der vollständig modernisierte Kurs umfasst **25 Portfolio-Komponenten**:
+Der vollständig modernisierte Kurs umfasst **24 Portfolio-Komponenten**:
 
 | Woche | Thema | Core Notebooks | Streamlit Apps | Fokus |
 |-------|-------|----------------|----------------|--------|
 | **01** | Python Grundlagen | 4 | 0 | Foundation + QUA³CK Framework |
 | **02** | Streamlit & Pandas | 1 | 1 | Interactive Web Development |
 | **03** | Machine Learning | 1 | 0 | ML Pipeline Development |
-| **04** | Advanced Algorithms | 2 | 0 | Big 3 + MLOps Integration |
-| **05** | Neural Networks | 1 | 1 | Deep Learning Foundations |
-| **06** | Computer Vision & NLP | 4 | 4 | CV/NLP + Transfer Learning |
-| **07** | Deployment & Portfolio | 5 | 2 | MLOps + Cloud Production |
+| **04** | Advanced Algorithms | 2 | 0 | Ensembles & Unsupervised, MLflow/DVC Intro |
+| **05** | Neural Networks | 1 | 1 | Keras Basics & Transfer Learning Lite |
+| **06** | Computer Vision & NLP | 4 | 4 | CV/NLP Fundamentals + Augmentation/Transfer |
+| **07** | Deployment & Portfolio | 3 | 2 | FastAPI + Monitoring Dashboards (NLP-Stubs) |
 
 **Gesamt: 16 Core Notebooks + 8 Streamlit Apps = 24 Portfolio-Komponenten**
 
@@ -63,7 +63,7 @@ Alle Projekte folgen dem systematischen **QUA³CK Prozessmodell**:
 
 ### Innovative Technologien und Tools
 
-Der Kurs setzt konsequent auf moderne, industrierelevante Technologien. Python 3.11+ bildet das Fundament, ergänzt durch leistungsfähige Bibliotheken wie Pandas, NumPy und Scikit-learn für klassisches Machine Learning. Für Deep Learning kommen TensorFlow und Keras zum Einsatz, während Hugging Face Transformers den Zugang zu modernsten NLP-Modellen ermöglicht.
+Der Kurs setzt konsequent auf moderne, industrierelevante Technologien. Python 3.11+ bildet das Fundament, ergänzt durch leistungsfähige Bibliotheken wie Pandas, NumPy und Scikit-learn für klassisches Machine Learning. Für Deep Learning kommen TensorFlow und Keras zum Einsatz, während Hugging Face Transformers den Zugang zu modernsten NLP-Modellen ermöglicht. Dependencies sind pro Woche getrennt (Week-Requirements + Lockfiles), damit Installationen schlank und reproduzierbar bleiben: leichter Stack (W01–W03), MLOps (W04), Deep Learning (W05), CV/NLP (W06), Deployment (W07).
 
 Ein besonderer Fokus liegt auf Streamlit als Framework für die Entwicklung interaktiver Web-Anwendungen. Diese Technologie ermöglicht es Data Scientists, ihre Analysen ohne umfangreiche Web-Entwicklungskenntnisse in benutzerfreundliche Interfaces zu verwandeln. Docker containerisiert die gesamte Entwicklungsumgebung und gewährleistet Konsistenz und Reproduzierbarkeit across verschiedene Systeme.
 
