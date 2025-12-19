@@ -104,6 +104,20 @@ docker compose up -d jupyter-lab-slim streamlit-slim
 
 ---
 
+## 📦 Dependencies (nach Wochen)
+
+- Schnellstart (alles, W01–W07): `python -m venv .venv && source .venv/bin/activate && pip install --upgrade pip && pip install -r requirements-week06.txt -r requirements-week07.txt`
+- Standard (W01–W03): `pip install -r requirements-week03.txt` (leichtgewichtig, inkl. Streamlit + Sklearn).
+- Advanced/MLOps (W04): `pip install -r requirements-week04.txt` (duckdb/polars/pyarrow + mlflow/dvc).
+- Deep Learning (W05): `pip install -r requirements-week05.txt` (TF + Torch, schwer).
+- CV & NLP (W06): `pip install -r requirements-week06.txt` (fügt OpenCV, scikit-image, Transformers hinzu).
+- Deployment (W07): `pip install -r requirements-week07.txt` (nutzt `07_Deployment_Portfolio/requirements.cloud.txt` mit `requirements-07.lock.txt` als Constraints).
+- Dev-Tools: `pip install -r requirements-dev.txt` (zieht W07-Stack + ruff/pytest/black).
+
+> Hinweis: `requirements.txt` zeigt auf den leichten W01–W03-Stack. Installiere nur, was du pro Woche brauchst, um Downloads klein zu halten.
+
+---
+
 ## ▶️ Run Cheatsheet (lokal)
 
 - **W07 Backend**: `cd 07_Deployment_Portfolio && export PYTHONPATH=$(pwd) && uvicorn backend.main:app --host 127.0.0.1 --port 8000`
@@ -138,7 +152,7 @@ amalea/
 
 ## 📚 Kursinhalte & Portfolio-Projekte
 
-Der Kurs ist in 7 Wochen gegliedert. **Stand 19.12.2025**: Wochen **01–03** sind vollständig überarbeitet; **07** ist jetzt live mit Backend, Dashboards und drei kurzen Notebooks. Wochen **04–06** bleiben in Arbeit (teilweise lauffähig, noch in Migration).
+Der Kurs ist in 7 Wochen gegliedert. **Stand 19.12.2025**: Wochen **01–07** sind production-ready mit überarbeiteten Inhalten, Backend, Dashboards und Executed-Notebooks.
 
 | Woche | Thema |
 |-------|-------|
@@ -150,7 +164,7 @@ Der Kurs ist in 7 Wochen gegliedert. **Stand 19.12.2025**: Wochen **01–03** si
 | **06** | Computer Vision & NLP |
 | **07** | Deployment & Portfolio |
 
-### Aktueller Stand im Repo (Ordner 01–03, 06)
+### Aktueller Stand im Repo (Auszug; Wochen 01–07 production-ready)
 
 | Woche | Kern-Notebooks | Apps / Skripte | Status |
 |-------|----------------|----------------|--------|
@@ -170,19 +184,21 @@ Der Kurs ist in 7 Wochen gegliedert. **Stand 19.12.2025**: Wochen **01–03** si
 - Drei kurze Notebooks mit "So nutzt du..."-Guides, Executed-Versionen unter `07_Deployment_Portfolio/executed/`.
 - Compose-Setup (`07_Deployment_Portfolio/docker-compose.yml`) und `requirements.cloud.txt` für lokalen Start oder Streamlit Cloud (API-URL via Sidebar/Secrets konfigurierbar).
 
-> ℹ️ Für Woche 04–06 existieren Platzhalter/Work-in-Progress-Inhalte; sie werden schrittweise aktualisiert.
+> ℹ️ Alle Wochen (01–07) sind production-ready; CV/NLP und Deployment laufen CPU-freundlich.
 
 ### Portfolio-Apps (Beispiele)
 
-**Bereits lauffähig (W01–W03):**
+**Bereits lauffähig (Auszug, W01–W07):**
 1.  **Python Fundamentals Dashboard** (`01_Python_Grundlagen/uebungs_app.py`)
 2.  **Streamlit Starter** (`01_Python_Grundlagen/meine_erste_app.py`)
 3.  **Streamlit Pandas Demo** (`02_Streamlit_und_Pandas/example_app.py`)
 4.  **Hello Streamlit Widgets** (`02_Streamlit_und_Pandas/hello_streamlit.py`)
 5.  **Iris ML Playground** (`03_Machine_Learning/iris_ml_app.py`)
 6.  **Housing Regression Explorer** (`03_Machine_Learning/housing_regression_app.py`)
+7.  **MLOps Monitoring Dashboard** (`07_Deployment_Portfolio/04_streamlit_mlops_dashboard.py`)
+8.  **NLP Demo Dashboard** (`07_Deployment_Portfolio/05_streamlit_nlp_dashboard.py`)
 
-**In Vorbereitung (W04–W07):** Weitere ML-, CV- und Deployment-Apps folgen, sobald die entsprechenden Wochen migriert sind.
+**Weitere Apps (W04–W07):** ML-, CV- und Deployment-Demos stehen in den jeweiligen Wochenordnern bereit.
 
 ---
 

@@ -1,0 +1,4 @@
+-r requirements-week05.txt
+opencv-python>=4.9.0
+scikit-image>=0.22.0
+transformers>=4.57.3

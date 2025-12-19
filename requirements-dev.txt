@@ -1,4 +1,4 @@
--r requirements.cloud.txt
+-r requirements-week07.txt
 ruff>=0.7.3
 pytest>=8.3.0
 nbconvert>=7.16.4

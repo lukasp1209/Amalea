@@ -1,0 +1,4 @@
+-c requirements-07.lock.txt
+-r requirements-core.txt
+-r 07_Deployment_Portfolio/requirements.cloud.txt
+mlflow>=3.7.0

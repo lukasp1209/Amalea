@@ -1,0 +1,16 @@
+# Shared baseline for AMALEA (CPU-friendly, weeks 01–04 & 07)
+pandas>=2.3.3
+numpy>=2.3.5
+scipy>=1.12.0
+scikit-learn>=1.8.0
+matplotlib>=3.10.6
+seaborn>=0.13.2
+plotly>=6.3.0,<6.6.0
+altair>=5.2.0
+Pillow>=10.2.0
+requests>=2.32.0
+python-dotenv>=1.0.0
+tqdm>=4.66.0
+rich>=13.7.0
+typer>=0.9.0
+filelock>=3.13.0
