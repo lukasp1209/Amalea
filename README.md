@@ -136,6 +136,7 @@ docker compose up -d jupyter-lab-slim streamlit-slim
 - Deployment (W07): `pip install -r requirements-week07.txt` (nutzt `07_Deployment_Portfolio/requirements.cloud.txt` mit `requirements-07.lock.txt` als Constraints).
 - Dev-Tools: `pip install -r requirements-dev.txt` (zieht W07-Stack + ruff/pytest/black).
 - Docker Compose (Full): nutzt `requirements-week06.txt` + `requirements-week07.txt` für `jupyter-lab`, `requirements-week07.txt` für `streamlit-dev` (Build-Args in `docker-compose.yml`).
+- Hinweis Base Images: Dockerfiles nutzen Python/Jupyter 3.12; lokale venvs gern mit 3.12 anlegen.
 
 Docker Compose Builds:
 - Full Build (Standard, wie oben konfiguriert): `docker compose build jupyter-lab streamlit-dev` → lädt W06+W07 (DL/CV/NLP+Deployment) für Jupyter, W07 für Streamlit.

@@ -1,5 +1,5 @@
 # Dockerfile.streamlit - Optimiert für IU Streamlit Apps
-FROM python:3.11-slim
+FROM python:3.12-slim
 
 # System-Updates und notwendige Tools
 RUN apt-get update && apt-get install -y \

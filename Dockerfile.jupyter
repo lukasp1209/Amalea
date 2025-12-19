@@ -1,5 +1,5 @@
 # Dockerfile.jupyter - Optimiert für IU Data Analytics Kurs
-FROM jupyter/scipy-notebook:python-3.11
+FROM jupyter/scipy-notebook:python-3.12
 
 # Als root-Benutzer für Installationen
 USER root

@@ -69,6 +69,15 @@ Ein besonderer Fokus liegt auf Streamlit als Framework für die Entwicklung inte
 
 Für das Experiment Tracking und MLOps kommt MLflow zum Einsatz, während Git und GitHub für Versionskontrolle und Collaboration sorgen. Die Visualisierung erfolgt mit modernen Bibliotheken wie Plotly und Matplotlib, die interaktive und publikationsreife Grafiken ermöglichen.
 
+### ML/DL-Algorithmen und Demos pro Woche (Auswahl)
+
+- **W01–W02 (Basics & Apps):** Deskriptive Statistik, Pandas-Transformationen, einfache Visualisierungen; Streamlit-Widgets zur Datenexploration.
+- **W03 (Classic ML):** Scikit-Learn Pipelines, Logistische Regression & RandomForest für Klassifikation, Lineare Regression für Housing; Hyperparameter-Playgrounds in Streamlit.
+- **W04 (Advanced/MLops):** Ensembles (RandomForest/GradientBoosting-Patterns), Clustering (K-Means), Anomalie-Detektion; MLflow/DVC-Einstieg.
+- **W05 (Deep Learning):** Keras-Sequential/Functional API, Dense-Netze für Tabulardaten, leichtgewichtige Transfer-Learning-Setups.
+- **W06 (CV/NLP):** CNN-Grundlagen, Edge/Feature-Extraction mit OpenCV, Data Augmentation, Transfer Learning Lite; Transformers-Demo für Text (CPU-freundlich).
+- **W07 (Deployment):** FastAPI-Demo mit Sklearn-Iris-Modell; NLP-Endpunkte als keyword-basierte Stubs (Sentiment/QA/Generate) für API/Monitoring/Deployment-Übungen; zwei Streamlit-Dashboards für Monitoring & NLP.
+
 ### Studienleistung
 
 Die Studienleistung erfordert die Entwicklung einer vollständigen MLOps-Anwendung, die eine End-to-End Machine Learning Pipeline, eine interaktive Streamlit-Web-App und ein Live-Deployment in der Streamlit Cloud umfasst. Dieser Ansatz geht weit über traditionelle Klausuren hinaus und bewertet die Fähigkeit, komplette, produktionsreife Lösungen zu entwickeln.
