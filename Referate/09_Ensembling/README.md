@@ -1,54 +1,40 @@
-# 09_Ensembling — Random Forests & Gradient Boosting
+# Thema 9: Ensemble Learning Methoden
 
-Kurzbeschreibung
+Dieses Modul demonstriert die Leistungsfähigkeit von Ensemble-Methoden im Vergleich zu einzelnen Modellen. Es visualisiert, wie die Kombination mehrerer "schwacher" Lerner zu einem starken Prädiktor führt.
 
-Dieses Muster‑Referat behandelt Ensembling‑Methoden mit Fokus auf Random Forests und Gradient Boosting. Ziel ist eine kurze Einführung in die Ideen, typische Einsatzfälle, Vor‑ und Nachteile sowie eine kompakte Demo mit sklearn.
+## Enthaltene Konzepte
 
-Was enthalten ist
+### 1. Bagging (Bootstrap Aggregating)
+*   **Prinzip**: Trainiert mehrere Modelle parallel auf zufälligen Teilmengen der Daten (mit Zurücklegen).
+*   **Ziel**: Reduktion der Varianz (gegen Overfitting).
+*   **Beispiel**: Random Forest.
 
-- `slides/` — Stichwort‑Folien als `slides.md` (Stub).
-- `notes/handout.md` — 4‑Seiten‑Handout‑Template (Markdown).
-- `code/demo.ipynb` — lauffähiges Demo‑Notebook (Iris/Breast Cancer, RF vs GB).
-- `code/requirements.txt` — benötigte Python‑Pakete.
-- `assets/` — Grafiken/Plots, falls benötigt.
+### 2. Boosting
+*   **Prinzip**: Trainiert Modelle sequenziell, wobei jedes neue Modell versucht, die Fehler des Vorgängers zu korrigieren.
+*   **Ziel**: Reduktion des Bias (gegen Underfitting) und der Varianz.
+*   **Beispiel**: Gradient Boosting, AdaBoost.
 
-Vorschlag zur Demonstration
+### 3. Stacking / Voting
+*   **Prinzip**: Kombiniert die Vorhersagen verschiedener Modelltypen (z.B. SVM + Decision Tree + KNN) durch einen Meta-Lerner oder Mehrheitsentscheid.
+*   **Ziel**: Nutzung der Stärken verschiedener Algorithmen.
 
-- Datensatz: `sklearn.datasets.load_iris` (kurze Demo) oder `load_breast_cancer` für einen binären Use‑Case.
-- Modelle: `RandomForestClassifier`, `GradientBoostingClassifier` (sklearn implementation).
-- Experimente: Train/Test accuracy, 5‑fold Cross‑Validation, Feature importances, Lernkurve (Training vs Validation), kurze Discussion der Hyperparameter‑Einflüsse.
+## Installation & Start
 
-Lieferumfang (jetzt ausführlich):
+```bash
+# In diesen Ordner wechseln
+cd Referate/09_Ensembling
 
-- `slides/slides.md`: ausgearbeitete Folienstruktur (≤12 Folien).
-- `notes/handout.md` + `notes/handout.pdf`: vollständiges 4‑Seiten‑Handout.
-- `code/demo.ipynb`: ausführliches Notebook (EDA, Training, CV, Plots) — speichert Plots in `assets/`.
-- `code/demo_run.py`: skriptfähige Version, erzeugt dieselben Plots und ein `results.txt`.
-- `code/requirements.txt`: benötigte Pakete.
-- `assets/`: generierte PNGs (feature_importances.png, learning_curve_rf.png).
+# Abhängigkeiten installieren
+pip install -r requirements.txt
 
-Lizenz / Quellen
-
-- Implementierung: scikit‑learn Beispiele, modifiziert und dokumentiert für Lehrzwecke.
-
-Reproduzieren der Ergebnisse
-
-1) Mit dem Skript (headless, empfohlen):
-
-```
-cd Referate/09_Ensembling/code
-python demo_run.py
+# App starten
+streamlit run app.py
 ```
 
-Das Skript erzeugt Plots in `Referate/09_Ensembling/assets/` (z. B. `feature_importances.png`, `learning_curve_rf.png`) und schreibt `code/results.txt` mit den wichtigsten Kennzahlen.
+## Experimente
 
-2) Notebook interaktiv / ausgeführt:
-
-Wenn du das Notebook interaktiv ausführen möchtest, kannst du die ausgeführte Version öffnen: `Referate/09_Ensembling/code/executed_demo.ipynb` (wurde via `nbconvert --execute` erstellt). Falls du selbst ausführen willst, aktiviere die Projekt‑venv und starte Jupyter:
-
-```
-source .venv/bin/activate
-jupyter notebook Referate/09_Ensembling/code/demo.ipynb
-```
-
-Hinweis: für die automatische Ausführung mit `nbconvert` habe ich im venv einen Kernel (`amalea-venv`) registriert; falls du die Ausführung auf einem anderen System machst, registriere ggf. den Kernel entsprechend oder nutze `demo_run.py`.
+Nutzen Sie die Sidebar der App, um:
+1.  Die Komplexität des Datasets (Noise) zu erhöhen.
+2.  Einen einfachen Decision Tree gegen einen Random Forest antreten zu lassen.
+3.  Zu beobachten, wie Gradient Boosting komplexe Grenzen zieht.
+4.  Die "Decision Boundary" (Entscheidungsgrenze) live zu visualisieren.
