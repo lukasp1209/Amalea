@@ -77,4 +77,5 @@ Als konkretes Muster habe ich das Thema **`09_Ensembling`** umgesetzt, damit du 
 - `code/demo.ipynb` — ausführliches Notebook (EDA, Training, 5‑fold CV, Feature Importances, Learning Curve); ausgeführte Kopie: `code/executed_demo.ipynb`.
 - `code/demo_run.py` — skriptfähige Version zur headless Ausführung (erzeugt Plots und `code/results.txt`).
 - `code/requirements.txt` — benötigte Pakete (inkl. `scikit-learn`, `seaborn`).
+- `app.py` und `models.py` — Interaktive Streamlit-App zur Visualisierung von Decision Boundaries und Ensembling-Effekten.
 - `assets/` — generierte PNGs: `feature_importances.png`, `learning_curve_rf.png`.
