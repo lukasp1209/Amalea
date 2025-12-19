@@ -45,6 +45,7 @@ jupyter notebook 06_05_neu_Image_Sampler.ipynb
 ## Assets
 - Legacy-Notebooks, Streamlit-Skripte und Altdaten wurden entfernt.
 - Der Ordner `images/` bleibt für Demos erhalten (wird im Image Sampler genutzt); fehlt er, fällt das Notebook automatisch auf synthetische Beispiele zurück.
+- Der Ordner `data/dataset` wird aktuell nicht verwendet und kann bei Bedarf gelöscht oder archiviert werden.
 
 ## QUA³CK-Mapping (Notebook-Einstiege)
 - **Q**uestion: 06_05 (Use-Case-Story) + 06_02 (Welche Features/Kanten warum?).
@@ -62,31 +63,26 @@ jupyter notebook 06_05_neu_Image_Sampler.ipynb
 6. 📋 **C**&**K**: Professional Documentation + Presentation
 
 ### 🎮 **Hands-on Learning Experience**
-- **Interactive Notebooks**: Real-time Code Execution
-- **Visual Learning**: Extensive Plots und Animations
-- **Parameter Exploration**: Streamlit Widgets für Experimentation
-- **Portfolio Building**: Assessment-optimierte Projekt-Struktur
+- **Interactive Notebooks**: Fokus auf CPU-freundliche Läufe
+- **Visual Learning**: Kernplots zu Feature-Maps, Edges, Augmentierungen
+- **Parameter Exploration**: Slider/Widgets im Image Sampler
+- **Portfolio Building**: Lightweight SavedModel-Export (06_04_neu)
 
-### 📈 **Progressive Complexity**
-- **Beginner**: CNN Basics mit CIFAR-10
-- **Intermediate**: Custom CV Pipelines mit OpenCV
-- **Advanced**: Transfer Learning mit Hugging Face
-- **Expert**: Production Deployment auf Streamlit Cloud
+### 📈 **Progressive Complexity (realistisch)**
+- **Beginner**: 06_01_neu_CNN_Basics (CIFAR-Subset)
+- **Intermediate**: 06_02_neu_OpenCV_Edge_Features, 06_03_neu_Data_Augmentation_Practice
+- **Advanced (leicht)**: 06_04_neu_Transfer_Learning_Lite mit EfficientNetB0
+- **Sandbox**: 06_05_neu_Image_Sampler für schnelle Visual-Checks
 
-### 🤝 **Community & Support**
-- **Code Repository**: Vollständig dokumentiert auf GitHub
-- **Video Integration**: 8 strukturierte AMALEA Lernvideos
-- **Office Hours**: Q&A Sessions für Portfolio Development
-- **Peer Learning**: Collaborative Development Approaches
+### 🤝 **Support-Hinweise**
+- Nutze die Selbstcheck/ Troubleshooting-Blöcke in jedem Notebook.
+- Für langsamere Rechner: Epochen/Samples wie im Lernpfad reduzieren.
 
 ---
 
-## 🌟 Computer Vision Excellence Achieved
+## 🌟 Abschluss
 
-**Nach AMALEA Woche 6 sind Sie bereit für:**
-- 🏢 **Industry CV Projects** mit modernen Deep Learning Tools
-- 🎓 **Academic Excellence** durch systematic QUA³CK Application
-- 💼 **Portfolio Distinction** mit Professional-Grade CV Applications
-- 🚀 **Career Advancement** durch demonstrable CV Expertise
-
-**AMALEA Computer Vision: Where Theory Meets Practice! 👁️🧠**
+Nach Woche 6 hast du:
+- ein kleines CNN-Beispiel, eine Edge/Feature-Pipeline, sichtbares Augmentations-Tuning und ein leichtes Transfer-Learning-Modell.
+- Export-Pfad (SavedModel) aus 06_04_neu als Portfolio-Artefakt.
+- Einen Image-Sampler, um eigene oder Demo-Bilder schnell zu prüfen.
