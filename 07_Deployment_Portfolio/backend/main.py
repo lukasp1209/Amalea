@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List
 
 import numpy as np
@@ -137,7 +137,7 @@ def health():
         "model_version": iris_service.version,
         "model_loaded": True,
         "target_classes": iris_service.target_names,
-        "timestamp": datetime.utcnow().isoformat() + "Z",
+           "timestamp": datetime.now(timezone.utc).isoformat(),
     }
 
 
