@@ -29,6 +29,24 @@ def mock_qa(context: str, question: str) -> Dict[str, Any]:
     return {"answer": {"answer": context.split(" ")[0] if context else "N/A", "confidence": 0.3}}
 
 
+def normalize_sentiment(payload: Dict[str, Any]) -> Dict[str, Any]:
+    # Accept both nested (demo) and flat (FastAPI) schemas
+    if isinstance(payload.get("sentiment"), dict):
+        return payload["sentiment"]
+    if {"label", "confidence"}.issubset(payload.keys()):
+        return {"label": payload["label"], "confidence": payload["confidence"]}
+    raise ValueError("Unexpected sentiment payload shape")
+
+
+def normalize_answer(payload: Dict[str, Any]) -> Dict[str, Any]:
+    # Accept both nested (demo) and flat (FastAPI) schemas
+    if isinstance(payload.get("answer"), dict):
+        return payload["answer"]
+    if {"answer", "confidence"}.issubset(payload.keys()):
+        return {"answer": payload["answer"], "confidence": payload["confidence"]}
+    raise ValueError("Unexpected QA payload shape")
+
+
 def safe_post(url: str, payload: Dict[str, Any]):
     return requests.post(url, json=payload, timeout=15)
 
@@ -104,7 +122,7 @@ with tab2:
                             result = response.json()
 
                     if result:
-                        sentiment = result["sentiment"]
+                        sentiment = normalize_sentiment(result)
                         col1, col2 = st.columns(2)
                         with col1:
                             st.metric("Sentiment", sentiment["label"])
@@ -144,7 +162,7 @@ with tab3:
                         else:
                             result = response.json()
                     if result:
-                        answer = result["answer"]
+                        answer = normalize_answer(result)
                         st.success("Antwort gefunden!")
                         st.write(f"**Antwort:** {answer['answer']}")
                         st.write(f"**Confidence:** {answer['confidence']:.2%}")

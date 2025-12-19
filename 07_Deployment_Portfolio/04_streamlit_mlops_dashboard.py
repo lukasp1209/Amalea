@@ -22,7 +22,6 @@ st.sidebar.header("⚙️ Konfiguration")
 demo_mode = st.sidebar.toggle("Demo-Modus (ohne API)", value=True)
 default_api = os.getenv("API_URL", "http://localhost:8000")
 api_url = st.sidebar.text_input("API URL", default_api)
-refresh_interval = st.sidebar.slider("Refresh Interval (s)", 5, 60, 10)
 
 if st.sidebar.button("🔄 Refresh"):
     st.rerun()
