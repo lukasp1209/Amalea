@@ -35,4 +35,4 @@ Für jedes bestehende Thema (1-9) gilt folgender Transformationsprozess:
 - [ ] **Self-Check:** Quizfragen am Ende des Skripts?
 
 ---
-*Status: Phase 1 abgeschlossen. Musterbeispiel (09_Ensembling) migriert.*
+*Status: Phase 1 abgeschlossen. Migriert: Unit 09 (Ensembling), Unit 01 (LinReg & MSE).*
