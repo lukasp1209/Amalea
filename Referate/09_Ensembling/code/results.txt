@@ -1,0 +1,14 @@
+RandomForest accuracy (test): 0.978
+RandomForest accuracy (5-fold CV mean): 0.960 (std 0.025)
+GradientBoosting accuracy (test): 0.978
+GradientBoosting accuracy (5-fold CV mean): 0.960 (std 0.033)
+
+Feature importances (RF sorted):
+          feature  rf_importance  gb_importance
+ petal width (cm)       0.453069       0.696090
+petal length (cm)       0.403674       0.278843
+sepal length (cm)       0.107995       0.012957
+ sepal width (cm)       0.035262       0.012110
+
+Saved plot: /Users/kqc/amalea/Referate/09_Ensembling/assets/feature_importances.png
+Saved learning curve: /Users/kqc/amalea/Referate/09_Ensembling/assets/learning_curve_rf.png
