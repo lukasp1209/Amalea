@@ -179,6 +179,7 @@ amalea/
 ├── 📋 requirements*.txt
 ├── 📄 README.md
 ├── 📄 02_Glossar_Alle_Begriffe_erklärt.ipynb
+├── 📄 ML_DL_Mathematik.ipynb
 └── 📄 DEVELOPER_GUIDE.md
 ```
 
