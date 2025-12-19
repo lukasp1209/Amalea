@@ -32,6 +32,10 @@ So nutzt du den Kurs:
 4) **Deployment üben (W07):** Starte die FastAPI + Dashboards lokal oder via Compose, spiele den Demo/Live-Schalter durch und inspiziere Requests/Responses.  
 5) **Portfolio bauen:** Sammle Screenshots, kurze Beschreibungen und Metrikvergleiche; jedes Wochenziel ergibt einen Baustein für dein Portfolio.
 
+## 📚 Pädagogische Einführung: Themen, Konzepte, Tools
+
+AMALEA ist so gebaut, dass du in jeder Woche ein in sich geschlossenes Lernpaket aus Notebook und App bekommst. In W01–W02 übst du sauberen Python-Code, den QUA³CK-Prozess und Daten-Transformationen mit Pandas/NumPy; Streamlit dient als Brücke, um sofort interaktive Ergebnisse zu sehen. W03–W04 vertiefen klassisches ML: Sklearn-Pipelines, Klassifikation/Regression, Ensembles, Clustering und Anomalie-Detektion. Hier lernst du, Metriken zu interpretieren, mit MLflow zu tracken und erste Versionierung von Daten/Artefakten mit DVC zu probieren. W05 führt dich in Deep Learning mit Keras (Sequential/Functional API), Initialisierung/Regularisierung und leichtem Transfer Learning; du übst, Overfitting zu erkennen und Seeds konsistent zu halten. In W06 folgen Computer Vision und NLP: CNN-Grundlagen, Augmentation, OpenCV-Feature-Extraction, Transfer-Learning-Patterns sowie eine CPU-freundliche Transformers-Demo für Text. W07 bündelt alles in einem Deployment-Modul: FastAPI für Inference, leichte HF-Pipelines für Sentiment/QA/Generate, zwei Streamlit-Dashboards für Monitoring/NLP und ein Compose-Stack. Durch Week-Requirements und Lockfiles bleiben Umgebungen reproduzierbar; jede Woche liefert ein lauffähiges Notebook plus App, Executed-Versionen erleichtern den Einstieg, und mit MLflow dokumentierst du deine Experimente. So entsteht Schritt für Schritt ein konsistentes Portfolio.
+
 **Wie du lernen kannst**
 - Folge Woche für Woche; jede Woche hat ein klares Ziel, ein Kernnotebook und eine kleine App.
 - Starte mit den Executed-Notebooks, führe dann selbst aus und variiere Parameter.
@@ -174,6 +178,7 @@ amalea/
 ├── 🐳 Dockerfile.*
 ├── 📋 requirements*.txt
 ├── 📄 README.md
+├── 📄 02_Glossar_Alle_Begriffe_erklärt.ipynb
 └── 📄 DEVELOPER_GUIDE.md
 ```
 
