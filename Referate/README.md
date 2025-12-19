@@ -68,12 +68,12 @@ Committe/Push deine finalen Dateien in dieses Repo unter dem genannten Pfad bis 
 Viel Erfolg — denk an klare Visualisierungen und ein kompaktes, aussagekräftiges Handout!
 
 ---
-**Musterbeispiel (zur Orientierung)**
+**Muster-Einheit (Unit 09)**
 
-Als konkretes Muster habe ich das Thema **`09_Ensembling`** umgesetzt, damit du ein vollständiges, korrektes Einreichungsbeispiel zum Ansehen und Kopieren hast. Die Implementierung findest du unter `Referate/09_Ensembling/` und enthält:
+Als Referenzimplementierung für eine vollständige Vorlesungseinheit dient das Thema **`09_Ensembling`**. Es zeigt den erwarteten Umfang und die Qualität der Materialien:
 
-- `slides/` — ausgearbeitete Folienstruktur (`slides.md`, ≤12 Folien).
-- `notes/handout.md` und `notes/handout.pdf` — vollständiges 4‑Seiten‑Handout mit Formeln, Experimentbeschrieb und Empfehlungen.
+- `slides/` — Vorlesungsfolien (`slides.md`).
+- `notes/handout.md` — Ausführliches Vorlesungsskript mit Formeln und Erklärungen.
 - `code/demo.ipynb` — ausführliches Notebook (EDA, Training, 5‑fold CV, Feature Importances, Learning Curve); ausgeführte Kopie: `code/executed_demo.ipynb`.
 - `code/demo_run.py` — skriptfähige Version zur headless Ausführung (erzeugt Plots und `code/results.txt`).
 - `code/requirements.txt` — benötigte Pakete (inkl. `scikit-learn`, `seaborn`).

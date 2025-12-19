@@ -1,14 +1,14 @@
-# Handout — Ensembling: Random Forests & Gradient Boosting
+# Vorlesungsskript — Ensembling: Random Forests & Gradient Boosting
 
-Dieses Handout ist als kompaktes 4‑Seiten‑Dokument konzipiert. Es enthält (1) Kernaussagen, (2) zentrale Formeln und Intuitionen, (3) ein kurzes Experiment mit Auswertung und Visualisierungen sowie (4) praktische Hinweise und Empfehlungen.
+Dieses Skript begleitet die Vorlesungseinheit "Ensembling". Es vertieft die mathematischen Grundlagen, bietet Intuitionen zu den Algorithmen und fasst Best Practices für den produktiven Einsatz zusammen.
 
-Seite 1 — Kernaussagen
+## 1. Kernaussagen & Motivation
 
 - Ziel: Ensembling kombiniert mehrere Modelle, um Gesamtleistung und Robustheit zu verbessern (Varianz- und/oder Bias‑Reduktion).
 - Random Forest (RF): Bagging (Bootstrap + Aggregation) von Entscheidungsbäumen → primär Varianzreduktion; robust gegenüber Rauschen und wenig Feature‑Engineering.
 - Gradient Boosting (GB): sequentielle Fehleranpassung (Additive Modelle) → reduziert Bias, erfordert mehr Hyperparametertuning und Regularisierung.
 
-Seite 2 — Zentrale Formeln & Intuitionen
+## 2. Zentrale Formeln & Intuitionen
 
 - Bagging‑Ensemble (Vorhersage):
 	$$\hat{f}(x)=\frac{1}{M}\sum_{m=1}^{M} f_m(x)$$
@@ -20,13 +20,13 @@ Seite 2 — Zentrale Formeln & Intuitionen
 
 - Feature Importance (RF): mittlere Reduktion der Impurity; Permutation Importance als robustere Alternative.
 
-Seite 3 — Experiment (kurz): Aufbau & Ergebnisse
+## 3. Experiment: Aufbau & Ergebnisse
 
 - Datensatz: `sklearn.datasets.load_iris` (oder `load_breast_cancer` für binäre Klassifikation).
 - Vorgehen: Train/Test‑Split (70/30), RF und GB mit Standard‑Hyperparametern (z.B. 100 Bäume), Accuracy & Classification Report; zusätzlich Cross‑Validation (5‑fold).
 - Wichtige Visualisierungen: Feature importances (Barplot), Lernkurve (Training/Validation Accuracy vs. Trainingsgröße), Vergleichs‑Metriken (Accuracy, Precision, Recall, ggf. ROC/AUC für binär).
 
-Seite 4 — Praktische Hinweise & Empfehlungen
+## 4. Praktische Hinweise & Empfehlungen
 
 - Hyperparameter (Kurz):
 	- RF: `n_estimators`, `max_depth`, `max_features`.

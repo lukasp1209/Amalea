@@ -1,6 +1,6 @@
-# Thema 9: Ensemble Learning Methoden
+# Unit 09: Ensemble Learning Methoden
 
-Dieses Modul demonstriert die Leistungsfähigkeit von Ensemble-Methoden im Vergleich zu einzelnen Modellen. Es visualisiert, wie die Kombination mehrerer "schwacher" Lerner zu einem starken Prädiktor führt.
+Diese Vorlesungseinheit behandelt die Theorie und Praxis von Ensemble-Methoden. Sie erklärt, wie die Kombination mehrerer "schwacher" Lerner zu einem starken Prädiktor führt und visualisiert die Unterschiede zwischen Bagging, Boosting und Stacking.
 
 ## Enthaltene Konzepte
 

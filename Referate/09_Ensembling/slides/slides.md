@@ -1,4 +1,4 @@
-% Slides — Ensembling: Random Forests & Gradient Boosting
+% Vorlesung — Ensembling: Random Forests & Gradient Boosting
 
 Slide 1 — Titel
 - Titel, Name, Datum, Lernziele (3 Ziele: Intuition, Formeln, kurzes Demo‑Ergebnis)
