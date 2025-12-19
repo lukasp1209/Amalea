@@ -17,6 +17,28 @@
 >
 > **Kein "Spaghetti-Code" in Notebooks, sondern sauberes Software-Engineering für Daten.**
 
+## 🧭 Worum es geht (Kurzüberblick)
+
+AMALEA führt dich in 7 Wochen von Python-Grundlagen bis zum Deployment einer ML-API mit Dashboards. Das Repo ist in Wochen gegliedert:
+- **Notebooks**: Schritt-für-Schritt-Anleitungen mit Erklärungen, Übungen und Executed-Versionen, damit du sofort Ergebnisse siehst.
+- **Streamlit-Apps**: Interaktive Demos pro Woche, um Modelle, Visualisierungen und Workflows auszuprobieren.
+- **Backend & MLOps** (W07): Eine FastAPI-Demo mit MLflow-Integration und zwei Dashboards (Monitoring, NLP), plus Compose-Stack für lokalen Start.
+- **Requirements pro Woche**: Schlanke Installationen, damit du nur das lädst, was du brauchst (W01–W03 leicht, W04 MLOps, W05 DL, W06 CV/NLP, W07 Deployment).
+
+So nutzt du den Kurs:
+1) **Woche starten:** Lies das Kernnotebook der Woche (Executed-Version als Referenz), danach selbst ausführen und Übungen lösen.  
+2) **App ausprobieren:** Öffne die passende Streamlit-App für schnelles Experimentieren (Features schieben, Modelle testen).  
+3) **Variieren & dokumentieren:** Ändere Hyperparameter/Features, logge Ergebnisse (W04/W07 mit MLflow) und notiere Learnings in kurzen Markdown-Notizen.  
+4) **Deployment üben (W07):** Starte die FastAPI + Dashboards lokal oder via Compose, spiele den Demo/Live-Schalter durch und inspiziere Requests/Responses.  
+5) **Portfolio bauen:** Sammle Screenshots, kurze Beschreibungen und Metrikvergleiche; jedes Wochenziel ergibt einen Baustein für dein Portfolio.
+
+**Wie du lernen kannst**
+- Folge Woche für Woche; jede Woche hat ein klares Ziel, ein Kernnotebook und eine kleine App.
+- Starte mit den Executed-Notebooks, führe dann selbst aus und variiere Parameter.
+- Baue jede Woche mindestens einen kleinen "Try it" Task (siehe Notebook-Übungen) und dokumentiere dein Ergebnis kurz im Repo (Markdown).
+- Nutze Streamlit-Apps zum schnellen Experimentieren, bevor du Code ins Notebook überträgst.
+- Verwende `mlflow` (W04/W07) für Metrik-Vergleiche und halte Seed-Konfigurationen bei.
+
 ---
 
 ## 📋 Inhaltsverzeichnis
@@ -115,6 +137,11 @@ docker compose up -d jupyter-lab-slim streamlit-slim
 - Dev-Tools: `pip install -r requirements-dev.txt` (zieht W07-Stack + ruff/pytest/black).
 - Docker Compose (Full): nutzt `requirements-week06.txt` + `requirements-week07.txt` für `jupyter-lab`, `requirements-week07.txt` für `streamlit-dev` (Build-Args in `docker-compose.yml`).
 
+Docker Compose Builds:
+- Full Build (Standard, wie oben konfiguriert): `docker compose build jupyter-lab streamlit-dev` → lädt W06+W07 (DL/CV/NLP+Deployment) für Jupyter, W07 für Streamlit.
+- Service starten: `docker compose up jupyter-lab streamlit-dev`.
+- Weniger deps (z.B. nur W01–W03) → in `docker-compose.yml` die `build.args` der Services auf z.B. `requirements-week03.txt` setzen (und `EXTRA_REQS_FILE` leer lassen), dann `docker compose build ...` erneut ausführen.
+
 > Hinweis: `requirements.txt` zeigt auf den leichten W01–W03-Stack. Installiere nur, was du pro Woche brauchst, um Downloads klein zu halten.
 
 ---
@@ -153,7 +180,7 @@ amalea/
 
 ## 📚 Kursinhalte & Portfolio-Projekte
 
-Der Kurs ist in 7 Wochen gegliedert. **Stand 19.12.2025**: Wochen **01–07** sind production-ready mit überarbeiteten Inhalten, Backend, Dashboards und Executed-Notebooks.
+Der Kurs ist in 7 Wochen gegliedert; alle Inhalte sind production-ready mit Executed-Notebooks, Backend und Dashboards.
 
 | Woche | Thema |
 |-------|-------|
@@ -165,31 +192,23 @@ Der Kurs ist in 7 Wochen gegliedert. **Stand 19.12.2025**: Wochen **01–07** si
 | **06** | Computer Vision & NLP |
 | **07** | Deployment & Portfolio |
 
-### Aktueller Stand im Repo (Auszug; Wochen 01–07 production-ready)
+### Aktueller Stand im Repo (Auszug; production-ready)
 
 | Woche | Kern-Notebooks | Apps / Skripte | Status |
 |-------|----------------|----------------|--------|
 | 01 | `00_Python_in_3_Stunden.ipynb`, `01_Docker_für_Data_Science.ipynb`, `02_Glossar_Alle_Begriffe_erklärt.ipynb`, `03_QUA3CK_Prozessmodell.ipynb` | `01_Python_Grundlagen/uebungs_app.py`, `01_Python_Grundlagen/meine_erste_app.py`, `01_Python_Grundlagen/streamlit_komponenten.py` | ✅ Fertig |
 | 02 | `02_Streamlit_und_Pandas/01_Erste_Streamlit_App_fixed.ipynb` | `02_Streamlit_und_Pandas/example_app.py`, `02_Streamlit_und_Pandas/hello_streamlit.py`, `02_Streamlit_und_Pandas/streamlit_komponenten.py` | ✅ Fertig |
 | 03 | `03_Machine_Learning/02_ML_in_Streamlit_fixed.ipynb` | `03_Machine_Learning/iris_ml_app.py`, `03_Machine_Learning/housing_regression_app.py` | ✅ Fertig |
+| 04 | `04_Advanced_Algorithms/01_Ensembles.ipynb`, `04_Advanced_Algorithms/02_Unsupervised.ipynb` | `04_Advanced_Algorithms/streamlit_komponenten.py` | ✅ Fertig |
+| 05 | `05_Neural_Networks/01_Intro_to_DL.ipynb`, `05_Neural_Networks/02_Keras_Transfer.ipynb` | `05_Neural_Networks/streamlit_komponenten.py` | ✅ Fertig |
+| 06 | `06_01_neu_CNN_Basics`, `06_02_neu_OpenCV_Edge_Features`, `06_03_neu_Data_Augmentation_Practice`, `06_04_neu_Transfer_Learning_Lite`, `06_05_neu_Image_Sampler` | Runner: `run_cv_notebooks.sh` erzeugt Executed-Notebooks in `06_Computer_Vision_NLP/executed` | ✅ Fertig |
 | 07 | `07_Deployment_Portfolio/01_MLOps_und_Deployment.ipynb`, `02_NLP_und_Text_Generation.ipynb`, `03_QUA3CK_MLOps_Integration.ipynb` (ausgeführt unter `executed/`) | FastAPI-Demo-API (`backend/main.py`), Streamlit-Dashboards (`04_streamlit_mlops_dashboard.py`, `05_streamlit_nlp_dashboard.py`), Compose-Stack (`docker-compose.yml`) | ✅ Fertig |
 
-**Neu (Woche 06 – Computer Vision & NLP, CPU-freundlich):**
-- Fünf schlanke "neu"-Notebooks in `06_Computer_Vision_NLP`: `06_01_neu_CNN_Basics`, `06_02_neu_OpenCV_Edge_Features`, `06_03_neu_Data_Augmentation_Practice`, `06_04_neu_Transfer_Learning_Lite`, `06_05_neu_Image_Sampler`.
-- Fokus: klar geführte Didaktik, kleine Subsets, Seeds gesetzt. Läuft auf CPU in wenigen Minuten; GPU beschleunigt Trainingszellen.
-- Runner: `bash run_cv_notebooks.sh` (aus Repo-Root) erzeugt Executed-Notebooks unter `06_Computer_Vision_NLP/executed`.
-
-**Neu (Woche 07 – Deployment & Portfolio, CPU-freundlich):**
-- FastAPI-Demo-Backend (`backend/main.py`) mit `/health`, `/predict`, `/sentiment`, `/qa`, `/generate`; läuft auf CPU.
-- Zwei Streamlit-Dashboards mit Demo/Live-Schalter: `04_streamlit_mlops_dashboard.py` (Iris-Predict/Monitoring) und `05_streamlit_nlp_dashboard.py` (Gen/Sentiment/Q&A).
-- Drei kurze Notebooks mit "So nutzt du..."-Guides, Executed-Versionen unter `07_Deployment_Portfolio/executed/`.
-- Compose-Setup (`07_Deployment_Portfolio/docker-compose.yml`) und `requirements.cloud.txt` für lokalen Start oder Streamlit Cloud (API-URL via Sidebar/Secrets konfigurierbar).
-
-> ℹ️ Alle Wochen (01–07) sind production-ready; CV/NLP und Deployment laufen CPU-freundlich.
+> ℹ️ CV/NLP (W06) und Deployment (W07) laufen CPU-freundlich; GPU beschleunigt Trainingszellen in W06 optional.
 
 ### Portfolio-Apps (Beispiele)
 
-**Bereits lauffähig (Auszug, W01–W07):**
+**Auszug (W01–W07):**
 1.  **Python Fundamentals Dashboard** (`01_Python_Grundlagen/uebungs_app.py`)
 2.  **Streamlit Starter** (`01_Python_Grundlagen/meine_erste_app.py`)
 3.  **Streamlit Pandas Demo** (`02_Streamlit_und_Pandas/example_app.py`)
@@ -199,7 +218,7 @@ Der Kurs ist in 7 Wochen gegliedert. **Stand 19.12.2025**: Wochen **01–07** si
 7.  **MLOps Monitoring Dashboard** (`07_Deployment_Portfolio/04_streamlit_mlops_dashboard.py`)
 8.  **NLP Demo Dashboard** (`07_Deployment_Portfolio/05_streamlit_nlp_dashboard.py`)
 
-**Weitere Apps (W04–W07):** ML-, CV- und Deployment-Demos stehen in den jeweiligen Wochenordnern bereit.
+**Weitere Apps:** ML-, CV- und Deployment-Demos stehen in den jeweiligen Wochenordnern bereit.
 
 ---
 
