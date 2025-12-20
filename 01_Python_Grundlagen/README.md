@@ -63,10 +63,25 @@ Um die `.ipynb` Dateien interaktiv zu lernen:
 
 ```bash
 # 1. Abhängigkeiten installieren
-pip install -r 01_Python_Grundlagen/requirements.txt
+pip install -r requirements.txt
 
 # 2. Jupyter Lab starten
 jupyter lab
+
+# 3. Tests ausführen (optional)
+make test
+```
+
+### Option C: Makefile-Befehle verwenden 🛠️
+Für häufige Aufgaben stehen Makefile-Befehle zur Verfügung:
+
+```bash
+make help          # Zeige alle verfügbaren Befehle
+make install       # Abhängigkeiten installieren
+make run           # Übungs-App starten
+make test          # Tests ausführen
+make clean         # Temporäre Dateien aufräumen
+make docker-build  # Docker-Image bauen
 ```
 
 ---
@@ -81,4 +96,30 @@ jupyter lab
 
 ---
 
-**Viel Erfolg!** 🚀
+## 🧪 Qualitätssicherung
+
+### Code-Standards
+- Alle Python-Dateien folgen **PEP 8** Konventionen
+- Umfassende **Docstrings** für bessere Dokumentation
+- **Type Hints** wo sinnvoll (in zukünftigen Versionen)
+
+### Tests
+Führe die Unit-Tests aus:
+```bash
+make test
+# oder
+python -m pytest tests/
+```
+
+### Linting & Formatierung
+```bash
+# Installation (einmalig)
+pip install flake8 black isort
+
+# Code formatieren
+black *.py tests/
+isort *.py tests/
+
+# Linting
+flake8 *.py tests/
+```

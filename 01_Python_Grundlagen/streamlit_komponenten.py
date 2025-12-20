@@ -1,3 +1,9 @@
+"""
+Streamlit Komponenten-Übersicht
+
+Demonstriert verschiedene Streamlit-Komponenten und Layout-Optionen.
+"""
+
 # Weitere Streamlit-Beispiele (als Python-Datei speichern, z.B. streamlit_komponenten.py)
 
 import streamlit as st

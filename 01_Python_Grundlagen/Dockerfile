@@ -23,7 +23,8 @@ USER appuser
 # 6. Python-Dependencies installieren
 # Erst requirements kopieren (nutzt Docker Layer Caching wenn sich Code ändert aber reqs nicht)
 COPY --chown=appuser:appuser requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt && \
+    python -c "import streamlit; print('Streamlit version:', streamlit.__version__)"
 
 # 7. Code kopieren
 COPY --chown=appuser:appuser . .
@@ -32,5 +33,5 @@ COPY --chown=appuser:appuser . .
 EXPOSE 8501
 HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health || exit 1
 
-# 9. Start-Befehl
-CMD ["streamlit", "run", "uebungs_app.py", "--server.address", "0.0.0.0", "--server.port", "8501"]
+# 9. Start-Befehl (verwende python -m für bessere Kompatibilität)
+CMD ["python", "-m", "streamlit", "run", "uebungs_app.py", "--server.address", "0.0.0.0", "--server.port", "8501"]
