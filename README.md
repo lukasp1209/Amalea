@@ -16,7 +16,7 @@
 > 🚀 **Dein Ziel:**
 >
 > Von Python-Basics zu **Production-Grade ML-Systemen**.
-> In 7 Wochen baust du ein Portfolio aus **8 interaktiven Apps**, trainierst neuronale Netze und deployest alles in die Cloud.
+> In 7 Wochen baust du ein Portfolio aus **12 interaktiven Apps**, trainierst neuronale Netze und deployest alles in die Cloud.
 >
 > **Kein "Spaghetti-Code" in Notebooks, sondern sauberes Software-Engineering für Daten.**
 

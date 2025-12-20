@@ -11,11 +11,11 @@
 
 ### Überblick
 
-AMALEA 2025 ist ein vollständig modernisierter, praxisorientierter Notebook-basierter Kurs für "Data Analytics" & "Machine Learning", der speziell für Informatik-Studierende der IU ab dem 5. Semester konzipiert wurde. Der Kurs baut auf dem bewährten **"Angewandte Machine Learning Algorithmen"** Programm des KI-Campus auf und erweitert es um moderne Deployment-Strategien, interaktive Web-Anwendungen und industrierelevante MLOps-Kompetenzen. Der Kurs kombiniert theoretische Grundlagen mit intensiver praktischer Anwendung und bereitet Studierende auf die Anforderungen der modernen Datenwissenschaft vor. Durch die Entwicklung von 18+ interaktiven Jupyter Notebooks und 16+ produktionsreifen Streamlit-Anwendungen (alle Wochen 01–07 production-ready; W06/W07 CPU-freundlich) erwerben die Teilnehmer nicht nur technische Kompetenzen, sondern erstellen gleichzeitig ein beeindruckendes Portfolio für ihre berufliche Laufbahn.
+AMALEA 2025 ist ein vollständig modernisierter, praxisorientierter Notebook-basierter Kurs für "Data Analytics" & "Machine Learning", der speziell für Informatik-Studierende der IU ab dem 5. Semester konzipiert wurde. Der Kurs baut auf dem bewährten **"Angewandte Machine Learning Algorithmen"** Programm des KI-Campus auf und erweitert es um moderne Deployment-Strategien, interaktive Web-Anwendungen und industrierelevante MLOps-Kompetenzen. Der Kurs kombiniert theoretische Grundlagen mit intensiver praktischer Anwendung und bereitet Studierende auf die Anforderungen der modernen Datenwissenschaft vor. Durch die Entwicklung von **17 interaktiven Jupyter Notebooks** und **12 produktionsreifen Streamlit-Anwendungen** (alle Wochen 01–07 production-ready; W06/W07 CPU-freundlich) erwerben die Teilnehmer nicht nur technische Kompetenzen, sondern erstellen gleichzeitig ein beeindruckendes Portfolio für ihre berufliche Laufbahn.
 
 ### Pädagogisches Konzept
 
-Der Kurs folgt einem projektbasierten Lernansatz, bei dem jede Woche aufeinander aufbauende Kompetenzen vermittelt werden. Beginnend mit Python-Grundlagen und Datenmanipulation führt der Lernpfad systematisch zu fortgeschrittenen Machine Learning-Verfahren, Neural Networks und schließlich zu produktionsreifen Deployment-Strategien. Besonders innovativ ist die Integration von 22 originalen AMALEA-Videos aus dem Jahr 2021, die nahtlos in die modernisierten Notebooks eingebettet sind und bewährte theoretische Konzepte mit aktuellen praktischen Anwendungen verbinden.
+Der Kurs folgt einem projektbasierten Lernansatz, bei dem jede Woche aufeinander aufbauende Kompetenzen vermittelt werden. Beginnend mit Python-Grundlagen und Datenmanipulation führt der Lernpfad systematisch zu fortgeschrittenen Machine Learning-Verfahren, Neural Networks und schließlich zu produktionsreifen Deployment-Strategien. Jede Woche baut auf den vorherigen auf und liefert sofort einsatzbereite Portfolio-Komponenten.
 
 Ein zentrales Merkmal des Kurses ist die Betonung auf echte, industrierelevante Projekte. Anstatt theoretische Übungen zu absolvieren, entwickeln die Studierenden von Beginn an funktionsfähige Web-Anwendungen, die echte Daten verarbeiten und für reale Nutzer zugänglich sind. Dieser Ansatz bereitet optimal auf die Anforderungen moderner Arbeitsplätze vor, wo Data Scientists nicht nur Algorithmen verstehen, sondern auch komplette End-to-End-Lösungen entwickeln müssen.
 
@@ -39,7 +39,7 @@ Die fünfte Woche taucht tief in Neural Networks und Deep Learning ein, während
 
 ### Aktuelle Kursstruktur im Detail (2025)
 
-Der vollständig modernisierte Kurs umfasst **24 Portfolio-Komponenten** und ist in einem professionellen Repository mit modularer Struktur organisiert:
+Der vollständig modernisierte Kurs umfasst **29 Portfolio-Komponenten** und ist in einem professionellen Repository mit modularer Struktur organisiert:
 
 | Woche | Thema | Core Notebooks | Streamlit Apps | Fokus |
 |-------|-------|----------------|----------------|--------|
@@ -47,11 +47,11 @@ Der vollständig modernisierte Kurs umfasst **24 Portfolio-Komponenten** und ist
 | **02** | Streamlit & Pandas | 1 | 3 | Interactive Web Development |
 | **03** | Machine Learning | 1 | 2 | ML Pipeline Development |
 | **04** | Advanced Algorithms | 2 | 1 | Ensembles & Unsupervised, MLflow/DVC Intro |
-| **05** | Neural Networks | 2+ | 1 | Keras Basics & Transfer Learning Lite |
-| **06** | Computer Vision & NLP | 5+ | 4+ | CV/NLP Fundamentals + Augmentation/Transfer |
+| **05** | Neural Networks | 1 | 1 | Keras Basics & Transfer Learning Lite |
+| **06** | Computer Vision & NLP | 5 | 0 | CV/NLP Fundamentals + Augmentation/Transfer |
 | **07** | Deployment & Portfolio | 3 | 2 | FastAPI + Monitoring Dashboards (HF-Pipelines) |
 
-**Gesamt: 18+ Core Notebooks + 16+ Streamlit Apps = 34+ Portfolio-Komponenten**
+**Gesamt: 17 Core Notebooks + 12 Streamlit Apps = 29 Portfolio-Komponenten**
 
 **Zusätzliche Ressourcen:**
 - **Executed Notebooks** (`executed_notebooks/`): Sofort einsatzbereite, ausführbare Versionen aller wichtigen Notebooks
@@ -101,7 +101,7 @@ Für Business-Anwendungen stehen APIs wie Yahoo Finance für Finanzdaten, World 
 
 ### Portfolio-Entwicklung und Karrierevorbereitung
 
-Ein zentrales Ziel des Kurses ist die Entwicklung eines beeindruckenden Portfolios, das die Studierenden direkt in Bewerbungsgesprächen einsetzen können. Die 34+ Portfolio-Komponenten (18+ Notebooks + 16+ Streamlit Apps) demonstrieren nicht nur technische Kompetenz, sondern zeigen auch die Fähigkeit, komplexe Probleme vollständig zu lösen und benutzerfreundliche Interfaces zu entwickeln.
+Ein zentrales Ziel des Kurses ist die Entwicklung eines beeindruckenden Portfolios, das die Studierenden direkt in Bewerbungsgesprächen einsetzen können. Die **29 Portfolio-Komponenten** (17 Notebooks + 12 Streamlit Apps) demonstrieren nicht nur technische Kompetenz, sondern zeigen auch die Fähigkeit, komplexe Probleme vollständig zu lösen und benutzerfreundliche Interfaces zu entwickeln.
 
 Alle entwickelten Anwendungen sind produktionsreif und öffentlich zugänglich, was sie von typischen Studienarbeiten unterscheidet. Arbeitgeber können die Live-Apps direkt testen und sich von den praktischen Fähigkeiten der Bewerber überzeugen. Zusätzlich bieten die Executed Notebooks in `executed_notebooks/` sofort einsatzbereite Referenzimplementierungen, während die Vorlesungseinheiten in `Vorlesungseinheiten/` theoretische Konzepte vertiefen.
 
@@ -117,7 +117,7 @@ Für Studierende, die lokale Installationen bevorzugen, ist eine detaillierte An
 
 ### Integration originaler AMALEA-Inhalte
 
-Ein besonderer Wert wird auf die Kontinuität zu den bewährten originalen AMALEA-Inhalten gelegt. Alle 22 Videos aus dem Jahr 2021 sind strategisch in die modernisierten Notebooks integriert und bieten solide theoretische Grundlagen, die durch aktuelle praktische Anwendungen ergänzt werden. Diese Kombination gewährleistet, dass bewährte pädagogische Konzepte erhalten bleiben, während gleichzeitig modernste Technologien und Methoden vermittelt werden.
+Der Kurs baut auf dem bewährten **"Angewandte Machine Learning Algorithmen"** Programm des KI-Campus auf und integriert die pädagogischen Konzepte in moderne, praktische Anwendungen. Die bewährten methodischen Ansätze werden beibehalten, während gleichzeitig modernste Technologien und Deployment-Strategien vermittelt werden.
 
 ### Zukunftsorientierung und Industrie-Relevanz
 
@@ -127,4 +127,4 @@ Der Kurs bereitet auch optimal auf weiterführende Studien vor, insbesondere fü
 
 ---
 
-*AMALEA 2025 verbindet bewährte pädagogische Konzepte mit modernster Technologie und bereitet eine neue Generation von Data Scientists vor, die nicht nur Algorithmen verstehen, sondern komplette, produktionsreife Lösungen entwickeln können, die echten Impact in der digitalen Wirtschaft erzielen. Mit 34+ Portfolio-Komponenten (18+ Notebooks + 16+ Apps), modularer Repository-Struktur und professionellen Entwicklungstools ist der Kurs optimal für moderne Data Science Karrieren ausgerichtet.*
+*AMALEA 2025 verbindet bewährte pädagogische Konzepte mit modernster Technologie und bereitet eine neue Generation von Data Scientists vor, die nicht nur Algorithmen verstehen, sondern komplette, produktionsreife Lösungen entwickeln können, die echten Impact in der digitalen Wirtschaft erzielen. Mit **29 Portfolio-Komponenten** (17 Notebooks + 12 Apps), modularer Repository-Struktur und professionellen Entwicklungstools ist der Kurs optimal für moderne Data Science Karrieren ausgerichtet.*
