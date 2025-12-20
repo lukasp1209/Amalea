@@ -8,7 +8,7 @@ UNITS = [
     "04_Regularisierung",
     "05_Optimierung",
     "06_CNN_Basics",
-    "07_Attention_Transformer",
+    "07_Attention",
     "08_Bias_Variance",
     "09_Ensembling",
 ]

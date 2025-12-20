@@ -18,7 +18,7 @@ Dieser Ordner enthält detaillierte Lehrmaterialien, Skripte und interaktive Lab
 
 ### Deep Learning Architekturen
 *   **[Unit 06: CNN Basics](06_CNN_Basics/)** - Computer Vision: Convolution, Filter und Pooling.
-*   **[Unit 07: Attention & Transformer](07_Attention_Transformer/)** - NLP: Der Mechanismus hinter ChatGPT & Co.
+*   **[Unit 07: Attention & Transformer](07_Attention/)** - NLP: Der Mechanismus hinter ChatGPT & Co.
 
 ## Nutzung
 

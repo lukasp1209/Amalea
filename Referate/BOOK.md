@@ -1,4 +1,5 @@
 ---
+
 # Deep Learning Lecture Notes
 
 ### Zusammenfassung der Vorlesungseinheiten
@@ -418,6 +419,12 @@ Dieses Skript begleitet die Vorlesungseinheit "Ensembling". Es vertieft die math
 - Gradient Boosting (Update‑Skizze):
 	$$F_{0}(x)=\arg\min_{\gamma}\sum_i L(y_i,\gamma),\\
 	F_{t+1}(x)=F_t(x)+\eta\,h_t(x)$$
+	$$
+	\begin{aligned}
+	F_{0}(x) &= \arg\min_{\gamma}\sum_i L(y_i,\gamma), \\
+	F_{t+1}(x) &= F_t(x)+\eta\,h_t(x)
+	\end{aligned}
+	$$
 	wobei $h_t$ auf den negativen Gradienten (Residuen) approximiert wird und $\eta$ die Lernrate ist.
 
 - Feature Importance (RF): mittlere Reduktion der Impurity; Permutation Importance als robustere Alternative.
