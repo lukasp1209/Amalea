@@ -45,7 +45,7 @@ def main():
         if content:
             print(f"  + Füge hinzu: {unit} ({fname})")
             # Seitenumbruch für PDF-Generierung (Pandoc)
-            full_content.append(f"\n\n\\newpage\n\n")
+            full_content.append(f"\n\n<div style=\"page-break-after: always;\"></div>\n\n")
             full_content.append(content)
         else:
             print(f"  ! WARNUNG: Kein Skript gefunden für {unit}")

@@ -1,4 +1,9 @@
-#  Deep Learning Lecture Notes
+% Deep Learning Lecture Notes
+% Zusammenfassung der Vorlesungseinheiten
+% Stand: Heute
+
+
+<div style="page-break-after: always;"></div>
 
 # Vorlesungsskript: Lineare Regression & MSE
 
@@ -59,7 +64,7 @@ Das ist der Standard für Deep Learning.
 2.  Implementieren Sie eine Funktion `calculate_mae` (Mean Absolute Error) und vergleichen Sie.
 
 
-\newpage
+<div style="page-break-after: always;"></div>
 
 # Vorlesungsskript: Logistische Regression
 
@@ -123,7 +128,7 @@ Betrachten wir einen einzelnen Fall:
     *   Modell C: [0.1, 0.9, 0.1] (Falsch und sicher -> Katastrophe)
 
 
-\newpage
+<div style="page-break-after: always;"></div>
 
 # Vorlesungsskript: Softmax & Multiclass Classification
 
@@ -181,7 +186,7 @@ Wir wählen $C = \max(z)$. Damit ist der größte Exponent im Vektor genau 0 ($e
 3.  Beobachten Sie, wie sich der Loss ändert, wenn das Modell "unsicherer" wird.
 
 
-\newpage
+<div style="page-break-after: always;"></div>
 
 # Vorlesungsskript: Optimierung
 
@@ -229,7 +234,7 @@ Wir simulieren eine einfache 2D-Funktion $f(x, y) = x^2 + 10y^2$. Das ist ein en
 *   Beobachten Sie, wie "Momentum" direkt zur Mitte steuert.
 
 
-\newpage
+<div style="page-break-after: always;"></div>
 
 # Vorlesungsskript: CNN Basics
 
@@ -279,7 +284,7 @@ Typischer Aufbau (wie Lego):
 8.  Output (Softmax)
 
 
-\newpage
+<div style="page-break-after: always;"></div>
 
 # Vorlesungsskript: Attention & Transformer
 
@@ -328,7 +333,7 @@ Wir simulieren Self-Attention mit NumPy:
 3.  Wir visualisieren, welches Wort auf welches andere "achtet".
 
 
-\newpage
+<div style="page-break-after: always;"></div>
 
 # Vorlesungsskript: Bias-Variance Tradeoff
 
@@ -389,7 +394,7 @@ Wir führen ein Experiment durch:
 4.  Wir visualisieren: Das einfache Modell ist immer ähnlich falsch (Bias). Das komplexe Modell zappelt wild umher (Variance).
 
 
-\newpage
+<div style="page-break-after: always;"></div>
 
 # Vorlesungsskript — Ensembling: Random Forests & Gradient Boosting
 
