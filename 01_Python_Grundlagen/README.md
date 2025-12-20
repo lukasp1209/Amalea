@@ -39,7 +39,7 @@ Arbeite die Inhalte in dieser Reihenfolge durch:
   - *Was:* Deine erste Streamlit-App (Dashboard).
   - *Aufgabe:* Starte sie und passe sie an!
 
-> 📚 **Cheat-Sheet:** Nutze `02_Glossar_Alle_Begriffe_erklärt.ipynb` als dein ständiges Nachschlagewerk für Fachbegriffe.
+> 📚 **Cheat-Sheet:** Nutze `../Glossar_Alle_Begriffe_erklärt.ipynb` als dein ständiges Nachschlagewerk für Fachbegriffe.
 
 ---
 

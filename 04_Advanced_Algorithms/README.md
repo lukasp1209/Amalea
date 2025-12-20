@@ -10,7 +10,7 @@
 > - Du sammelst praktische Erfahrung mit Tools, die in der Data-Science-Praxis Standard sind.
 > - Du kannst eigene ML-Apps bauen und erklären – ein echter Pluspunkt für Bewerbungen.
 
-> 📚 **Glossar-Tipp:** Unklare Begriffe? Schau ins [Glossar](../01_Python_Grundlagen/02_Glossar_Alle_Begriffe_erklärt.ipynb) – dort findest du alle wichtigen Erklärungen!
+> 📚 **Glossar-Tipp:** Unklare Begriffe? Schau ins [Glossar](../../Glossar_Alle_Begriffe_erklärt.ipynb) – dort findest du alle wichtigen Erklärungen!
 
 ## 📚 Inhalt
 

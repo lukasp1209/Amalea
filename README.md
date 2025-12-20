@@ -273,7 +273,7 @@ amalea/
 ├── 📄 README.md                       # Diese Datei
 ├── 📄 DEVELOPER_GUIDE.md              # Entwicklungsrichtlinien
 ├── 📄 KURSBESCHREIBUNG.md             # Kurs-Details
-├── 📄 02_Glossar_Alle_Begriffe_erklärt.ipynb # Fachbegriffe erklärt
+├── 📄 Glossar_Alle_Begriffe_erklärt.ipynb # Fachbegriffe erklärt
 ├── 📄 ML_DL_Mathematik.ipynb          # Mathematische Grundlagen
 └── 📄 LICENSE.md                      # Lizenz-Informationen
 ```
@@ -298,7 +298,7 @@ Der Kurs ist in 7 Wochen gegliedert; alle Inhalte sind production-ready mit Exec
 
 | Woche | Kern-Notebooks | Apps / Skripte | Status |
 |-------|----------------|----------------|--------|
-| 01 | `00_Python_in_3_Stunden.ipynb`, `01_Docker_für_Data_Science.ipynb`, `02_Glossar_Alle_Begriffe_erklärt.ipynb`, `03_QUA3CK_Prozessmodell.ipynb` | `01_Python_Grundlagen/uebungs_app.py`, `01_Python_Grundlagen/meine_erste_app.py`, `01_Python_Grundlagen/streamlit_komponenten.py` | ✅ Fertig |
+| 01 | `00_Python_in_3_Stunden.ipynb`, `01_Docker_für_Data_Science.ipynb`, `Glossar_Alle_Begriffe_erklärt.ipynb`, `03_QUA3CK_Prozessmodell.ipynb` | `01_Python_Grundlagen/uebungs_app.py`, `01_Python_Grundlagen/meine_erste_app.py`, `01_Python_Grundlagen/streamlit_komponenten.py` | ✅ Fertig |
 | 02 | `02_Streamlit_und_Pandas/01_Erste_Streamlit_App_fixed.ipynb` | `02_Streamlit_und_Pandas/example_app.py`, `02_Streamlit_und_Pandas/hello_streamlit.py`, `02_Streamlit_und_Pandas/streamlit_komponenten.py` | ✅ Fertig |
 | 03 | `03_Machine_Learning/02_ML_in_Streamlit_fixed.ipynb` | `03_Machine_Learning/iris_ml_app.py`, `03_Machine_Learning/housing_regression_app.py` | ✅ Fertig |
 | 04 | `04_Advanced_Algorithms/02_MLFlow_Big3_Tracking.ipynb`, `04_Advanced_Algorithms/03_Bäume_Nachbarn_und_Clustering.ipynb` | `04_Advanced_Algorithms/streamlit_komponenten.py` | ✅ Fertig |
@@ -348,6 +348,6 @@ Der Kurs ist in 7 Wochen gegliedert; alle Inhalte sind production-ready mit Exec
 - Bei technischen Problemen: Issues im Repository erstellen
 
 ### Zusätzliche Ressourcen
-- 📊 **Glossar**: `02_Glossar_Alle_Begriffe_erklärt.ipynb` - Alle Fachbegriffe erklärt
+- 📊 **Glossar**: `Glossar_Alle_Begriffe_erklärt.ipynb` - Alle Fachbegriffe erklärt
 - 🔢 **Mathematik**: `ML_DL_Mathematik.ipynb` - Mathematische Grundlagen für ML/DL
 - 📁 **Datasets**: Kurs-Datensätze in `datasets/` für praktische Übungen
