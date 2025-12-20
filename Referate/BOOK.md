@@ -1,9 +1,4 @@
-% Deep Learning Lecture Notes
-% Zusammenfassung der Vorlesungseinheiten
-% Stand: Heute
-
-
-\newpage
+#  Deep Learning Lecture Notes
 
 # Vorlesungsskript: Lineare Regression & MSE
 
