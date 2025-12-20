@@ -19,7 +19,7 @@ Ein neuronales Netz ist nur so gut wie sein Trainingsalgorithmus. In dieser Einh
 ## Start der Demo
 
 ```bash
-cd Referate/05_Optimierung
+cd Vorlesungseinheiten/05_Optimierung
 pip install -r requirements.txt
 # python code/lab.py
 ```

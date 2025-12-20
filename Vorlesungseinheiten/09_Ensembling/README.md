@@ -22,7 +22,7 @@ Diese Vorlesungseinheit behandelt die Theorie und Praxis von Ensemble-Methoden. 
 
 ```bash
 # In diesen Ordner wechseln
-cd Referate/09_Ensembling
+cd Vorlesungseinheiten/09_Ensembling
 
 # Abhängigkeiten installieren
 pip install -r requirements.txt

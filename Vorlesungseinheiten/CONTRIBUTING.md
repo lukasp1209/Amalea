@@ -38,7 +38,7 @@ Bevor du einen PR einreichst, prüfe bitte:
 Wir haben eine kleine Test-Suite, um sicherzustellen, dass die Kern-Algorithmen (Softmax, Gradienten etc.) korrekt sind.
 
 ```bash
-# Im Hauptverzeichnis (Referate/)
+# Im Hauptverzeichnis (Vorlesungseinheiten/)
 python -m unittest tests/test_labs.py
 ```
 

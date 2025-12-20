@@ -21,7 +21,7 @@ Nachdem wir gelernt haben, Zahlen vorherzusagen (Regression), wollen wir nun Ent
 Visualisieren Sie die "S-Kurve" und versuchen Sie, Datenpunkte (Bestanden/Durchgefallen) manuell zu trennen.
 
 ```bash
-cd Referate/02_Logistische_Regression
+cd Vorlesungseinheiten/02_Logistische_Regression
 pip install -r requirements.txt
 streamlit run app.py
 ```

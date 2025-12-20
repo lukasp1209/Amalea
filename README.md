@@ -261,7 +261,7 @@ amalea/
 ├── 📂 07_Deployment_Portfolio/        # Production Deployment & APIs
 ├── 📂 executed_notebooks/             # Ausgeführte Notebook-Versionen
 ├── 📂 datasets/                       # Kurs-Datensätze
-├── 📂 Referate/                       # Studentische Präsentationen
+├── 📂 Vorlesungseinheiten/              # Vertiefende Vorlesungseinheiten
 ├── 📂 tests/                          # Test-Suite
 ├── 📂 BACKUP_Original_AMALEA_Notebooks/ # Backup der Originale
 ├── 🐳 docker-compose.yml              # Multi-Service Setup
@@ -344,7 +344,7 @@ Der Kurs ist in 7 Wochen gegliedert; alle Inhalte sind production-ready mit Exec
 
 ### Kurs-Forum & Community
 - Nutze das Kurs-Forum für fachliche Fragen
-- Teile deine Lösungen in `Referate/` für andere Lernende
+- Teile deine Lösungen in `Vorlesungseinheiten/` für andere Lernende
 - Bei technischen Problemen: Issues im Repository erstellen
 
 ### Zusätzliche Ressourcen

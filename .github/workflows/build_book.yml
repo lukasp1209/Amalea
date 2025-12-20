@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - 'Referate/**'
+      - 'Vorlesungseinheiten/**'
   workflow_dispatch:
 
 jobs:
@@ -24,15 +24,15 @@ jobs:
           sudo apt-get install -y pandoc texlive-xetex texlive-fonts-recommended texlive-latex-extra
           
       - name: Generate BOOK.md
-        run: python Referate/build_book.py
+        run: python Vorlesungseinheiten/build_book.py
         
       - name: Convert to PDF
         run: |
-          cd Referate
+          cd Vorlesungseinheiten
           pandoc BOOK.md -o Deep_Learning_Lecture_Notes.pdf --toc --pdf-engine=xelatex -V geometry:margin=2cm
           
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Deep_Learning_Lecture_Notes
-          path: Referate/Deep_Learning_Lecture_Notes.pdf
+          path: Vorlesungseinheiten/Deep_Learning_Lecture_Notes.pdf

@@ -20,7 +20,7 @@ Wenn wir Bilder in ein normales neuronales Netz (Dense Layer) füttern, zerstör
 ## Start der Demo
 
 ```bash
-cd Referate/06_CNN_Basics
+cd Vorlesungseinheiten/06_CNN_Basics
 pip install -r requirements.txt
 # python code/lab.py
 ```

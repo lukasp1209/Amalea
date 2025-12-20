@@ -21,7 +21,7 @@ Diese Einheit bildet das Fundament des maschinellen Lernens. Wir betrachten das 
 Die App erlaubt es, **manuell** eine Regressionsgerade durch eine Punktwolke zu legen und live zu sehen, wie sich der MSE verändert.
 
 ```bash
-cd Referate/01_Lineare_Regression_MSE
+cd Vorlesungseinheiten/01_Lineare_Regression_MSE
 pip install -r requirements.txt
 streamlit run app.py
 ```

@@ -22,7 +22,7 @@ Warum ist ein "perfektes" Modell auf Trainingsdaten oft nutzlos? In dieser Einhe
 ## Start der Demo
 
 ```bash
-cd Referate/08_Bias_Variance
+cd Vorlesungseinheiten/08_Bias_Variance
 pip install -r requirements.txt
 # python code/lab.py
 ```

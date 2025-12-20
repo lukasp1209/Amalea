@@ -20,7 +20,7 @@ Bisher konnten wir nur Ja/Nein entscheiden (Logistische Regression). Was aber, w
 ## Start der Demo (Optional)
 
 ```bash
-cd Referate/03_Softmax_Multiclass
+cd Vorlesungseinheiten/03_Softmax_Multiclass
 pip install -r requirements.txt
 # python code/lab.py  <-- Führt das Lab-Skript aus
 ```

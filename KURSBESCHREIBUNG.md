@@ -11,7 +11,7 @@
 
 ### Überblick
 
-AMALEA 2025 ist ein vollständig modernisierter, praxisorientierter Kurs für Data Analytics & Big Data, der speziell für Informatik-Studierende der IU im 5. Semester konzipiert wurde. Der Kurs baut auf dem bewährten **"Angewandte Machine Learning Algorithmen"** Programm des KI-Campus auf und erweitert es um moderne Deployment-Strategien, interaktive Web-Anwendungen und industrierelevante MLOps-Kompetenzen. Der Kurs kombiniert theoretische Grundlagen mit intensiver praktischer Anwendung und bereitet Studierende auf die Anforderungen der modernen Datenwissenschaft vor. Durch die Entwicklung von 16 interaktiven Jupyter Notebooks und 8 produktionsreifen Streamlit-Anwendungen (alle Wochen 01–07 production-ready; W06/W07 CPU-freundlich) erwerben die Teilnehmer nicht nur technische Kompetenzen, sondern erstellen gleichzeitig ein beeindruckendes Portfolio für ihre berufliche Laufbahn.
+AMALEA 2025 ist ein vollständig modernisierter, praxisorientierter Kurs für Data Analytics & Big Data, der speziell für Informatik-Studierende der IU im 5. Semester konzipiert wurde. Der Kurs baut auf dem bewährten **"Angewandte Machine Learning Algorithmen"** Programm des KI-Campus auf und erweitert es um moderne Deployment-Strategien, interaktive Web-Anwendungen und industrierelevante MLOps-Kompetenzen. Der Kurs kombiniert theoretische Grundlagen mit intensiver praktischer Anwendung und bereitet Studierende auf die Anforderungen der modernen Datenwissenschaft vor. Durch die Entwicklung von 18+ interaktiven Jupyter Notebooks und 16+ produktionsreifen Streamlit-Anwendungen (alle Wochen 01–07 production-ready; W06/W07 CPU-freundlich) erwerben die Teilnehmer nicht nur technische Kompetenzen, sondern erstellen gleichzeitig ein beeindruckendes Portfolio für ihre berufliche Laufbahn.
 
 ### Pädagogisches Konzept
 
@@ -35,21 +35,30 @@ Das absolute Highlight des Kurses ist die vierte Woche mit dem "Big 3" Notebook,
 
 Die fünfte Woche taucht tief in Neural Networks und Deep Learning ein, während die sechste Woche Computer Vision und Natural Language Processing mit vier spezialisierten Notebooks (Runner: `run_cv_notebooks.sh`, Executed-Notebooks inklusive) und vier begleitenden Streamlit-Anwendungen/Dashboards behandelt. Die finale siebte Woche konzentriert sich auf Deployment, MLOps und Portfolio-Entwicklung mit FastAPI-Demo (NLP-Endpunkte via leichte HF-Pipelines für Sentiment/QA/Generate), zwei produktionsreifen Streamlit-Dashboards und drei kompakten Notebooks; die Studierenden üben API-Handling, Monitoring und Deployment.
 
+**Repository-Organisation:** Alle Kursmaterialien sind systematisch strukturiert mit wochenspezifischen Ordnern (01_Python_Grundlagen/ bis 07_Deployment_Portfolio/). Executed Notebooks in `executed_notebooks/` bieten sofort einsatzbereite Referenzimplementierungen, während `datasets/` alle notwendigen Datensätze für praktische Übungen enthält. Vorlesungseinheiten in `Vorlesungseinheiten/` vertiefen theoretische Konzepte, und `tests/` gewährleistet Code-Qualität durch umfassende Test-Suiten.
+
 ### Aktuelle Kursstruktur im Detail (2025)
 
-Der vollständig modernisierte Kurs umfasst **24 Portfolio-Komponenten**:
+Der vollständig modernisierte Kurs umfasst **24 Portfolio-Komponenten** und ist in einem professionellen Repository mit modularer Struktur organisiert:
 
 | Woche | Thema | Core Notebooks | Streamlit Apps | Fokus |
 |-------|-------|----------------|----------------|--------|
-| **01** | Python Grundlagen | 4 | 0 | Foundation + QUA³CK Framework |
-| **02** | Streamlit & Pandas | 1 | 1 | Interactive Web Development |
-| **03** | Machine Learning | 1 | 0 | ML Pipeline Development |
-| **04** | Advanced Algorithms | 2 | 0 | Ensembles & Unsupervised, MLflow/DVC Intro |
-| **05** | Neural Networks | 1 | 1 | Keras Basics & Transfer Learning Lite |
-| **06** | Computer Vision & NLP | 4 | 4 | CV/NLP Fundamentals + Augmentation/Transfer |
+| **01** | Python Grundlagen | 4 | 3 | Foundation + QUA³CK Framework + Docker |
+| **02** | Streamlit & Pandas | 1 | 3 | Interactive Web Development |
+| **03** | Machine Learning | 1 | 2 | ML Pipeline Development |
+| **04** | Advanced Algorithms | 2 | 1 | Ensembles & Unsupervised, MLflow/DVC Intro |
+| **05** | Neural Networks | 2+ | 1 | Keras Basics & Transfer Learning Lite |
+| **06** | Computer Vision & NLP | 5+ | 4+ | CV/NLP Fundamentals + Augmentation/Transfer |
 | **07** | Deployment & Portfolio | 3 | 2 | FastAPI + Monitoring Dashboards (HF-Pipelines) |
 
-**Gesamt: 16 Core Notebooks + 8 Streamlit Apps = 24 Portfolio-Komponenten**
+**Gesamt: 18+ Core Notebooks + 16+ Streamlit Apps = 34+ Portfolio-Komponenten**
+
+**Zusätzliche Ressourcen:**
+- **Executed Notebooks** (`executed_notebooks/`): Sofort einsatzbereite, ausführbare Versionen aller wichtigen Notebooks
+- **Datasets** (`datasets/`): Alle Kurs-Datensätze für praktische Übungen
+- **Vorlesungseinheiten** (`Vorlesungseinheiten/`): Vertiefende Vorlesungseinheiten zu theoretischen Konzepten
+- **Tests** (`tests/`): Umfassende Test-Suite für Qualitätssicherung
+- **Backup** (`BACKUP_Original_AMALEA_Notebooks/`): Original-Versionen für Vergleich
 
 ### QUA³CK Framework Integration
 
@@ -65,9 +74,9 @@ Alle Projekte folgen dem systematischen **QUA³CK Prozessmodell**:
 
 Der Kurs setzt konsequent auf moderne, industrierelevante Technologien. Python 3.11+ bildet das Fundament, ergänzt durch leistungsfähige Bibliotheken wie Pandas, NumPy und Scikit-learn für klassisches Machine Learning. Für Deep Learning kommen TensorFlow und Keras zum Einsatz, während Hugging Face Transformers den Zugang zu modernsten NLP-Modellen ermöglicht. Dependencies sind pro Woche getrennt (Week-Requirements + Lockfiles), damit Installationen schlank und reproduzierbar bleiben: leichter Stack (W01–W03), MLOps (W04), Deep Learning (W05), CV/NLP (W06), Deployment (W07).
 
-Ein besonderer Fokus liegt auf Streamlit als Framework für die Entwicklung interaktiver Web-Anwendungen. Diese Technologie ermöglicht es Data Scientists, ihre Analysen ohne umfangreiche Web-Entwicklungskenntnisse in benutzerfreundliche Interfaces zu verwandeln. Docker containerisiert die gesamte Entwicklungsumgebung und gewährleistet Konsistenz und Reproduzierbarkeit across verschiedene Systeme.
+Ein besonderer Fokus liegt auf Streamlit als Framework für die Entwicklung interaktiver Web-Anwendungen. Diese Technologie ermöglicht es Data Scientists, ihre Analysen ohne umfangreiche Web-Entwicklungskenntnisse in benutzerfreundliche Interfaces zu verwandeln. Docker containerisiert die gesamte Entwicklungsumgebung und gewährleistet Konsistenz und Reproduzierbarkeit across verschiedene Systeme. Mehrere Dockerfile-Varianten (jupyter, streamlit, slim/full) bieten Flexibilität für verschiedene Use-Cases.
 
-Für das Experiment Tracking und MLOps kommt MLflow zum Einsatz, während Git und GitHub für Versionskontrolle und Collaboration sorgen. Die Visualisierung erfolgt mit modernen Bibliotheken wie Plotly und Matplotlib, die interaktive und publikationsreife Grafiken ermöglichen.
+Für das Experiment Tracking und MLOps kommt MLflow zum Einsatz, während Git und GitHub für Versionskontrolle und Collaboration sorgen. Die Visualisierung erfolgt mit modernen Bibliotheken wie Plotly und Matplotlib, die interaktive und publikationsreife Grafiken ermöglichen. Qualitätssicherung erfolgt durch pytest für Unit-Tests, ruff und black für Code-Qualität und -Formatierung, und ein umfassendes Makefile für automatisierte Workflows.
 
 ### ML/DL-Algorithmen und Demos pro Woche (Auswahl)
 
@@ -92,15 +101,19 @@ Für Business-Anwendungen stehen APIs wie Yahoo Finance für Finanzdaten, World 
 
 ### Portfolio-Entwicklung und Karrierevorbereitung
 
-Ein zentrales Ziel des Kurses ist die Entwicklung eines beeindruckenden Portfolios, das die Studierenden direkt in Bewerbungsgesprächen einsetzen können. Die 24 Portfolio-Komponenten (16 Notebooks + 8 Streamlit Apps) demonstrieren nicht nur technische Kompetenz, sondern zeigen auch die Fähigkeit, komplexe Probleme vollständig zu lösen und benutzerfreundliche Interfaces zu entwickeln.
+Ein zentrales Ziel des Kurses ist die Entwicklung eines beeindruckenden Portfolios, das die Studierenden direkt in Bewerbungsgesprächen einsetzen können. Die 34+ Portfolio-Komponenten (18+ Notebooks + 16+ Streamlit Apps) demonstrieren nicht nur technische Kompetenz, sondern zeigen auch die Fähigkeit, komplexe Probleme vollständig zu lösen und benutzerfreundliche Interfaces zu entwickeln.
 
-Alle entwickelten Anwendungen sind produktionsreif und öffentlich zugänglich, was sie von typischen Studienarbeiten unterscheidet. Arbeitgeber können die Live-Apps direkt testen und sich von den praktischen Fähigkeiten der Bewerber überzeugen. Diese Herangehensweise bereitet optimal auf moderne Data Science Rollen vor, wo die Fähigkeit zur Kommunikation und Präsentation von Ergebnissen genauso wichtig ist wie die technische Umsetzung.
+Alle entwickelten Anwendungen sind produktionsreif und öffentlich zugänglich, was sie von typischen Studienarbeiten unterscheidet. Arbeitgeber können die Live-Apps direkt testen und sich von den praktischen Fähigkeiten der Bewerber überzeugen. Zusätzlich bieten die Executed Notebooks in `executed_notebooks/` sofort einsatzbereite Referenzimplementierungen, während die Vorlesungseinheiten in `Vorlesungseinheiten/` theoretische Konzepte vertiefen.
+
+Diese Herangehensweise bereitet optimal auf moderne Data Science Rollen vor, wo die Fähigkeit zur Kommunikation und Präsentation von Ergebnissen genauso wichtig ist wie die technische Umsetzung. Die modulare Repository-Struktur mit professionellen Entwicklungstools (pytest, ruff, Makefile) vermittelt zudem Industriestandards für Code-Qualität und Projektmanagement.
 
 ### Technische Infrastruktur und Support
 
-Die gesamte Kursinfrastruktur ist dockerisiert und ermöglicht eine einheitliche Entwicklungsumgebung für alle Teilnehmer. Mit einem einzigen `docker-compose up` Kommando wird eine vollständige Data Science Workbench gestartet, die Jupyter Notebooks (Port 8888), Streamlit-Entwicklung (Port 8501) und MLflow für Experiment Tracking (Port 5001) umfasst.
+Die gesamte Kursinfrastruktur ist vollständig dockerisiert und ermöglicht eine einheitliche Entwicklungsumgebung für alle Teilnehmer. Mit einem einzigen `docker-compose up` Kommando wird eine vollständige Data Science Workbench gestartet, die Jupyter Notebooks (Port 8888), Streamlit-Entwicklung (Port 8501) und MLflow für Experiment Tracking (Port 5001) umfasst. Zusätzlich stehen Slim-Varianten für ressourcenschonende Entwicklung zur Verfügung.
 
-Für Studierende, die lokale Installationen bevorzugen, ist eine detaillierte Anleitung mit allen erforderlichen Dependencies verfügbar. Ein umfassendes Troubleshooting-Kapitel behandelt häufige Probleme und deren Lösungen, während zusätzliche Ressourcen und Links zu offizieller Dokumentation bei der Vertiefung spezifischer Themen helfen.
+Das Repository ist modular strukturiert mit wochenspezifischen Requirements-Dateien für effiziente Installationen. Ein umfassendes Makefile automatisiert Build-, Test- und Formatierungsprozesse, während pytest und ruff für Qualitätssicherung sorgen. Executed Notebooks in `executed_notebooks/` bieten sofortige Referenzimplementierungen, und `datasets/` enthält alle Kurs-Datensätze für praktische Übungen.
+
+Für Studierende, die lokale Installationen bevorzugen, ist eine detaillierte Anleitung mit allen erforderlichen Dependencies verfügbar. Ein umfassendes Troubleshooting-Kapitel behandelt häufige Probleme und deren Lösungen, während zusätzliche Ressourcen und Links zu offizieller Dokumentation bei der Vertiefung spezifischer Themen helfen. Die `Vorlesungseinheiten/` enthalten vertiefende Vorlesungseinheiten zu theoretischen Konzepten, und `tests/` bietet eine vollständige Test-Suite für Qualitätssicherung.
 
 ### Integration originaler AMALEA-Inhalte
 
@@ -114,4 +127,4 @@ Der Kurs bereitet auch optimal auf weiterführende Studien vor, insbesondere fü
 
 ---
 
-*AMALEA 2025 verbindet bewährte pädagogische Konzepte mit modernster Technologie und bereitet eine neue Generation von Data Scientists vor, die nicht nur Algorithmen verstehen, sondern komplette, produktionsreife Lösungen entwickeln können, die echten Impact in der digitalen Wirtschaft erzielen. Mit 24 Portfolio-Komponenten (16 Notebooks + 8 Apps) und vollständiger QUA³CK Framework Integration ist der Kurs optimal für moderne Data Science Karrieren ausgerichtet.*
+*AMALEA 2025 verbindet bewährte pädagogische Konzepte mit modernster Technologie und bereitet eine neue Generation von Data Scientists vor, die nicht nur Algorithmen verstehen, sondern komplette, produktionsreife Lösungen entwickeln können, die echten Impact in der digitalen Wirtschaft erzielen. Mit 34+ Portfolio-Komponenten (18+ Notebooks + 16+ Apps), modularer Repository-Struktur und professionellen Entwicklungstools ist der Kurs optimal für moderne Data Science Karrieren ausgerichtet.*
