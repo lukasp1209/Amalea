@@ -417,8 +417,6 @@ Dieses Skript begleitet die Vorlesungseinheit "Ensembling". Es vertieft die math
 	$$\hat{f}(x)=\frac{1}{M}\sum_{m=1}^{M} f_m(x)$$
 
 - Gradient Boosting (Update‑Skizze):
-	$$F_{0}(x)=\arg\min_{\gamma}\sum_i L(y_i,\gamma),\\
-	F_{t+1}(x)=F_t(x)+\eta\,h_t(x)$$
 	$$
 	\begin{aligned}
 	F_{0}(x) &= \arg\min_{\gamma}\sum_i L(y_i,\gamma), \\
