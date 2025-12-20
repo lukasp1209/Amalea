@@ -11,7 +11,13 @@ import plotly.express as px
 
 # App-Titel
 st.title("📊 Meine Data Analytics & Big Data App")
-st.write("Von: [Dein Name hier]")
+
+# Name des Entwicklers eingeben
+entwickler_name = st.text_input("Wie heißt du?", placeholder="Dein Name hier...")
+if entwickler_name:
+    st.write(f"Von: {entwickler_name}")
+else:
+    st.info("💡 Gib deinen Namen oben ein, um ihn hier anzuzeigen!")
 
 # Beispieldaten erstellen
 daten = {
