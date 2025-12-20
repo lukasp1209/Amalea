@@ -16,6 +16,7 @@ services:
       - JUPYTER_ENABLE_LAB=yes
       - JUPYTER_TOKEN=
     command: start-notebook.sh --ServerApp.token='' --ServerApp.password='' --ServerApp.allow_remote_access=True
+    profiles: [full]
 
   # Jupyter Lab Slim (kleineres Image, ohne TF/Torch/OpenCV)
   jupyter-lab-slim:
@@ -29,6 +30,7 @@ services:
     environment:
       - JUPYTER_ENABLE_LAB=yes
     command: start-notebook.sh --ServerApp.token='' --ServerApp.password='' --ServerApp.allow_remote_access=True
+    profiles: [slim]
 
   # Streamlit Development Environment für Studierende
   streamlit-dev:
@@ -45,6 +47,7 @@ services:
       STREAMLIT_SERVER_PORT: "8501"
       STREAMLIT_SERVER_ADDRESS: "0.0.0.0"
     command: streamlit run /app/02_Streamlit_und_Pandas/example_app.py
+    profiles: [full]
 
   # Streamlit Slim (schneller Start, kleineres Image)
   streamlit-slim:
@@ -59,6 +62,7 @@ services:
       STREAMLIT_SERVER_PORT: "8501"
       STREAMLIT_SERVER_ADDRESS: "0.0.0.0"
     command: streamlit run /app/02_Streamlit_und_Pandas/example_app.py
+    profiles: [slim]
 
   # MLflow Tracking Server für Experiment Management
   mlflow:
@@ -70,6 +74,7 @@ services:
     command: >
       bash -c "pip install mlflow>=3.7.0 &&
                mlflow server --host 0.0.0.0 --port 5000 --default-artifact-root /mlflow/artifacts --backend-store-uri sqlite:///mlflow/mlflow.db"
+    profiles: [full]
 
   # PostgreSQL für fortgeschrittene Datenbank-Übungen
   postgres:
@@ -83,6 +88,7 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
       - ./datasets:/docker-entrypoint-initdb.d
+    profiles: [full]
 
 volumes:
   jupyter-data:
