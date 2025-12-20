@@ -34,9 +34,10 @@ def get_script_content(unit_folder):
 def main():
     full_content = []
     # Titelblatt
-    full_content.append("% Deep Learning Lecture Notes\n")
-    full_content.append("% Zusammenfassung der Vorlesungseinheiten\n")
-    full_content.append("% Stand: Heute\n\n")
+    full_content.append("# Deep Learning Lecture Notes\n\n")
+    full_content.append("### Zusammenfassung der Vorlesungseinheiten\n\n")
+    full_content.append("**Stand:** Heute\n\n")
+    full_content.append("---\n\n")
     
     print(f"Erstelle Buch aus {len(UNITS)} Einheiten...")
 

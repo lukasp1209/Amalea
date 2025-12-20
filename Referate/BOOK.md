@@ -1,7 +1,11 @@
-% Deep Learning Lecture Notes
-% Zusammenfassung der Vorlesungseinheiten
-% Stand: Heute
+---
+# Deep Learning Lecture Notes
 
+### Zusammenfassung der Vorlesungseinheiten
+
+**Stand:** Heute
+
+---
 
 <div style="page-break-after: always;"></div>
 
