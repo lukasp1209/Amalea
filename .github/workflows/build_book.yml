@@ -1,0 +1,38 @@
+name: Build Lecture Book PDF
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'Referate/**'
+  workflow_dispatch:
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          
+      - name: Install dependencies (Pandoc & LaTeX)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive-xetex texlive-fonts-recommended texlive-latex-extra
+          
+      - name: Generate BOOK.md
+        run: python Referate/build_book.py
+        
+      - name: Convert to PDF
+        run: |
+          cd Referate
+          pandoc BOOK.md -o Deep_Learning_Lecture_Notes.pdf --toc --pdf-engine=xelatex -V geometry:margin=2cm
+          
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Deep_Learning_Lecture_Notes
+          path: Referate/Deep_Learning_Lecture_Notes.pdf

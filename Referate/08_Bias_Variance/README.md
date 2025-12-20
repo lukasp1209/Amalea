@@ -1,7 +1,34 @@
-# Bias–Variance Decomposition
+# Unit 08: Bias-Variance Tradeoff
 
-Formel (MSE):
+Warum ist ein "perfektes" Modell auf Trainingsdaten oft nutzlos? In dieser Einheit zerlegen wir den Fehler eines Modells in seine mathematischen Bestandteile und lernen, wie wir die Balance finden.
 
-$$\mathbb{E}_{\mathcal{D}}\big[(y-\hat{f}(x))^2\big] = \big(\text{Bias}[\hat{f}(x)]\big)^2 + \text{Var}[\hat{f}(x)] + \sigma^2_{\text{noise}}$$
+## Enthaltene Konzepte
 
-Kurz: Zerlegt erwarteten Fehler in Bias, Varianz und irreduziblen Fehler.
+### 1. Fehler-Zerlegung
+*   $Error = Bias^2 + Variance + Noise$
+*   **Bias (Verzerrung)**: Fehler durch falsche Annahmen (z.B. Gerade statt Kurve). Führt zu Underfitting.
+*   **Variance (Varianz)**: Fehler durch Empfindlichkeit gegenüber kleinen Schwankungen im Training. Führt zu Overfitting.
+*   **Noise (Rauschen)**: Der unvermeidbare Fehler in den Daten selbst.
+
+### 2. Der Tradeoff
+*   Komplexe Modelle haben wenig Bias, aber hohe Varianz.
+*   Einfache Modelle haben wenig Varianz, aber hohen Bias.
+*   Das Ziel: Der "Sweet Spot" in der Mitte (Total Error Minimum).
+
+### 3. Lernkurven (Learning Curves)
+*   Wie verhalten sich Training- und Test-Error, wenn wir mehr Daten hinzufügen?
+*   Diagnose-Tool: Haben wir ein Bias- oder ein Varianz-Problem?
+
+## Start der Demo
+
+```bash
+cd Referate/08_Bias_Variance
+pip install -r requirements.txt
+# python code/lab.py
+```
+
+## Lab & Übung
+
+*   `notes/script.md`: Mathematische Intuition hinter der Fehlerzerlegung.
+*   `slides/lecture.md`: Grafische Darstellung des Tradeoffs (Bullseye-Diagramm).
+*   `code/lab.py`: Simulation: Wir ziehen viele Datensätze aus der gleichen Verteilung und sehen, wie unterschiedliche Modelle (linear vs. polynom) schwanken.
