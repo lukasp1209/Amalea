@@ -6,6 +6,9 @@
   <img src="https://img.shields.io/badge/Python-3.11%2B-blue?logo=python&logoColor=white" alt="Python">
   <img src="https://img.shields.io/badge/Streamlit-App-FF4B4B?logo=streamlit&logoColor=white" alt="Streamlit">
   <img src="https://img.shields.io/badge/Docker-Enabled-2496ED?logo=docker&logoColor=white" alt="Docker">
+  <img src="https://img.shields.io/badge/MLflow-Tracking-orange?logo=mlflow&logoColor=white" alt="MLflow">
+  <img src="https://img.shields.io/badge/TensorFlow-2.0+-FF6F00?logo=tensorflow&logoColor=white" alt="TensorFlow">
+  <img src="https://img.shields.io/badge/Hugging%20Face-Transformers-yellow?logo=huggingface&logoColor=white" alt="Hugging Face">
 </div>
 
 **Der modernisierte Data-Science-Kurs für Entwickler & Analysten**
@@ -107,13 +110,17 @@ Der Kurs ist modular aufgebaut. Jede Woche liefert ein fertiges Projekt für dei
 Die einfachste Art zu starten. Wir bieten zwei Varianten an:
 
 ### Option A: Full Experience (Empfohlen) 🐳
-Enthält alles (inkl. TensorFlow, MLflow).
+Enthält alles (inkl. TensorFlow, MLflow, Hugging Face).
 
 ```bash
-# 1. Starten
+# 1. Repository klonen
+git clone <repository-url>
+cd amalea
+
+# 2. Services starten
 docker-compose up --build
 
-# 2. Services öffnen
+# 3. Services öffnen
 # Jupyter Lab: http://localhost:8888
 # Streamlit App: http://localhost:8501
 # MLflow UI:     http://localhost:5001
@@ -128,59 +135,147 @@ docker compose up -d jupyter-lab-slim streamlit-slim
 - **Jupyter Slim**: [http://localhost:8889](http://localhost:8889)
 - **Streamlit Slim**: [http://localhost:8502](http://localhost:8502)
 
+### Option C: Einzelne Services 🏗️
+Baue nur das, was du brauchst:
+
+```bash
+# Nur Jupyter für Notebooks
+docker build -f Dockerfile.jupyter -t amalea-jupyter .
+docker run -p 8888:8888 amalea-jupyter
+
+# Nur Streamlit für Apps
+docker build -f Dockerfile.streamlit -t amalea-streamlit .
+docker run -p 8501:8501 amalea-streamlit
+```
+
 ---
 
 ## 📦 Dependencies (nach Wochen)
 
-- Schnellstart (alles, W01–W07): `python -m venv .venv && source .venv/bin/activate && pip install --upgrade pip && pip install -r requirements-week06.txt -r requirements-week07.txt`
-- Standard (W01–W03): `pip install -r requirements-week03.txt` (leichtgewichtig, inkl. Streamlit + Sklearn).
-- Advanced/MLOps (W04): `pip install -r requirements-week04.txt` (duckdb/polars/pyarrow + mlflow/dvc).
-- Deep Learning (W05): `pip install -r requirements-week05.txt` (TF + Torch, schwer).
-- CV & NLP (W06): `pip install -r requirements-week06.txt` (fügt OpenCV, scikit-image, Transformers hinzu).
-- Deployment (W07): `pip install -r requirements-week07.txt` (nutzt `07_Deployment_Portfolio/requirements.cloud.txt` mit `requirements-07.lock.txt` als Constraints).
-- Dev-Tools: `pip install -r requirements-dev.txt` (zieht W07-Stack + ruff/pytest/black).
-- Docker Compose (Full): nutzt `requirements-week06.txt` + `requirements-week07.txt` für `jupyter-lab`, `requirements-week07.txt` für `streamlit-dev` (Build-Args in `docker-compose.yml`).
-- Hinweis Base Images: Dockerfiles nutzen Python/Jupyter 3.12; lokale venvs gern mit 3.12 anlegen.
+Das Repository verwendet modulare Requirements-Dateien für effiziente Installationen:
 
-Docker Compose Builds:
-- Full Build (Standard, wie oben konfiguriert): `docker compose build jupyter-lab streamlit-dev` → lädt W06+W07 (DL/CV/NLP+Deployment) für Jupyter, W07 für Streamlit.
-- Service starten: `docker compose up jupyter-lab streamlit-dev`.
-- Weniger deps (z.B. nur W01–W03) → in `docker-compose.yml` die `build.args` der Services auf z.B. `requirements-week03.txt` setzen (und `EXTRA_REQS_FILE` leer lassen), dann `docker compose build ...` erneut ausführen.
+### Core Requirements
+- **`requirements-core.txt`**: Grundlegende Abhängigkeiten (Python, Datenbibliotheken)
+- **`requirements-dev.txt`**: Entwicklungs-Tools (pytest, black, ruff, etc.)
 
-> Hinweis: `requirements.txt` zeigt auf den leichten W01–W03-Stack. Installiere nur, was du pro Woche brauchst, um Downloads klein zu halten.
+### Wochen-spezifische Requirements
+- **W01-W03**: `requirements-week01.txt` bis `requirements-week03.txt` (Python Basics, Streamlit, ML Grundlagen)
+- **W04**: `requirements-week04.txt` (MLOps, MLflow, DVC)
+- **W05**: `requirements-week05.txt` (TensorFlow, PyTorch)
+- **W06**: `requirements-week06.txt` (OpenCV, Transformers, Computer Vision)
+- **W07**: `requirements-week07.txt` (FastAPI, Deployment-Tools)
+
+### Spezielle Setups
+- **Cloud Deployment**: `requirements.cloud.txt` (optimiert für Streamlit Cloud)
+- **Locked Versions**: `requirements-*.lock.txt` (pinned Versionen für Reproduzierbarkeit)
+
+### Installation Beispiele
+
+```bash
+# Schnellstart (alles, W01–W07)
+python -m venv .venv && source .venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements-week06.txt -r requirements-week07.txt
+
+# Standard (W01–W03)
+pip install -r requirements-week03.txt
+
+# Mit Dev-Tools
+pip install -r requirements-dev.txt
+
+# Reproduzierbare Installation (W07)
+pip install -r requirements-07.lock.txt
+```
+
+> 💡 **Tipp**: Nutze `requirements.txt` als Alias für den leichten W01–W03-Stack. Installiere nur, was du pro Woche brauchst!
 
 ---
 
 ## ▶️ Run Cheatsheet (lokal)
 
-- **W07 Backend**: `cd 07_Deployment_Portfolio && export PYTHONPATH=$(pwd) && uvicorn backend.main:app --host 127.0.0.1 --port 8000`
-- **W07 Dashboards lokal**: `API_URL=http://127.0.0.1:8000 streamlit run 04_streamlit_mlops_dashboard.py --server.port 8505` und `...05_streamlit_nlp_dashboard.py --server.port 8506`
-- **Compose (API + beide Dashboards)**: `cd 07_Deployment_Portfolio && docker compose up --build`
-- **Streamlit Cloud**: `requirements.cloud.txt` nutzen, `API_URL` als Secret setzen (Demo-Modus ohne Backend möglich).
-- **Pinned Stack (07)**: `make install` nutzt `requirements-07.lock.txt` als Constraints für reproduzierbare Versionsstände (FastAPI/Streamlit/Sklearn).
+### Docker Compose (Empfohlen)
+```bash
+# Volles Setup starten
+docker-compose up --build
+
+# Einzelne Services
+docker compose up jupyter-lab-slim streamlit-slim
+```
+
+### Lokale Entwicklung
+```bash
+# W07 Backend starten
+cd 07_Deployment_Portfolio && export PYTHONPATH=$(pwd)
+uvicorn backend.main:app --host 127.0.0.1 --port 8000
+
+# W07 Dashboards lokal
+API_URL=http://127.0.0.1:8000 streamlit run 07_Deployment_Portfolio/04_streamlit_mlops_dashboard.py --server.port 8505
+API_URL=http://127.0.0.1:8000 streamlit run 07_Deployment_Portfolio/05_streamlit_nlp_dashboard.py --server.port 8506
+
+# Compose für W07 (API + beide Dashboards)
+cd 07_Deployment_Portfolio && docker compose up --build
+```
+
+### Notebook Execution
+```bash
+# CV/NLP Notebooks automatisch ausführen
+./run_cv_notebooks.sh
+
+# Einzelne Woche starten
+cd 01_Python_Grundlagen && jupyter lab
+```
+
+### Tests & Qualität
+```bash
+# Alle Tests ausführen
+pytest
+
+# Code-Qualität prüfen
+make lint
+
+# Formatierung
+make format
+```
+
+> 🔧 **Makefile**: Nutze `make install`, `make test`, `make lint` für automatisierte Tasks.
 
 ---
 
 ## 📁 Repository-Struktur
 
-Das Repository ist nach den Kurswochen gegliedert:
+Das Repository ist nach den Kurswochen gegliedert und enthält alle notwendigen Ressourcen für einen vollständigen Data-Science-Kurs:
 
 ```text
 amalea/
-├── 📂 01_Python_Grundlagen/
-├── 📂 02_Streamlit_und_Pandas/
-├── 📂 03_Machine_Learning/
-├── 📂 04_Advanced_Algorithms/
-├── 📂 05_Neural_Networks/
-├── 📂 06_Computer_Vision_NLP/
-├── 📂 07_Deployment_Portfolio/
-├── 🐳 docker-compose.yml
-├── 🐳 Dockerfile.*
-├── 📋 requirements*.txt
-├── 📄 README.md
-├── 📄 02_Glossar_Alle_Begriffe_erklärt.ipynb
-├── 📄 ML_DL_Mathematik.ipynb
-└── 📄 DEVELOPER_GUIDE.md
+├── 📂 01_Python_Grundlagen/           # Python Basics & QUA³CK Framework
+│   ├── 📄 *.ipynb                     # Notebooks (inkl. executed Versionen)
+│   ├── 🐍 *.py                        # Streamlit Apps & Skripte
+│   ├── 🐳 Dockerfile                  # Lokaler Docker Build
+│   ├── 📋 requirements.txt            # Abhängigkeiten
+│   └── 📄 README.md                   # Wochen-Dokumentation
+├── 📂 02_Streamlit_und_Pandas/        # Interaktive Data Apps
+├── 📂 03_Machine_Learning/            # ML Pipelines & Modelle
+├── 📂 04_Advanced_Algorithms/         # Ensembles & Unsupervised Learning
+├── 📂 05_Neural_Networks/             # Deep Learning mit TensorFlow
+├── 📂 06_Computer_Vision_NLP/         # CV & NLP mit Transformers
+├── 📂 07_Deployment_Portfolio/        # Production Deployment & APIs
+├── 📂 executed_notebooks/             # Ausgeführte Notebook-Versionen
+├── 📂 datasets/                       # Kurs-Datensätze
+├── 📂 Referate/                       # Studentische Präsentationen
+├── 📂 tests/                          # Test-Suite
+├── 📂 BACKUP_Original_AMALEA_Notebooks/ # Backup der Originale
+├── 🐳 docker-compose.yml              # Multi-Service Setup
+├── 🐳 Dockerfile.*                    # Verschiedene Docker-Konfigurationen
+├── 📋 requirements*.txt               # Modular requirements pro Woche
+├── 🔧 Makefile                        # Build & Development Tasks
+├── ⚙️ pytest.ini                       # Test-Konfiguration
+├── 🌐 nightwatch.conf.js              # E2E Testing
+├── 📄 README.md                       # Diese Datei
+├── 📄 DEVELOPER_GUIDE.md              # Entwicklungsrichtlinien
+├── 📄 KURSBESCHREIBUNG.md             # Kurs-Details
+├── 📄 02_Glossar_Alle_Begriffe_erklärt.ipynb # Fachbegriffe erklärt
+├── 📄 ML_DL_Mathematik.ipynb          # Mathematische Grundlagen
+└── 📄 LICENSE.md                      # Lizenz-Informationen
 ```
 
 ---
@@ -206,12 +301,14 @@ Der Kurs ist in 7 Wochen gegliedert; alle Inhalte sind production-ready mit Exec
 | 01 | `00_Python_in_3_Stunden.ipynb`, `01_Docker_für_Data_Science.ipynb`, `02_Glossar_Alle_Begriffe_erklärt.ipynb`, `03_QUA3CK_Prozessmodell.ipynb` | `01_Python_Grundlagen/uebungs_app.py`, `01_Python_Grundlagen/meine_erste_app.py`, `01_Python_Grundlagen/streamlit_komponenten.py` | ✅ Fertig |
 | 02 | `02_Streamlit_und_Pandas/01_Erste_Streamlit_App_fixed.ipynb` | `02_Streamlit_und_Pandas/example_app.py`, `02_Streamlit_und_Pandas/hello_streamlit.py`, `02_Streamlit_und_Pandas/streamlit_komponenten.py` | ✅ Fertig |
 | 03 | `03_Machine_Learning/02_ML_in_Streamlit_fixed.ipynb` | `03_Machine_Learning/iris_ml_app.py`, `03_Machine_Learning/housing_regression_app.py` | ✅ Fertig |
-| 04 | `04_Advanced_Algorithms/01_Ensembles.ipynb`, `04_Advanced_Algorithms/02_Unsupervised.ipynb` | `04_Advanced_Algorithms/streamlit_komponenten.py` | ✅ Fertig |
-| 05 | `05_Neural_Networks/01_Intro_to_DL.ipynb`, `05_Neural_Networks/02_Keras_Transfer.ipynb` | `05_Neural_Networks/streamlit_komponenten.py` | ✅ Fertig |
-| 06 | `06_01_neu_CNN_Basics`, `06_02_neu_OpenCV_Edge_Features`, `06_03_neu_Data_Augmentation_Practice`, `06_04_neu_Transfer_Learning_Lite`, `06_05_neu_Image_Sampler` | Runner: `run_cv_notebooks.sh` erzeugt Executed-Notebooks in `06_Computer_Vision_NLP/executed` | ✅ Fertig |
-| 07 | `07_Deployment_Portfolio/01_MLOps_und_Deployment.ipynb`, `02_NLP_und_Text_Generation.ipynb`, `03_QUA3CK_MLOps_Integration.ipynb` (ausgeführt unter `executed/`) | FastAPI-Demo-API (`backend/main.py`, NLP mit HF-Pipelines für Sentiment/QA/Generate), Streamlit-Dashboards (`04_streamlit_mlops_dashboard.py`, `05_streamlit_nlp_dashboard.py`), Compose-Stack (`docker-compose.yml`) | ✅ Fertig |
+| 04 | `04_Advanced_Algorithms/02_MLFlow_Big3_Tracking.ipynb`, `04_Advanced_Algorithms/03_Bäume_Nachbarn_und_Clustering.ipynb` | `04_Advanced_Algorithms/streamlit_komponenten.py` | ✅ Fertig |
+| 05 | `05_Neural_Networks/` (mehrere Notebooks) | `05_Neural_Networks/streamlit_komponenten.py` | ✅ Fertig |
+| 06 | `06_Computer_Vision_NLP/06_01_neu_CNN_Basics.ipynb` u.a. | Runner: `run_cv_notebooks.sh` erzeugt Executed-Notebooks in `executed_notebooks/` | ✅ Fertig |
+| 07 | `07_Deployment_Portfolio/` (Notebooks in `executed_notebooks/`) | FastAPI-Demo-API (`backend/main.py`), Streamlit-Dashboards, Compose-Stack | ✅ Fertig |
 
-> ℹ️ CV/NLP (W06) und Deployment (W07) laufen CPU-freundlich; GPU beschleunigt Trainingszellen in W06 optional.
+> ℹ️ **Executed Notebooks**: Alle wichtigen Notebooks liegen in `executed_notebooks/` als HTML/PDF für schnelle Referenz.
+> 🔧 **Docker Setup**: Mehrere Dockerfile-Varianten (jupyter, streamlit, slim/full) für verschiedene Use-Cases.
+> 📊 **MLflow Tracking**: Experiment-Logs in `mlruns/` für Reproduzierbarkeit.
 
 ### Portfolio-Apps (Beispiele)
 
@@ -231,9 +328,26 @@ Der Kurs ist in 7 Wochen gegliedert; alle Inhalte sind production-ready mit Exec
 
 ---
 
-## 👨‍🏫 Support
+## 👨‍🏫 Support & Ressourcen
 
-Bei Fragen oder Problemen:
-1.  Prüfe die Dokumentation in den jeweiligen Wochen-Ordnern.
-2.  Nutze das Kurs-Forum für fachliche Fragen.
-3.  Kontaktiere den Instructor für weiterführende Probleme.
+### Dokumentation
+- 📖 **[DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md)**: Detaillierte Entwicklungsrichtlinien und Best Practices
+- 📚 **[KURSBESCHREIBUNG.md](KURSBESCHREIBUNG.md)**: Vollständige Kursbeschreibung und Lernziele
+- 🔧 **[Makefile](Makefile)**: Automatisierte Build- und Development-Tasks
+- 🧪 **Tests**: Vollständige Test-Suite in `tests/` mit pytest-Konfiguration
+
+### Bei Problemen
+1. **Dokumentation prüfen**: Schaue in den Wochen-Ordnern nach READMEs und der DEVELOPER_GUIDE.md
+2. **Executed Notebooks**: Nutze `executed_notebooks/` für funktionierende Beispiele
+3. **Docker Issues**: Mehrere Dockerfile-Varianten verfügbar (slim/full)
+4. **Dependencies**: Modulare requirements-Dateien für verschiedene Setups
+
+### Kurs-Forum & Community
+- Nutze das Kurs-Forum für fachliche Fragen
+- Teile deine Lösungen in `Referate/` für andere Lernende
+- Bei technischen Problemen: Issues im Repository erstellen
+
+### Zusätzliche Ressourcen
+- 📊 **Glossar**: `02_Glossar_Alle_Begriffe_erklärt.ipynb` - Alle Fachbegriffe erklärt
+- 🔢 **Mathematik**: `ML_DL_Mathematik.ipynb` - Mathematische Grundlagen für ML/DL
+- 📁 **Datasets**: Kurs-Datensätze in `datasets/` für praktische Übungen
