@@ -87,7 +87,7 @@ Für das Experiment Tracking und MLOps kommt MLflow zum Einsatz, während Git un
 - **W06 (CV/NLP):** CNN-Grundlagen, Edge/Feature-Extraction mit OpenCV, Data Augmentation, Transfer Learning Lite; Transformers-Demo für Text (CPU-freundlich).
 - **W07 (Deployment):** FastAPI-Demo mit Sklearn-Iris-Modell; NLP-Endpunkte mit leichten HF-Pipelines (Sentiment/QA/Generate) für API/Monitoring/Deployment-Übungen; zwei Streamlit-Dashboards für Monitoring & NLP.
 
-### Studienleistung
+### Studienleistung: Portfolio laut Prüfungsordnung
 
 Die Studienleistung erfordert die Entwicklung einer vollständigen MLOps-Anwendung, die eine End-to-End Machine Learning Pipeline, eine interaktive Streamlit-Web-App und ein Live-Deployment in der Streamlit Cloud umfasst. Dieser Ansatz geht weit über traditionelle Klausuren hinaus und bewertet die Fähigkeit, komplette, produktionsreife Lösungen zu entwickeln.
 
@@ -117,7 +117,7 @@ Für Studierende, die lokale Installationen bevorzugen, ist eine detaillierte An
 
 ### Integration originaler AMALEA-Inhalte
 
-Der Kurs baut auf dem bewährten **"Angewandte Machine Learning Algorithmen"** Programm des KI-Campus auf und integriert die pädagogischen Konzepte in moderne, praktische Anwendungen. Die bewährten methodischen Ansätze werden beibehalten, während gleichzeitig modernste Technologien und Deployment-Strategien vermittelt werden.
+Der Kurs baut auf dem bewährten **"Angewandte Machine Learning Algorithmen"**-Programm des KI-Campus auf und integriert die pädagogischen Konzepte in moderne, praktische Anwendungen. Die bewährten methodischen Ansätze werden beibehalten, während gleichzeitig modernste Technologien und Deployment-Strategien vermittelt werden.
 
 ### Zukunftsorientierung und Industrie-Relevanz
 
