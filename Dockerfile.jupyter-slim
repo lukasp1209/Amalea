@@ -1,5 +1,5 @@
 # Dockerfile.jupyter-slim - Lean Jupyter Lab image for coursework
-FROM jupyter/minimal-notebook:python-3.12
+FROM jupyter/minimal-notebook:latest
 
 # Avoid conda update to keep layers small; install only needed Python deps
 USER root
