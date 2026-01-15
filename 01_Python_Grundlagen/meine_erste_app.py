@@ -1,10 +1,3 @@
-"""
-Meine erste Streamlit-App
-
-Eine einfache Streamlit-Anwendung zur Demonstration grundlegender Funktionen.
-Zeigt Text-Eingabe, Daten-Frames und einfache Diagramme.
-"""
-
 # Beispiel: So könnte deine erste Streamlit-App aussehen (als Python-Datei speichern, z.B. meine_erste_app.py)
 
 import streamlit as st

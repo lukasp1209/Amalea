@@ -1,9 +1,3 @@
-"""
-Data Analytics & Big Data Dashboard
-
-Eine interaktive Streamlit-Anwendung zur Datenanalyse mit Filtern und Visualisierungen.
-Demonstriert professionelle Dashboard-Entwicklung mit Pandas und Plotly.
-"""
 
 import streamlit as st
 import pandas as pd
@@ -11,13 +5,7 @@ import plotly.express as px
 
 # App-Titel
 st.title("📊 Meine Data Analytics & Big Data App")
-
-# Name des Entwicklers eingeben
-entwickler_name = st.text_input("Wie heißt du?", placeholder="Dein Name hier...")
-if entwickler_name:
-    st.write(f"Von: {entwickler_name}")
-else:
-    st.info("💡 Gib deinen Namen oben ein, um ihn hier anzuzeigen!")
+st.write("Von: [Dein Name hier]")
 
 # Beispieldaten erstellen
 daten = {
@@ -52,12 +40,12 @@ col1, col2 = st.columns(2)
 with col1:
     fig1 = px.bar(gefilterte_daten, x='Produkt', y='Preis', 
                   title="Preise nach Produkt")
-    st.plotly_chart(fig1, width='stretch')
+    st.plotly_chart(fig1, use_container_width=True)
 
 with col2:
     fig2 = px.scatter(gefilterte_daten, x='Preis', y='Bewertung',
                      color='Kategorie', title="Preis vs. Bewertung")
-    st.plotly_chart(fig2, width='stretch')
+    st.plotly_chart(fig2, use_container_width=True)
 
 # Statistiken
 st.subheader("📈 Zusammenfassung")
